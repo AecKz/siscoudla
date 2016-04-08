@@ -52,3 +52,5 @@ Temporary Items
 .metadata
 target
 bin
+classes
+.class
