@@ -16,14 +16,19 @@
 		<gcloud.plugin.version>2.0.9.74.v20150814</gcloud.plugin.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.showDeprecation>true</maven.compiler.showDeprecation>
-		<cloudsql.url>jdbc:google:mysql://siscoudla/dsiscoudla?user=root</cloudsql.url>
-		<cloudsql.url.dev>jdbc:mysql://localhost:3306/demo?user=root,password=Abc123-</cloudsql.url.dev>
+		<cloudsql.url>jdbc:google:mysql://siscoudla/siscoudla?user=root</cloudsql.url>
+		<cloudsql.url.dev>jdbc:mysql://localhost:3306/dsiscoudla?user=root,password=Abc123-</cloudsql.url.dev>
 	</properties>
 
 	<prerequisites>
 		<maven>3.1.0</maven>
 	</prerequisites>
-
+<!-- 	<repositories> -->
+<!-- 		<repository> -->
+<!-- 			<id>central</id> -->
+<!-- 			<url>http://repo1.maven.org/maven2/</url> -->
+<!-- 		</repository> -->
+<!-- 	</repositories> -->
 	<dependencies>
 		<!-- Compile/runtime dependencies -->
 		<dependency>
@@ -52,6 +57,19 @@
 			<artifactId>org.eclipse.persistence.jpa</artifactId>
 			<version>2.6.2</version>
 		</dependency>
+		<!-- Otras Dependencias -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>3.1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.json-lib</groupId>
+			<artifactId>json-lib</artifactId>
+			<version>2.4</version>
+			<classifier>jdk15</classifier>
+		</dependency>
+
 
 		<!-- Test Dependencies -->
 		<dependency>
