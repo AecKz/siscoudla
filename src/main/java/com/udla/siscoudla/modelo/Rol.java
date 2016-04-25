@@ -23,7 +23,7 @@ public class Rol implements Serializable {
 
 	//bi-directional many-to-one association to Usuario
 	@ManyToOne
-	@JoinColumn(name="idUsuario")
+	@JoinColumn(name="idUsuario",insertable=false, updatable=false)
 	private Usuario usuario;
 
 	public Rol() {

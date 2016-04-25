@@ -29,7 +29,7 @@ public class Turno implements Serializable {
 
 	//bi-directional many-to-one association to Cubiculo
 	@ManyToOne
-	@JoinColumn(name="idCubiculo")
+	@JoinColumn(name="idCubiculo",insertable=false, updatable=false)
 	private Cubiculo cubiculo;
 
 	//bi-directional many-to-one association to Paciente
@@ -38,7 +38,7 @@ public class Turno implements Serializable {
 
 	//bi-directional many-to-one association to Horario
 	@ManyToOne
-	@JoinColumn(name="idHorario")
+	@JoinColumn(name="idHorario",insertable=false, updatable=false)
 	private Horario horario;
 
 	public Turno() {

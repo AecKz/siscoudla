@@ -28,12 +28,12 @@ public class Horario implements Serializable {
 
 	//bi-directional many-to-one association to Estudiante
 	@ManyToOne
-	@JoinColumn(name="idEstudiante")
+	@JoinColumn(name="idEstudiante" ,insertable=false, updatable=false)
 	private Estudiante estudiante1;
 
 	//bi-directional many-to-one association to Estudiante
 	@ManyToOne
-	@JoinColumn(name="idEstudiante")
+	@JoinColumn(name="idEstudiante",insertable=false, updatable=false)
 	private Estudiante estudiante2;
 
 	//bi-directional many-to-one association to Turno

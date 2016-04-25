@@ -25,7 +25,7 @@ public class Paciente implements Serializable {
 
 	//bi-directional many-to-one association to Turno
 	@ManyToOne
-	@JoinColumn(name="idPaciente", referencedColumnName="idPaciente")
+	@JoinColumn(name="idPaciente", referencedColumnName="idPaciente",insertable=false, updatable=false)
 	private Turno turno;
 
 	public Paciente() {
