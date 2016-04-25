@@ -6,10 +6,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
 import com.udla.siscoudla.entitymanagerfactory.EntityManagerFactoryDAO;
-import com.udla.siscoudla.modelo.Persona;
+import com.udla.siscoudla.modelo.Usuario;
 
-public class PersonaDAO extends EntityManagerFactoryDAO {
-	public Persona crear(Persona objeto) {
+public class UsuarioDAO extends EntityManagerFactoryDAO {
+	public Usuario crear(Usuario objeto) {
 		EntityManager em = obtenerEntityManagerFactory().createEntityManager();
 		try {
 			em.getTransaction().begin();
@@ -27,7 +27,7 @@ public class PersonaDAO extends EntityManagerFactoryDAO {
 		}
 	}
 
-	public Persona editar(Persona objeto) {
+	public Usuario editar(Usuario objeto) {
 		EntityManager em = obtenerEntityManagerFactory().createEntityManager();
 		try {
 			em.getTransaction().begin();
@@ -43,12 +43,12 @@ public class PersonaDAO extends EntityManagerFactoryDAO {
 		}
 	}
 
-	public Persona eliminar(Persona objeto) {
+	public Usuario eliminar(Usuario objeto) {
 		EntityManager em = obtenerEntityManagerFactory().createEntityManager();
 		try {
 			em.getTransaction().begin();
-			Persona EntidadToBeRemoved = em.getReference(Persona.class,
-					objeto.getIdPersona());
+			Usuario EntidadToBeRemoved = em.getReference(Usuario.class,
+					objeto.getIdUsuario());
 			em.remove(EntidadToBeRemoved);
 			em.getTransaction().commit();
 			return objeto;
@@ -61,44 +61,68 @@ public class PersonaDAO extends EntityManagerFactoryDAO {
 		}
 	}
 
-	public List<Persona> buscarTodos() {
+	public List<Usuario> buscarTodos() {
 		EntityManager em = obtenerEntityManagerFactory().createEntityManager();
 		try {
-			TypedQuery<Persona> query = em.createQuery(
-					"SELECT e FROM Persona e order by e.nombre", Persona.class);
-			List<Persona> results = query.getResultList();
+			TypedQuery<Usuario> query = em.createQuery(
+					"SELECT e FROM Usuario e order by e.nombre", Usuario.class);
+			List<Usuario> results = query.getResultList();
 			return results;
 		} finally {
 			em.close();
 		}
 	}
 
-	public Persona buscarPorId(String id) {
+	public Usuario buscarPorId(String id) {
 		EntityManager em = obtenerEntityManagerFactory().createEntityManager();
-		Persona persona = new Persona();
+		Usuario usuario = new Usuario();
 		try {
-			TypedQuery<Persona> query = em.createQuery(
-					"SELECT c FROM Persona c where c.id = :id ", Persona.class)
+			TypedQuery<Usuario> query = em.createQuery(
+					"SELECT c FROM Usuario c where c.id = :id ", Usuario.class)
 					.setParameter("id", id);
-			List<Persona> results = query.getResultList();
-			persona = results.get(0);
-			return persona;
+			List<Usuario> results = query.getResultList();
+			usuario = results.get(0);
+			return usuario;
 		} catch (Exception e) {
 			em.getTransaction().rollback();
 			System.out.println(e.getMessage());
-			return persona;
+			return usuario;
+		} finally {
+			em.close();
+		}
+	}
+	
+	public Boolean login (String usuarioLogin, String contrasenaLogin) {
+		EntityManager em = obtenerEntityManagerFactory().createEntityManager();
+		Boolean flagLogin = false;
+		try {
+			TypedQuery<Usuario> query = em.createQuery(
+					"SELECT u.idUsuario FROM Usuario u where u.usuario = :usuarioLogin and u.password = :contrasenaLogin "
+					+ "and u.estado = 'ACT'", Usuario.class)
+					.setParameter("usuarioLogin", usuarioLogin).setParameter("contrasenaLogin", contrasenaLogin);
+			List<Usuario> results = query.getResultList();
+			if(!results.isEmpty()){
+				flagLogin = true;
+			}else{
+				flagLogin = false;
+			}
+			return flagLogin;
+		} catch (Exception e) {
+			em.getTransaction().rollback();
+			System.out.println(e.getMessage());
+			return flagLogin;
 		} finally {
 			em.close();
 		}
 	}
 
-	public List<Persona> buscarActivos() {
+	public List<Usuario> buscarActivos() {
 		EntityManager em = obtenerEntityManagerFactory().createEntityManager();
-		List<Persona> results = null;
+		List<Usuario> results = null;
 		try {
-			TypedQuery<Persona> query = em.createQuery(
-					"SELECT c FROM Persona c WHERE c.activo =:valorActivo",
-					Persona.class).setParameter("valorActivo", true);
+			TypedQuery<Usuario> query = em.createQuery(
+					"SELECT c FROM Usuario c WHERE c.activo =:valorActivo",
+					Usuario.class).setParameter("valorActivo", true);
 			results = query.getResultList();
 		} catch (Exception e) {
 			em.getTransaction().rollback();
@@ -106,29 +130,6 @@ public class PersonaDAO extends EntityManagerFactoryDAO {
 			em.close();
 		}
 		return results;
-	}
-	
-	public Boolean buscarPorEmail(String email) {
-		EntityManager em = obtenerEntityManagerFactory().createEntityManager();
-		Boolean flagEmail = false;
-		try {
-			TypedQuery<Persona> query = em.createQuery(
-					"SELECT p.email FROM Persona p where p.email = :email ", Persona.class)
-					.setParameter("email", email);
-			List<Persona> results = query.getResultList();
-			if(!results.isEmpty()){
-				flagEmail = true;
-			}else{
-				flagEmail = false;
-			}
-			return flagEmail;
-		} catch (Exception e) {
-			em.getTransaction().rollback();
-			System.out.println(e.getMessage());
-			return flagEmail;
-		} finally {
-			em.close();
-		}
 	}
 
 }

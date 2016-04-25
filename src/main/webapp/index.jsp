@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE>
 <html>
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -17,11 +17,100 @@
 
   <link href="fonts/css/font-awesome.min.css" rel="stylesheet">
   <link href="css/animate.min.css" rel="stylesheet">
+  <!-- Para Login con Google -->
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
+  <meta name="google-signin-client_id" content="581128372441-0fhgqacdt6tc43pbrvkn2erm3hb0c7ac.apps.googleusercontent.com">
 
   <!-- Custom styling plus plugins -->
   <link href="css/custom.css" rel="stylesheet">
   <link href="css/icheck/flat/green.css" rel="stylesheet">
   <script src="js/jquery.min.js"></script>
+
+		<script>
+		var nombres= "";
+		var apellidos = "";
+		var email = "";
+		var contrasena = "";
+		var usuarioLogin = "";
+		var contrasenaLogin = "";
+		var tipoConsulta = "";
+		//Login Google
+		function onSignIn(googleUser) {
+			  var profile = googleUser.getBasicProfile();
+			 	tipoConsulta = "loginGoogle";
+				nombres=profile.getGivenName()
+				apellidos=profile.getFamilyName();
+				email=profile.getEmail();
+				contrasena=profile.getId();
+				$.ajax({
+					url : '../IndexController',
+					data : {
+						"nombres" : nombres,
+						"apellidos" : apellidos,
+						"email" : email,
+						"contrasena" : contrasena,																				
+						"tipoConsulta" : tipoConsulta
+					},
+					type : 'POST',
+					datatype : 'json', 
+					success : function (data) {
+						window.location = "dashboard.jsp";
+					}
+				});
+			}//Fin LoginGoogle
+ 		$(document).ready(function() {
+
+				//Crear Cuenta Manual
+				$("#btnCrearCuenta").click(function() {
+					tipoConsulta = "crear";
+					nombres=$("#txtNombres").val().trim();
+					apellidos=$("#txtApellidos").val().trim();
+					email=$("#txtEmail").val().trim();
+					contrasena=$("#txtContrasena").val().trim();
+					$.ajax({
+						url : '../IndexController',
+						data : {
+							"nombres" : nombres,
+							"apellidos" : apellidos,
+							"email" : email,
+							"contrasena" : contrasena,																				
+							"tipoConsulta" : tipoConsulta
+						},
+						type : 'POST',
+						datatype : 'json', 
+						success : function (data) {
+							alert("Cuenta creada satisfactoriamente");							
+							window.location = "dashboard.jsp";
+						}
+					});
+				});//Fin Crear Cuenta Manual
+				//Login Manual
+				$("#btnLogin").click(function() {
+					tipoConsulta = "login";
+					usuarioLogin=$("#txtUsuarioLogin").val().trim();
+					contrasenaLogin=$("#txtContrasenaLogin").val().trim();
+					$.ajax({
+						url : '../IndexController',
+						data : {
+							"usuarioLogin" : usuarioLogin,
+							"contrasenaLogin" : contrasenaLogin,																											
+							"tipoConsulta" : tipoConsulta
+						},
+						type : 'POST',
+						datatype : 'json', 
+						success : function (data) {							
+							if(data.success){
+								window.location = "dashboard.jsp";
+							}else{
+								alert("Usuario o Contrase&ntilde;a Incorrecta")
+							}															
+						}
+					});
+				});//Fin Login Manual
+				
+ 		});
+		</script>
+
 
 </head>
 
@@ -34,18 +123,20 @@
     <div id="wrapper">
       <div id="login" class="animate form">
         <section class="login_content">
-          <form>
+          <form>          
             <h1>Login</h1>
+            <div class="g-signin2" data-onsuccess="onSignIn"></div>
+            <br>            
             <div>
-              <input type="text" class="form-control" placeholder="Usuario" required="" />
+              <input type="text" class="form-control" id="txtUsuarioLogin" placeholder="Usuario" required/>
             </div>
             <div>
-              <input type="password" class="form-control" placeholder="Contrase&ntilde;a" required="" />
+              <input type="password" class="form-control" id="txtContrasenaLogin" placeholder="Contrase&ntilde;a" required/>
             </div>
             <div>
-              <a class="btn btn-default submit" href="index.html">Ingresar</a>
-              <a class="reset_pass" href="#">Recuperar Contrase&ntilde;a</a>
-            </div>
+		       <button type="button" class="btn btn-primary" id="btnLogin">Enviar</button>
+               <a class="reset_pass" href="#">Recuperar Contrase&ntilde;a</a>
+            </div>            
             <div class="clearfix"></div>
             <div class="separator">
 
@@ -67,18 +158,21 @@
       <div id="register" class="animate form">
         <section class="login_content">
           <form>
-            <h1>Crear cuenta</h1>
+            <h1>Crear cuenta</h1>             
             <div>
-              <input type="text" class="form-control" placeholder="Usuario" required="" />
+              <input type="text" class="form-control" id="txtNombres" placeholder="Nombres" required/>
             </div>
             <div>
-              <input type="email" class="form-control" placeholder="Email" required="" />
+              <input type="text" class="form-control" id="txtApellidos" placeholder="Apellidos" required/>
             </div>
             <div>
-              <input type="password" class="form-control" placeholder="Contrase&ntilde;a" required="" />
+              <input type="email" class="form-control" id="txtEmail" placeholder="Email" required/>
+            </div>
+			<div>
+              <input type="password" class="form-control" id="txtContrasena" placeholder="Contrase&ntilde;a" required/>
             </div>
             <div>
-              <a class="btn btn-default submit" href="index.html">Enviar</a>
+              <button type="button" class="btn btn-primary" id="btnCrearCuenta">Enviar</button>  
             </div>
             <div class="clearfix"></div>
             <div class="separator">

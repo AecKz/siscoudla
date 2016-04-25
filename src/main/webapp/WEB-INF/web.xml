@@ -9,8 +9,16 @@
 		<servlet-name>PersonaController</servlet-name>
 		<servlet-class>com.udla.siscoudla.controlador.PersonaController</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>IndexController</servlet-name>
+		<servlet-class>com.udla.siscoudla.controlador.IndexController</servlet-class>
+	</servlet>
 	<servlet-mapping>
 		<servlet-name>PersonaController</servlet-name>
 		<url-pattern>/PersonaController</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>IndexController</servlet-name>
+		<url-pattern>/IndexController</url-pattern>
 	</servlet-mapping>
 </web-app>
