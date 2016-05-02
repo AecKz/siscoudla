@@ -32,15 +32,15 @@ public class Turno implements Serializable {
 	@JoinColumn(name="idCubiculo")
 	private Cubiculo cubiculo;
 
-	//bi-directional many-to-one association to Horario
-	@ManyToOne
-	@JoinColumn(name="idHorario")
-	private Horario horario;
-
 	//bi-directional many-to-one association to Paciente
 	@ManyToOne
 	@JoinColumn(name="idPaciente")
 	private Paciente paciente;
+
+	//bi-directional many-to-one association to Horarioestudiante
+	@ManyToOne
+	@JoinColumn(name="idHorarioEstudiante")
+	private Horarioestudiante horarioestudiante;
 
 	public Turno() {
 	}
@@ -93,20 +93,20 @@ public class Turno implements Serializable {
 		this.cubiculo = cubiculo;
 	}
 
-	public Horario getHorario() {
-		return this.horario;
-	}
-
-	public void setHorario(Horario horario) {
-		this.horario = horario;
-	}
-
 	public Paciente getPaciente() {
 		return this.paciente;
 	}
 
 	public void setPaciente(Paciente paciente) {
 		this.paciente = paciente;
+	}
+
+	public Horarioestudiante getHorarioestudiante() {
+		return this.horarioestudiante;
+	}
+
+	public void setHorarioestudiante(Horarioestudiante horarioestudiante) {
+		this.horarioestudiante = horarioestudiante;
 	}
 
 }

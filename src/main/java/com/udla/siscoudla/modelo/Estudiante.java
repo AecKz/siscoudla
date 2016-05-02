@@ -32,9 +32,9 @@ public class Estudiante implements Serializable {
 	@JoinColumn(name="idPersona")
 	private Persona persona;
 
-	//bi-directional many-to-one association to Horario
+	//bi-directional many-to-one association to Horarioestudiante
 	@OneToMany(mappedBy="estudiante")
-	private List<Horario> horarios;
+	private List<Horarioestudiante> horarioestudiantes;
 
 	public Estudiante() {
 	}
@@ -79,26 +79,26 @@ public class Estudiante implements Serializable {
 		this.persona = persona;
 	}
 
-	public List<Horario> getHorarios() {
-		return this.horarios;
+	public List<Horarioestudiante> getHorarioestudiantes() {
+		return this.horarioestudiantes;
 	}
 
-	public void setHorarios(List<Horario> horarios) {
-		this.horarios = horarios;
+	public void setHorarioestudiantes(List<Horarioestudiante> horarioestudiantes) {
+		this.horarioestudiantes = horarioestudiantes;
 	}
 
-	public Horario addHorario(Horario horario) {
-		getHorarios().add(horario);
-		horario.setEstudiante(this);
+	public Horarioestudiante addHorarioestudiante(Horarioestudiante horarioestudiante) {
+		getHorarioestudiantes().add(horarioestudiante);
+		horarioestudiante.setEstudiante(this);
 
-		return horario;
+		return horarioestudiante;
 	}
 
-	public Horario removeHorario(Horario horario) {
-		getHorarios().remove(horario);
-		horario.setEstudiante(null);
+	public Horarioestudiante removeHorarioestudiante(Horarioestudiante horarioestudiante) {
+		getHorarioestudiantes().remove(horarioestudiante);
+		horarioestudiante.setEstudiante(null);
 
-		return horario;
+		return horarioestudiante;
 	}
 
 }

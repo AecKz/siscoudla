@@ -26,14 +26,9 @@ public class Horario implements Serializable {
 
 	private String horaInicio;
 
-	//bi-directional many-to-one association to Estudiante
-	@ManyToOne
-	@JoinColumn(name="idEstudiante")
-	private Estudiante estudiante;
-
-	//bi-directional many-to-one association to Turno
+	//bi-directional many-to-one association to Horarioestudiante
 	@OneToMany(mappedBy="horario")
-	private List<Turno> turnos;
+	private List<Horarioestudiante> horarioestudiantes;
 
 	public Horario() {
 	}
@@ -78,34 +73,26 @@ public class Horario implements Serializable {
 		this.horaInicio = horaInicio;
 	}
 
-	public Estudiante getEstudiante() {
-		return this.estudiante;
+	public List<Horarioestudiante> getHorarioestudiantes() {
+		return this.horarioestudiantes;
 	}
 
-	public void setEstudiante(Estudiante estudiante) {
-		this.estudiante = estudiante;
+	public void setHorarioestudiantes(List<Horarioestudiante> horarioestudiantes) {
+		this.horarioestudiantes = horarioestudiantes;
 	}
 
-	public List<Turno> getTurnos() {
-		return this.turnos;
+	public Horarioestudiante addHorarioestudiante(Horarioestudiante horarioestudiante) {
+		getHorarioestudiantes().add(horarioestudiante);
+		horarioestudiante.setHorario(this);
+
+		return horarioestudiante;
 	}
 
-	public void setTurnos(List<Turno> turnos) {
-		this.turnos = turnos;
-	}
+	public Horarioestudiante removeHorarioestudiante(Horarioestudiante horarioestudiante) {
+		getHorarioestudiantes().remove(horarioestudiante);
+		horarioestudiante.setHorario(null);
 
-	public Turno addTurno(Turno turno) {
-		getTurnos().add(turno);
-		turno.setHorario(this);
-
-		return turno;
-	}
-
-	public Turno removeTurno(Turno turno) {
-		getTurnos().remove(turno);
-		turno.setHorario(null);
-
-		return turno;
+		return horarioestudiante;
 	}
 
 }
