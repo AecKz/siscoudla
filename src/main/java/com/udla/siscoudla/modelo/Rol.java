@@ -2,6 +2,7 @@ package com.udla.siscoudla.modelo;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import java.util.List;
 
 
 /**
@@ -22,9 +23,8 @@ public class Rol implements Serializable {
 	private String nombre;
 
 	//bi-directional many-to-one association to Usuario
-	@ManyToOne
-	@JoinColumn(name="idUsuario",insertable=false, updatable=false)
-	private Usuario usuario;
+	@OneToMany(mappedBy="rol")
+	private List<Usuario> usuarios;
 
 	public Rol() {
 	}
@@ -53,12 +53,26 @@ public class Rol implements Serializable {
 		this.nombre = nombre;
 	}
 
-	public Usuario getUsuario() {
-		return this.usuario;
+	public List<Usuario> getUsuarios() {
+		return this.usuarios;
 	}
 
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
+	public void setUsuarios(List<Usuario> usuarios) {
+		this.usuarios = usuarios;
+	}
+
+	public Usuario addUsuario(Usuario usuario) {
+		getUsuarios().add(usuario);
+		usuario.setRol(this);
+
+		return usuario;
+	}
+
+	public Usuario removeUsuario(Usuario usuario) {
+		getUsuarios().remove(usuario);
+		usuario.setRol(null);
+
+		return usuario;
 	}
 
 }

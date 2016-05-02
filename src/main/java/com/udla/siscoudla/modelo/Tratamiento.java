@@ -25,7 +25,7 @@ public class Tratamiento implements Serializable {
 
 	//bi-directional many-to-one association to Especialidad
 	@ManyToOne
-	@JoinColumn(name="idEspecialidad",insertable=false, updatable=false)
+	@JoinColumn(name="idEspecialidad")
 	private Especialidad especialidad;
 
 	public Tratamiento() {

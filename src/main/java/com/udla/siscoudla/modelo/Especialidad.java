@@ -24,13 +24,13 @@ public class Especialidad implements Serializable {
 
 	private String nombre;
 
-	//bi-directional many-to-one association to Tratamiento
-	@OneToMany(mappedBy="especialidad")
-	private List<Tratamiento> tratamientos;
-
 	//bi-directional many-to-one association to Cubiculo
 	@OneToMany(mappedBy="especialidad")
 	private List<Cubiculo> cubiculos;
+
+	//bi-directional many-to-one association to Tratamiento
+	@OneToMany(mappedBy="especialidad")
+	private List<Tratamiento> tratamientos;
 
 	public Especialidad() {
 	}
@@ -67,28 +67,6 @@ public class Especialidad implements Serializable {
 		this.nombre = nombre;
 	}
 
-	public List<Tratamiento> getTratamientos() {
-		return this.tratamientos;
-	}
-
-	public void setTratamientos(List<Tratamiento> tratamientos) {
-		this.tratamientos = tratamientos;
-	}
-
-	public Tratamiento addTratamiento(Tratamiento tratamiento) {
-		getTratamientos().add(tratamiento);
-		tratamiento.setEspecialidad(this);
-
-		return tratamiento;
-	}
-
-	public Tratamiento removeTratamiento(Tratamiento tratamiento) {
-		getTratamientos().remove(tratamiento);
-		tratamiento.setEspecialidad(null);
-
-		return tratamiento;
-	}
-
 	public List<Cubiculo> getCubiculos() {
 		return this.cubiculos;
 	}
@@ -109,6 +87,28 @@ public class Especialidad implements Serializable {
 		cubiculo.setEspecialidad(null);
 
 		return cubiculo;
+	}
+
+	public List<Tratamiento> getTratamientos() {
+		return this.tratamientos;
+	}
+
+	public void setTratamientos(List<Tratamiento> tratamientos) {
+		this.tratamientos = tratamientos;
+	}
+
+	public Tratamiento addTratamiento(Tratamiento tratamiento) {
+		getTratamientos().add(tratamiento);
+		tratamiento.setEspecialidad(this);
+
+		return tratamiento;
+	}
+
+	public Tratamiento removeTratamiento(Tratamiento tratamiento) {
+		getTratamientos().remove(tratamiento);
+		tratamiento.setEspecialidad(null);
+
+		return tratamiento;
 	}
 
 }

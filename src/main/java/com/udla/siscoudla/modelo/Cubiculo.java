@@ -28,7 +28,7 @@ public class Cubiculo implements Serializable {
 
 	//bi-directional many-to-one association to Especialidad
 	@ManyToOne
-	@JoinColumn(name="idEspecialidad" ,insertable=false, updatable=false)
+	@JoinColumn(name="idEspecialidad")
 	private Especialidad especialidad;
 
 	//bi-directional many-to-one association to Turno

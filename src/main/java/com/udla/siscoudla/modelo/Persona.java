@@ -32,19 +32,19 @@ public class Persona implements Serializable {
 
 	private String nombres;
 
-	private String numeroDocumento;
-
 	private String telefono;
-
-	private String tipoDocumento;
-
-	//bi-directional many-to-one association to Usuario
-	@OneToMany(mappedBy="persona")
-	private List<Usuario> usuarios;
 
 	//bi-directional many-to-one association to Estudiante
 	@OneToMany(mappedBy="persona")
 	private List<Estudiante> estudiantes;
+
+	//bi-directional many-to-one association to Paciente
+	@OneToMany(mappedBy="persona")
+	private List<Paciente> pacientes;
+
+	//bi-directional many-to-one association to Usuario
+	@OneToMany(mappedBy="persona")
+	private List<Usuario> usuarios;
 
 	public Persona() {
 	}
@@ -105,50 +105,12 @@ public class Persona implements Serializable {
 		this.nombres = nombres;
 	}
 
-	public String getNumeroDocumento() {
-		return this.numeroDocumento;
-	}
-
-	public void setNumeroDocumento(String numeroDocumento) {
-		this.numeroDocumento = numeroDocumento;
-	}
-
 	public String getTelefono() {
 		return this.telefono;
 	}
 
 	public void setTelefono(String telefono) {
 		this.telefono = telefono;
-	}
-
-	public String getTipoDocumento() {
-		return this.tipoDocumento;
-	}
-
-	public void setTipoDocumento(String tipoDocumento) {
-		this.tipoDocumento = tipoDocumento;
-	}
-
-	public List<Usuario> getUsuarios() {
-		return this.usuarios;
-	}
-
-	public void setUsuarios(List<Usuario> usuarios) {
-		this.usuarios = usuarios;
-	}
-
-	public Usuario addUsuario(Usuario usuario) {
-		getUsuarios().add(usuario);
-		usuario.setPersona(this);
-
-		return usuario;
-	}
-
-	public Usuario removeUsuario(Usuario usuario) {
-		getUsuarios().remove(usuario);
-		usuario.setPersona(null);
-
-		return usuario;
 	}
 
 	public List<Estudiante> getEstudiantes() {
@@ -171,6 +133,50 @@ public class Persona implements Serializable {
 		estudiante.setPersona(null);
 
 		return estudiante;
+	}
+
+	public List<Paciente> getPacientes() {
+		return this.pacientes;
+	}
+
+	public void setPacientes(List<Paciente> pacientes) {
+		this.pacientes = pacientes;
+	}
+
+	public Paciente addPaciente(Paciente paciente) {
+		getPacientes().add(paciente);
+		paciente.setPersona(this);
+
+		return paciente;
+	}
+
+	public Paciente removePaciente(Paciente paciente) {
+		getPacientes().remove(paciente);
+		paciente.setPersona(null);
+
+		return paciente;
+	}
+
+	public List<Usuario> getUsuarios() {
+		return this.usuarios;
+	}
+
+	public void setUsuarios(List<Usuario> usuarios) {
+		this.usuarios = usuarios;
+	}
+
+	public Usuario addUsuario(Usuario usuario) {
+		getUsuarios().add(usuario);
+		usuario.setPersona(this);
+
+		return usuario;
+	}
+
+	public Usuario removeUsuario(Usuario usuario) {
+		getUsuarios().remove(usuario);
+		usuario.setPersona(null);
+
+		return usuario;
 	}
 
 }

@@ -22,23 +22,19 @@ public class Estudiante implements Serializable {
 
 	private String matricula;
 
-	//bi-directional many-to-one association to Persona
-	@ManyToOne
-	@JoinColumn(name="idPersona",insertable=false, updatable=false)
-	private Persona persona;
-
-	//bi-directional many-to-one association to Horario
-	@OneToMany(mappedBy="estudiante1")
-	private List<Horario> horarios1;
-
 	//bi-directional many-to-one association to Clinica
 	@ManyToOne
 	@JoinColumn(name="idClinica")
 	private Clinica clinica;
 
+	//bi-directional many-to-one association to Persona
+	@ManyToOne
+	@JoinColumn(name="idPersona")
+	private Persona persona;
+
 	//bi-directional many-to-one association to Horario
-	@OneToMany(mappedBy="estudiante2")
-	private List<Horario> horarios2;
+	@OneToMany(mappedBy="estudiante")
+	private List<Horario> horarios;
 
 	public Estudiante() {
 	}
@@ -67,36 +63,6 @@ public class Estudiante implements Serializable {
 		this.matricula = matricula;
 	}
 
-	public Persona getPersona() {
-		return this.persona;
-	}
-
-	public void setPersona(Persona persona) {
-		this.persona = persona;
-	}
-
-	public List<Horario> getHorarios1() {
-		return this.horarios1;
-	}
-
-	public void setHorarios1(List<Horario> horarios1) {
-		this.horarios1 = horarios1;
-	}
-
-	public Horario addHorarios1(Horario horarios1) {
-		getHorarios1().add(horarios1);
-		horarios1.setEstudiante1(this);
-
-		return horarios1;
-	}
-
-	public Horario removeHorarios1(Horario horarios1) {
-		getHorarios1().remove(horarios1);
-		horarios1.setEstudiante1(null);
-
-		return horarios1;
-	}
-
 	public Clinica getClinica() {
 		return this.clinica;
 	}
@@ -105,26 +71,34 @@ public class Estudiante implements Serializable {
 		this.clinica = clinica;
 	}
 
-	public List<Horario> getHorarios2() {
-		return this.horarios2;
+	public Persona getPersona() {
+		return this.persona;
 	}
 
-	public void setHorarios2(List<Horario> horarios2) {
-		this.horarios2 = horarios2;
+	public void setPersona(Persona persona) {
+		this.persona = persona;
 	}
 
-	public Horario addHorarios2(Horario horarios2) {
-		getHorarios2().add(horarios2);
-		horarios2.setEstudiante2(this);
-
-		return horarios2;
+	public List<Horario> getHorarios() {
+		return this.horarios;
 	}
 
-	public Horario removeHorarios2(Horario horarios2) {
-		getHorarios2().remove(horarios2);
-		horarios2.setEstudiante2(null);
+	public void setHorarios(List<Horario> horarios) {
+		this.horarios = horarios;
+	}
 
-		return horarios2;
+	public Horario addHorario(Horario horario) {
+		getHorarios().add(horario);
+		horario.setEstudiante(this);
+
+		return horario;
+	}
+
+	public Horario removeHorario(Horario horario) {
+		getHorarios().remove(horario);
+		horario.setEstudiante(null);
+
+		return horario;
 	}
 
 }

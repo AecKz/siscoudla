@@ -28,13 +28,8 @@ public class Horario implements Serializable {
 
 	//bi-directional many-to-one association to Estudiante
 	@ManyToOne
-	@JoinColumn(name="idEstudiante" ,insertable=false, updatable=false)
-	private Estudiante estudiante1;
-
-	//bi-directional many-to-one association to Estudiante
-	@ManyToOne
-	@JoinColumn(name="idEstudiante",insertable=false, updatable=false)
-	private Estudiante estudiante2;
+	@JoinColumn(name="idEstudiante")
+	private Estudiante estudiante;
 
 	//bi-directional many-to-one association to Turno
 	@OneToMany(mappedBy="horario")
@@ -83,20 +78,12 @@ public class Horario implements Serializable {
 		this.horaInicio = horaInicio;
 	}
 
-	public Estudiante getEstudiante1() {
-		return this.estudiante1;
+	public Estudiante getEstudiante() {
+		return this.estudiante;
 	}
 
-	public void setEstudiante1(Estudiante estudiante1) {
-		this.estudiante1 = estudiante1;
-	}
-
-	public Estudiante getEstudiante2() {
-		return this.estudiante2;
-	}
-
-	public void setEstudiante2(Estudiante estudiante2) {
-		this.estudiante2 = estudiante2;
+	public void setEstudiante(Estudiante estudiante) {
+		this.estudiante = estudiante;
 	}
 
 	public List<Turno> getTurnos() {

@@ -1,8 +1,8 @@
 package com.udla.siscoudla.modelo;
+
 import java.io.Serializable;
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
 
 
 /**
@@ -29,17 +29,18 @@ public class Turno implements Serializable {
 
 	//bi-directional many-to-one association to Cubiculo
 	@ManyToOne
-	@JoinColumn(name="idCubiculo",insertable=false, updatable=false)
+	@JoinColumn(name="idCubiculo")
 	private Cubiculo cubiculo;
-
-	//bi-directional many-to-one association to Paciente
-	@OneToMany(mappedBy="turno")
-	private List<Paciente> pacientes;
 
 	//bi-directional many-to-one association to Horario
 	@ManyToOne
-	@JoinColumn(name="idHorario",insertable=false, updatable=false)
+	@JoinColumn(name="idHorario")
 	private Horario horario;
+
+	//bi-directional many-to-one association to Paciente
+	@ManyToOne
+	@JoinColumn(name="idPaciente")
+	private Paciente paciente;
 
 	public Turno() {
 	}
@@ -92,34 +93,20 @@ public class Turno implements Serializable {
 		this.cubiculo = cubiculo;
 	}
 
-	public List<Paciente> getPacientes() {
-		return this.pacientes;
-	}
-
-	public void setPacientes(List<Paciente> pacientes) {
-		this.pacientes = pacientes;
-	}
-
-	public Paciente addPaciente(Paciente paciente) {
-		getPacientes().add(paciente);
-		paciente.setTurno(this);
-
-		return paciente;
-	}
-
-	public Paciente removePaciente(Paciente paciente) {
-		getPacientes().remove(paciente);
-		paciente.setTurno(null);
-
-		return paciente;
-	}
-
 	public Horario getHorario() {
 		return this.horario;
 	}
 
 	public void setHorario(Horario horario) {
 		this.horario = horario;
+	}
+
+	public Paciente getPaciente() {
+		return this.paciente;
+	}
+
+	public void setPaciente(Paciente paciente) {
+		this.paciente = paciente;
 	}
 
 }

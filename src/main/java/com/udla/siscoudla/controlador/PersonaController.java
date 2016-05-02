@@ -108,8 +108,6 @@ public class PersonaController extends HttpServlet {
 					entidadJSONObject.put("id", persona.getIdPersona());
 					entidadJSONObject.put("nombre", persona.getNombres());
 					entidadJSONObject.put("apellido", persona.getApellidos());
-					entidadJSONObject.put("identificacion",
-							persona.getNumeroDocumento());
 					entidadJSONObject.put("email", persona.getEmail());
 					entidadJSONObject.put("telefono", persona.getTelefono());
 

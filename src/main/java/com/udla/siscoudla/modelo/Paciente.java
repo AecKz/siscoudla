@@ -2,6 +2,7 @@ package com.udla.siscoudla.modelo;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import java.util.List;
 
 
 /**
@@ -19,14 +20,16 @@ public class Paciente implements Serializable {
 
 	private String estado;
 
-	private int idPersona;
-
 	private String numeroHistoria;
 
-	//bi-directional many-to-one association to Turno
+	//bi-directional many-to-one association to Persona
 	@ManyToOne
-	@JoinColumn(name="idPaciente", referencedColumnName="idPaciente",insertable=false, updatable=false)
-	private Turno turno;
+	@JoinColumn(name="idPersona")
+	private Persona persona;
+
+	//bi-directional many-to-one association to Turno
+	@OneToMany(mappedBy="paciente")
+	private List<Turno> turnos;
 
 	public Paciente() {
 	}
@@ -47,14 +50,6 @@ public class Paciente implements Serializable {
 		this.estado = estado;
 	}
 
-	public int getIdPersona() {
-		return this.idPersona;
-	}
-
-	public void setIdPersona(int idPersona) {
-		this.idPersona = idPersona;
-	}
-
 	public String getNumeroHistoria() {
 		return this.numeroHistoria;
 	}
@@ -63,12 +58,34 @@ public class Paciente implements Serializable {
 		this.numeroHistoria = numeroHistoria;
 	}
 
-	public Turno getTurno() {
-		return this.turno;
+	public Persona getPersona() {
+		return this.persona;
 	}
 
-	public void setTurno(Turno turno) {
-		this.turno = turno;
+	public void setPersona(Persona persona) {
+		this.persona = persona;
+	}
+
+	public List<Turno> getTurnos() {
+		return this.turnos;
+	}
+
+	public void setTurnos(List<Turno> turnos) {
+		this.turnos = turnos;
+	}
+
+	public Turno addTurno(Turno turno) {
+		getTurnos().add(turno);
+		turno.setPaciente(this);
+
+		return turno;
+	}
+
+	public Turno removeTurno(Turno turno) {
+		getTurnos().remove(turno);
+		turno.setPaciente(null);
+
+		return turno;
 	}
 
 }
