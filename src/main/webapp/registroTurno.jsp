@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -22,7 +22,12 @@
 
 
 <body class="nav-md">
-
+		<%
+			// Permitimos el acceso si la session existe		
+				if(session.getAttribute("login") == null){
+				    response.sendRedirect("/index.jsp");
+				}
+		%>
 	<div class="container body">
 		<div class="main_container">
 			<div class="col-md-3 left_col">
@@ -67,7 +72,7 @@
 								<li><a><i class="fa fa-book"></i>Informes<span
 										class="fa fa-chevron-down"></span></a>
 									<ul class="nav child_menu" style="display: none">
-										<li><a href="registroTurno.jsp">Turno Normal</a></li>
+										<li><a href="#">Turno Normal</a></li>
 										<li><a href="#">Turno Extra</a></li>
 									</ul></li>
 							</ul>
@@ -161,11 +166,9 @@
 									</div>
 								</li>
 							</ul></li>
-
 					</ul>
 					</nav>
 				</div>
-
 			</div>
 			<!-- /top navigation -->
 
@@ -179,9 +182,7 @@
 						</div>
 					</div>
 					<div class="clearfix"></div>
-
 					<div class="row">
-
 						<div class="col-md-12 col-sm-12 col-xs-12">
 							<div class="x_panel">
 								<div class="x_content">
@@ -191,110 +192,83 @@
 									<div id="wizard" class="form_wizard wizard_horizontal">
 										<ul class="wizard_steps">
 											<li><a href="#step-1"> <span class="step_no">1</span>
-													<span class="step_descr"> Step 1<br /> <small>Step
-															1 description</small>
+													<span class="step_descr"> Paso 1<br /> <small>Ingrese los datos del paciente</small>
 												</span>
 											</a></li>
 											<li><a href="#step-2"> <span class="step_no">2</span>
-													<span class="step_descr"> Step 2<br /> <small>Step
-															2 description</small>
+													<span class="step_descr"> Paso 2<br /> <small>Seleccione Horario</small>
 												</span>
 											</a></li>
 											<li><a href="#step-3"> <span class="step_no">3</span>
-													<span class="step_descr"> Step 3<br /> <small>Step
-															3 description</small>
+													<span class="step_descr"> Paso 3<br /> <small>Seleccione tratamiento</small>
 												</span>
 											</a></li>
 											<li><a href="#step-4"> <span class="step_no">4</span>
-													<span class="step_descr"> Step 4<br /> <small>Step
-															4 description</small>
+													<span class="step_descr"> Paso 4<br /> <small>Confirmaci&oacute;n</small>
 												</span>
 											</a></li>
 										</ul>
 										<div id="step-1">
+										<h2 class="StepTitle">Ingrese los datos del paciente</h2>
 											<form class="form-horizontal form-label-left">
-
-												<div class="form-group">
+											<div class="form-group">
 													<label class="control-label col-md-3 col-sm-3 col-xs-12"
-														for="first-name">First Name <span class="required">*</span>
-													</label>
+														for="txtHistoriaClinica">N° Historia Cl&iacute;nica:</label>
 													<div class="col-md-6 col-sm-6 col-xs-12">
-														<input type="text" id="first-name" required="required"
-															class="form-control col-md-7 col-xs-12">
+														<input type="text" id="txtHistoriaClinica" 
+														class="form-control col-md-7 col-xs-12">
 													</div>
 												</div>
 												<div class="form-group">
 													<label class="control-label col-md-3 col-sm-3 col-xs-12"
-														for="last-name">Last Name <span class="required">*</span>
+														for="txtNombresPaciente">Nombres:<span class="required">*</span>
 													</label>
 													<div class="col-md-6 col-sm-6 col-xs-12">
-														<input type="text" id="last-name" name="last-name"
-															required="required"
+														<input type="text" id="txtNombresPaciente" required
+														class="form-control col-md-7 col-xs-12">
+													</div>
+												</div>
+												<div class="form-group">
+													<label class="control-label col-md-3 col-sm-3 col-xs-12"
+														for="txtApellidosPaciente">Apellidos:<span class="required">*</span>
+													</label>
+													<div class="col-md-6 col-sm-6 col-xs-12">
+														<input type="text" id="txtApellidosPaciente" required
 															class="form-control col-md-7 col-xs-12">
 													</div>
 												</div>
 												<div class="form-group">
-													<label for="middle-name"
-														class="control-label col-md-3 col-sm-3 col-xs-12">Middle
-														Name / Initial</label>
+													<label for="txtEmail"
+														class="control-label col-md-3 col-sm-3 col-xs-12">E-mail:<span class="required">*</span></label>
 													<div class="col-md-6 col-sm-6 col-xs-12">
-														<input id="middle-name"
-															class="form-control col-md-7 col-xs-12" type="text"
-															name="middle-name">
+														<input type="email" id="txtEmail" required
+															class="form-control col-md-7 col-xs-12" >
 													</div>
 												</div>
 												<div class="form-group">
-													<label class="control-label col-md-3 col-sm-3 col-xs-12">Gender</label>
+													<label class="control-label col-md-3 col-sm-3 col-xs-12">G&eacute;nero:<span class="required">*</label>
 													<div class="col-md-6 col-sm-6 col-xs-12">
-														<div id="gender" class="btn-group" data-toggle="buttons">
-															<label class="btn btn-default"
-																data-toggle-class="btn-primary"
-																data-toggle-passive-class="btn-default"> <input
-																type="radio" name="gender" value="male"> &nbsp;
-																Male &nbsp;
-															</label> <label class="btn btn-primary active"
-																data-toggle-class="btn-primary"
-																data-toggle-passive-class="btn-default"> <input
-																type="radio" name="gender" value="female" checked="">
-																Female
-															</label>
+														<div id="genero" class="btn-group" data-toggle="buttons">
+															<input type="radio" name="genero" value="m">&nbsp;Masculino&nbsp;
+															<input type="radio" name="genero" value="f">&nbsp;Femenino&nbsp;
 														</div>
 													</div>
 												</div>
 												<div class="form-group">
-													<label class="control-label col-md-3 col-sm-3 col-xs-12">Date
-														Of Birth <span class="required">*</span>
+													<label class="control-label col-md-3 col-sm-3 col-xs-12">Fecha de Nacimiento:<span class="required">*</span>
 													</label>
 													<div class="col-md-6 col-sm-6 col-xs-12">
-														<input id="birthday"
-															class="date-picker form-control col-md-7 col-xs-12"
-															required="required" type="text">
+													<input type="date" id="fechaNacimientoPaciente" class="form-control col-md-7 col-xs-12" required>
 													</div>
 												</div>
-
 											</form>
-
 										</div>
 										<div id="step-2">
-											<h2 class="StepTitle">Step 2 Content</h2>
-											<p>do eiusmod tempor incididunt ut labore et dolore magna
-												aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-												ullamco laboris nisi ut aliquip ex ea commodo consequat.
-												Duis aute irure dolor in reprehenderit in voluptate velit
-												esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-												occaecat cupidatat non proident, sunt in culpa qui officia
-												deserunt mollit anim id est laborum.</p>
-											<p>Lorem ipsum dolor sit amet, consectetur adipisicing
-												elit, sed do eiusmod tempor incididunt ut labore et dolore
-												magna aliqua. Ut enim ad minim veniam, quis nostrud
-												exercitation ullamco laboris nisi ut aliquip ex ea commodo
-												consequat. Duis aute irure dolor in reprehenderit in
-												voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-												Excepteur sint occaecat cupidatat non proident, sunt in
-												culpa qui officia deserunt mollit anim id est laborum.</p>
+											<h2 class="StepTitle">Horarios Registrados</h2>
+											
 										</div>
 										<div id="step-3">
-											<h2 class="StepTitle">Step 3 Content</h2>
+											<h2 class="StepTitle">Seleccione el tratamiento a realizar:</h2>
 											<p>sed do eiusmod tempor incididunt ut labore et dolore
 												magna aliqua. Ut enim ad minim veniam, quis nostrud
 												exercitation ullamco laboris nisi ut aliquip ex ea commodo
@@ -312,7 +286,7 @@
 												culpa qui officia deserunt mollit anim id est laborum.</p>
 										</div>
 										<div id="step-4">
-											<h2 class="StepTitle">Step 4 Content</h2>
+											<h2 class="StepTitle">Confirme su turno:</h2>
 											<p>Lorem ipsum dolor sit amet, consectetur adipisicing
 												elit, sed do eiusmod tempor incididunt ut labore et dolore
 												magna aliqua. Ut enim ad minim veniam, quis nostrud
@@ -352,13 +326,13 @@
 
 	</div>
 
-	<div id="custom_notifications" class="custom-notifications dsp_none">
-		<ul class="list-unstyled notifications clearfix"
-			data-tabbed_notifications="notif-group">
-		</ul>
-		<div class="clearfix"></div>
-		<div id="notif-group" class="tabbed_notifications"></div>
-	</div>
+<!-- 	<div id="custom_notifications" class="custom-notifications dsp_none"> -->
+<!-- 		<ul class="list-unstyled notifications clearfix" -->
+<!-- 			data-tabbed_notifications="notif-group"> -->
+<!-- 		</ul> -->
+<!-- 		<div class="clearfix"></div> -->
+<!-- 		<div id="notif-group" class="tabbed_notifications"></div> -->
+<!-- 	</div> -->
 
 	<script src="js/bootstrap.min.js"></script>
 
@@ -380,16 +354,8 @@
 
       function onFinishCallback() {
         $('#wizard').smartWizard('showMessage', 'Finish Clicked');
-        //alert('Finish Clicked');
+        alert('Finish Clicked');
       }
-    });
-
-    $(document).ready(function() {
-      // Smart Wizard
-      $('#wizard_verticle').smartWizard({
-        transitionEffect: 'slide'
-      });
-
     });
   </script>
 

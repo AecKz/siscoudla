@@ -21,8 +21,8 @@ function SmartWizard(target, options) {
     this.elmStepContainer = $('<div></div>').addClass("stepContainer");
     this.loader = $('<div>Loading</div>').addClass("loader");
     this.buttons = {
-        next : $('<a>'+options.labelNext+'</a>').attr("href","#").addClass("btn btn-success"),
-        previous : $('<a>'+options.labelPrevious+'</a>').attr("href","#").addClass("btn btn-primary"),
+        next : $('<a>'+options.labelNext+'</a>').attr("href","#").addClass("btn btn-primary"),
+        previous : $('<a>'+options.labelPrevious+'</a>').attr("href","#").addClass("btn btn-success"),
         finish  : $('<a>'+options.labelFinish+'</a>').attr("href","#").addClass("btn btn-default")
     };
 
@@ -475,15 +475,15 @@ function SmartWizard(target, options) {
         enableFinishButton: false, // make finish button enabled always
         hideButtonsOnDisabled: false, // when the previous/next/finish buttons are disabled, hide them instead?
         errorSteps:[],    // Array Steps with errors
-        labelNext:'Next',
-        labelPrevious:'Previous',
-        labelFinish:'Finish',
+        labelNext:'Siguiente',
+        labelPrevious:'Anterior',
+        labelFinish:'Finalizar',
         noForwardJumping: false,
         ajaxType: "POST",
         onLeaveStep: null, // triggers when leaving a step
         onShowStep: null,  // triggers when showing a step
         onFinish: null,  // triggers when Finish button is clicked
-        includeFinishButton : true   // Add the finish button
+        includeFinishButton : false   // Add the finish button
     };
 
 })(jQuery);
