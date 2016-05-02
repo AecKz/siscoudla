@@ -166,7 +166,7 @@
               <input type="text" class="form-control" id="txtApellidos" placeholder="Apellidos" required/>
             </div>
             <div>
-              <input type="email" class="form-control" id="txtEmail" placeholder="Email" required/>
+              <input type="email" class="form-control" id="txtEmail" placeholder="E-mail" required/>
             </div>
 			<div>
               <input type="password" class="form-control" id="txtContrasena" placeholder="Contrase&ntilde;a" required/>

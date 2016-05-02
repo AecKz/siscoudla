@@ -31,7 +31,12 @@
 
 
 <body class="nav-md">
-
+		<%
+			// Permitimos el acceso si la session existe		
+				if(session.getAttribute("login") == null){
+				    response.sendRedirect("/index.jsp");
+				}
+		%>
 	<div class="container body">
 		<div class="main_container">
 			<div class="col-md-3 left_col">
@@ -49,7 +54,7 @@
 						</div>
 						<div class="profile_info">
 							<span>Bienvenida (o),</span>
-							<h2>Empty user</h2>
+							<h2 id="txtUsuarioMenu">Empty user</h2>
 						</div>
 					</div>
 					<!-- /menu prile quick info -->
@@ -74,7 +79,7 @@
 								</li>
 								<li><a><i class="fa fa-book"></i>Informes<span class="fa fa-chevron-down"></span></a>
 									<ul class="nav child_menu" style="display: none">
-										<li><a href="registroTurno.jsp">Turno Normal</a>
+										<li><a href="#">Turno Normal</a>
 										</li>
 										<li><a href="#">Turno Extra</a>
 										</li>

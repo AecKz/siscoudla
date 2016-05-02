@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import net.sf.json.JSONObject;
 
@@ -14,6 +15,7 @@ import com.udla.siscoudla.dao.PersonaDAO;
 import com.udla.siscoudla.dao.UsuarioDAO;
 import com.udla.siscoudla.modelo.Persona;
 import com.udla.siscoudla.modelo.Usuario;
+import com.udla.siscoudla.util.Utilitarios;
 
 /**
  * Servlet implementation class IndexController
@@ -35,6 +37,7 @@ public class IndexController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
+		doPost(request, response);
 	}
 
 	/**
@@ -71,7 +74,8 @@ public class IndexController extends HttpServlet {
 				usuario.setUsuario(email);
 			}
 			if (!contrasena.equals("")){
-				usuario.setPassword(contrasena);
+				String encriptarClave = Utilitarios.encriptacionClave(contrasena);
+				usuario.setPassword(encriptarClave);
 			}
 		
 			if (!nombres.equals("")){
@@ -86,7 +90,8 @@ public class IndexController extends HttpServlet {
 				personaDAO.crear(persona);
 				usuario.setPersona(persona);
 				usuario.setEstado("ACT");
-				usuarioDAO.crear(usuario);				
+				usuarioDAO.crear(usuario);			
+				activarSesion(request, usuario);
 			}
 			
 			if (tipoConsulta.equals("loginGoogle")){
@@ -98,7 +103,8 @@ public class IndexController extends HttpServlet {
 					usuario.setPersona(persona);
 					usuario.setEstado("ACT");
 					usuarioDAO.crear(usuario);
-				}				
+				}		
+				activarSesion(request, usuario);
 			}
 			if (tipoConsulta.equals("login")){
 				Boolean flagLogin = false;
@@ -108,7 +114,8 @@ public class IndexController extends HttpServlet {
 					result.put("error", "Usuario o Contrase\u00F1a Incorrecta");
 					response.setContentType("application/json; charset=UTF-8");
 					result.write(response.getWriter());
-				}				
+				}
+				activarSesion(request, usuario);
 			}
 			result.put("success", Boolean.TRUE);
 			response.setContentType("application/json; charset=UTF-8");
@@ -121,6 +128,12 @@ public class IndexController extends HttpServlet {
 			e.printStackTrace();
 
 		}
+	}
+
+	private void activarSesion(HttpServletRequest request, Usuario usuario) {
+		// Activacion de la sesion y agregamos 
+		HttpSession session = request.getSession();			
+		session.setAttribute("login", usuario.getUsuario());
 	}
 
 }
