@@ -19,6 +19,8 @@
   <class>com.udla.siscoudla.modelo.Turno</class>
   <class>com.udla.siscoudla.modelo.Usuario</class>
   <class>com.udla.siscoudla.modelo.Horarioestudiante</class>
+  <class>com.udla.siscoudla.modelo.Horariocubiculo</class>
+  <class>com.udla.siscoudla.modelo.Horariocubiculoestado</class>
 
     <properties>
       <property name="javax.persistence.jdbc.user" value="root" />

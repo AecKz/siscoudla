@@ -30,6 +30,10 @@ public class Horario implements Serializable {
 	@OneToMany(mappedBy="horario")
 	private List<Horarioestudiante> horarioestudiantes;
 
+	//bi-directional many-to-one association to Horariocubiculo
+	@OneToMany(mappedBy="horario")
+	private List<Horariocubiculo> horariocubiculos;
+
 	public Horario() {
 	}
 
@@ -93,6 +97,28 @@ public class Horario implements Serializable {
 		horarioestudiante.setHorario(null);
 
 		return horarioestudiante;
+	}
+
+	public List<Horariocubiculo> getHorariocubiculos() {
+		return this.horariocubiculos;
+	}
+
+	public void setHorariocubiculos(List<Horariocubiculo> horariocubiculos) {
+		this.horariocubiculos = horariocubiculos;
+	}
+
+	public Horariocubiculo addHorariocubiculo(Horariocubiculo horariocubiculo) {
+		getHorariocubiculos().add(horariocubiculo);
+		horariocubiculo.setHorario(this);
+
+		return horariocubiculo;
+	}
+
+	public Horariocubiculo removeHorariocubiculo(Horariocubiculo horariocubiculo) {
+		getHorariocubiculos().remove(horariocubiculo);
+		horariocubiculo.setHorario(null);
+
+		return horariocubiculo;
 	}
 
 }

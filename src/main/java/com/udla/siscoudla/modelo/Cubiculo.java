@@ -31,9 +31,9 @@ public class Cubiculo implements Serializable {
 	@JoinColumn(name="idEspecialidad")
 	private Especialidad especialidad;
 
-	//bi-directional many-to-one association to Turno
+	//bi-directional many-to-one association to Horariocubiculo
 	@OneToMany(mappedBy="cubiculo")
-	private List<Turno> turnos;
+	private List<Horariocubiculo> horariocubiculos;
 
 	public Cubiculo() {
 	}
@@ -86,26 +86,26 @@ public class Cubiculo implements Serializable {
 		this.especialidad = especialidad;
 	}
 
-	public List<Turno> getTurnos() {
-		return this.turnos;
+	public List<Horariocubiculo> getHorariocubiculos() {
+		return this.horariocubiculos;
 	}
 
-	public void setTurnos(List<Turno> turnos) {
-		this.turnos = turnos;
+	public void setHorariocubiculos(List<Horariocubiculo> horariocubiculos) {
+		this.horariocubiculos = horariocubiculos;
 	}
 
-	public Turno addTurno(Turno turno) {
-		getTurnos().add(turno);
-		turno.setCubiculo(this);
+	public Horariocubiculo addHorariocubiculo(Horariocubiculo horariocubiculo) {
+		getHorariocubiculos().add(horariocubiculo);
+		horariocubiculo.setCubiculo(this);
 
-		return turno;
+		return horariocubiculo;
 	}
 
-	public Turno removeTurno(Turno turno) {
-		getTurnos().remove(turno);
-		turno.setCubiculo(null);
+	public Horariocubiculo removeHorariocubiculo(Horariocubiculo horariocubiculo) {
+		getHorariocubiculos().remove(horariocubiculo);
+		horariocubiculo.setCubiculo(null);
 
-		return turno;
+		return horariocubiculo;
 	}
 
 }
