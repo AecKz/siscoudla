@@ -22,12 +22,12 @@
 
 
 <body class="nav-md">
-		<%
-			// Permitimos el acceso si la session existe		
-				if(session.getAttribute("login") == null){
-				    response.sendRedirect("/index.jsp");
-				}
-		%>
+	<%
+		// Permitimos el acceso si la session existe		
+		if (session.getAttribute("login") == null) {
+			response.sendRedirect("/index.jsp");
+		}
+	%>
 	<div class="container body">
 		<div class="main_container">
 			<div class="col-md-3 left_col">
@@ -101,72 +101,72 @@
 
 				<div class="nav_menu">
 					<nav class="" role="navigation">
-					<div class="nav toggle">
-						<a id="menu_toggle"><i class="fa fa-bars"></i></a>
-					</div>
+						<div class="nav toggle">
+							<a id="menu_toggle"><i class="fa fa-bars"></i></a>
+						</div>
 
-					<ul class="nav navbar-nav navbar-right">
-						<li class=""><a href="javascript:;"
-							class="user-profile dropdown-toggle" data-toggle="dropdown"
-							aria-expanded="false"> <img src="images/img.jpg" alt="">John
-								Doe <span class=" fa fa-angle-down"></span>
-						</a>
-							<ul
-								class="dropdown-menu dropdown-usermenu animated fadeInDown pull-right">
-								<li><a href="javascript:;"> Profile</a></li>
-								<li><a href="javascript:;"> <span
-										class="badge bg-red pull-right">50%</span> <span>Settings</span>
-								</a></li>
-								<li><a href="javascript:;">Help</a></li>
-								<li><a href="login.html"><i
-										class="fa fa-sign-out pull-right"></i> Log Out</a></li>
-							</ul></li>
+						<ul class="nav navbar-nav navbar-right">
+							<li class=""><a href="javascript:;"
+								class="user-profile dropdown-toggle" data-toggle="dropdown"
+								aria-expanded="false"> <img src="images/img.jpg" alt="">John
+									Doe <span class=" fa fa-angle-down"></span>
+							</a>
+								<ul
+									class="dropdown-menu dropdown-usermenu animated fadeInDown pull-right">
+									<li><a href="javascript:;"> Profile</a></li>
+									<li><a href="javascript:;"> <span
+											class="badge bg-red pull-right">50%</span> <span>Settings</span>
+									</a></li>
+									<li><a href="javascript:;">Help</a></li>
+									<li><a href="login.html"><i
+											class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+								</ul></li>
 
-						<li role="presentation" class="dropdown"><a
-							href="javascript:;" class="dropdown-toggle info-number"
-							data-toggle="dropdown" aria-expanded="false"> <i
-								class="fa fa-envelope-o"></i> <span class="badge bg-green">6</span>
-						</a>
-							<ul id="menu1"
-								class="dropdown-menu list-unstyled msg_list animated fadeInDown"
-								role="menu">
-								<li><a> <span class="image"> <img
-											src="images/img.jpg" alt="Profile Image" />
-									</span> <span> <span>John Smith</span> <span class="time">3
-												mins ago</span>
-									</span> <span class="message"> Film festivals used to be
-											do-or-die moments for movie makers. They were where... </span>
-								</a></li>
-								<li><a> <span class="image"> <img
-											src="images/img.jpg" alt="Profile Image" />
-									</span> <span> <span>John Smith</span> <span class="time">3
-												mins ago</span>
-									</span> <span class="message"> Film festivals used to be
-											do-or-die moments for movie makers. They were where... </span>
-								</a></li>
-								<li><a> <span class="image"> <img
-											src="images/img.jpg" alt="Profile Image" />
-									</span> <span> <span>John Smith</span> <span class="time">3
-												mins ago</span>
-									</span> <span class="message"> Film festivals used to be
-											do-or-die moments for movie makers. They were where... </span>
-								</a></li>
-								<li><a> <span class="image"> <img
-											src="images/img.jpg" alt="Profile Image" />
-									</span> <span> <span>John Smith</span> <span class="time">3
-												mins ago</span>
-									</span> <span class="message"> Film festivals used to be
-											do-or-die moments for movie makers. They were where... </span>
-								</a></li>
-								<li>
-									<div class="text-center">
-										<a> <strong>See All Alerts</strong> <i
-											class="fa fa-angle-right"></i>
-										</a>
-									</div>
-								</li>
-							</ul></li>
-					</ul>
+							<li role="presentation" class="dropdown"><a
+								href="javascript:;" class="dropdown-toggle info-number"
+								data-toggle="dropdown" aria-expanded="false"> <i
+									class="fa fa-envelope-o"></i> <span class="badge bg-green">6</span>
+							</a>
+								<ul id="menu1"
+									class="dropdown-menu list-unstyled msg_list animated fadeInDown"
+									role="menu">
+									<li><a> <span class="image"> <img
+												src="images/img.jpg" alt="Profile Image" />
+										</span> <span> <span>John Smith</span> <span class="time">3
+													mins ago</span>
+										</span> <span class="message"> Film festivals used to be
+												do-or-die moments for movie makers. They were where... </span>
+									</a></li>
+									<li><a> <span class="image"> <img
+												src="images/img.jpg" alt="Profile Image" />
+										</span> <span> <span>John Smith</span> <span class="time">3
+													mins ago</span>
+										</span> <span class="message"> Film festivals used to be
+												do-or-die moments for movie makers. They were where... </span>
+									</a></li>
+									<li><a> <span class="image"> <img
+												src="images/img.jpg" alt="Profile Image" />
+										</span> <span> <span>John Smith</span> <span class="time">3
+													mins ago</span>
+										</span> <span class="message"> Film festivals used to be
+												do-or-die moments for movie makers. They were where... </span>
+									</a></li>
+									<li><a> <span class="image"> <img
+												src="images/img.jpg" alt="Profile Image" />
+										</span> <span> <span>John Smith</span> <span class="time">3
+													mins ago</span>
+										</span> <span class="message"> Film festivals used to be
+												do-or-die moments for movie makers. They were where... </span>
+									</a></li>
+									<li>
+										<div class="text-center">
+											<a> <strong>See All Alerts</strong> <i
+												class="fa fa-angle-right"></i>
+											</a>
+										</div>
+									</li>
+								</ul></li>
+						</ul>
 					</nav>
 				</div>
 			</div>
@@ -192,15 +192,18 @@
 									<div id="wizard" class="form_wizard wizard_horizontal">
 										<ul class="wizard_steps">
 											<li><a href="#step-1"> <span class="step_no">1</span>
-													<span class="step_descr"> Paso 1<br /> <small>Ingrese los datos del paciente</small>
+													<span class="step_descr"> Paso 1<br /> <small>Ingrese
+															los datos del paciente</small>
 												</span>
 											</a></li>
 											<li><a href="#step-2"> <span class="step_no">2</span>
-													<span class="step_descr"> Paso 2<br /> <small>Seleccione Horario</small>
+													<span class="step_descr"> Paso 2<br /> <small>Seleccione
+															Horario</small>
 												</span>
 											</a></li>
 											<li><a href="#step-3"> <span class="step_no">3</span>
-													<span class="step_descr"> Paso 3<br /> <small>Seleccione tratamiento</small>
+													<span class="step_descr"> Paso 3<br /> <small>Seleccione
+															tratamiento</small>
 												</span>
 											</a></li>
 											<li><a href="#step-4"> <span class="step_no">4</span>
@@ -209,28 +212,31 @@
 											</a></li>
 										</ul>
 										<div id="step-1">
-										<h2 class="StepTitle">Ingrese los datos del paciente</h2>
+											<h2 class="StepTitle">Ingrese los datos del paciente</h2>
 											<form class="form-horizontal form-label-left">
-											<div class="form-group">
+												<div class="form-group">
 													<label class="control-label col-md-3 col-sm-3 col-xs-12"
-														for="txtHistoriaClinica">N° Historia Cl&iacute;nica:</label>
+														for="txtHistoriaClinica">N° Historia
+														Cl&iacute;nica:</label>
 													<div class="col-md-6 col-sm-6 col-xs-12">
-														<input type="text" id="txtHistoriaClinica" 
-														class="form-control col-md-7 col-xs-12">
+														<input type="text" id="txtHistoriaClinica"
+															class="form-control col-md-7 col-xs-12">
 													</div>
 												</div>
 												<div class="form-group">
 													<label class="control-label col-md-3 col-sm-3 col-xs-12"
-														for="txtNombresPaciente">Nombres:<span class="required">*</span>
+														for="txtNombresPaciente">Nombres:<span
+														class="required">*</span>
 													</label>
 													<div class="col-md-6 col-sm-6 col-xs-12">
 														<input type="text" id="txtNombresPaciente" required
-														class="form-control col-md-7 col-xs-12">
+															class="form-control col-md-7 col-xs-12">
 													</div>
 												</div>
 												<div class="form-group">
 													<label class="control-label col-md-3 col-sm-3 col-xs-12"
-														for="txtApellidosPaciente">Apellidos:<span class="required">*</span>
+														for="txtApellidosPaciente">Apellidos:<span
+														class="required">*</span>
 													</label>
 													<div class="col-md-6 col-sm-6 col-xs-12">
 														<input type="text" id="txtApellidosPaciente" required
@@ -239,14 +245,16 @@
 												</div>
 												<div class="form-group">
 													<label for="txtEmail"
-														class="control-label col-md-3 col-sm-3 col-xs-12">E-mail:<span class="required">*</span></label>
+														class="control-label col-md-3 col-sm-3 col-xs-12">E-mail:<span
+														class="required">*</span></label>
 													<div class="col-md-6 col-sm-6 col-xs-12">
 														<input type="email" id="txtEmail" required
-															class="form-control col-md-7 col-xs-12" >
+															class="form-control col-md-7 col-xs-12">
 													</div>
 												</div>
 												<div class="form-group">
-													<label class="control-label col-md-3 col-sm-3 col-xs-12">G&eacute;nero:<span class="required">*</label>
+													<label class="control-label col-md-3 col-sm-3 col-xs-12">G&eacute;nero:<span
+														class="required">*</span></label>
 													<div class="col-md-6 col-sm-6 col-xs-12">
 														<div id="genero" class="btn-group" data-toggle="buttons">
 															<input type="radio" name="genero" value="m">&nbsp;Masculino&nbsp;
@@ -255,20 +263,39 @@
 													</div>
 												</div>
 												<div class="form-group">
-													<label class="control-label col-md-3 col-sm-3 col-xs-12">Fecha de Nacimiento:<span class="required">*</span>
+													<label class="control-label col-md-3 col-sm-3 col-xs-12">Fecha
+														de Nacimiento:<span class="required">*</span>
 													</label>
 													<div class="col-md-6 col-sm-6 col-xs-12">
-													<input type="date" id="fechaNacimientoPaciente" class="form-control col-md-7 col-xs-12" required>
+														<input type="date" id="fechaNacimientoPaciente"
+															class="form-control col-md-7 col-xs-12" required>
 													</div>
 												</div>
 											</form>
 										</div>
 										<div id="step-2">
 											<h2 class="StepTitle">Horarios Registrados</h2>
-											
+											<p>Estimada(o) estudiante, para el presente semestre ud
+												tiene registrado los siguientes horarios:</p>
+											<table id="tblHorariosEstudiante" class="table">
+												<thead>
+													<tr>
+														<th></th>
+														<th>LUNES</th>
+														<th>MARTES</th>
+														<th>MIERCOLES</th>
+														<th>JUEVES</th>
+														<th>VIERNES</th>
+													</tr>
+												</thead>
+												<tbody id="dataTableContent">
+												</tbody>
+											</table>
+
 										</div>
 										<div id="step-3">
-											<h2 class="StepTitle">Seleccione el tratamiento a realizar:</h2>
+											<h2 class="StepTitle">Seleccione el tratamiento a
+												realizar:</h2>
 											<p>sed do eiusmod tempor incididunt ut labore et dolore
 												magna aliqua. Ut enim ad minim veniam, quis nostrud
 												exercitation ullamco laboris nisi ut aliquip ex ea commodo
@@ -326,13 +353,13 @@
 
 	</div>
 
-<!-- 	<div id="custom_notifications" class="custom-notifications dsp_none"> -->
-<!-- 		<ul class="list-unstyled notifications clearfix" -->
-<!-- 			data-tabbed_notifications="notif-group"> -->
-<!-- 		</ul> -->
-<!-- 		<div class="clearfix"></div> -->
-<!-- 		<div id="notif-group" class="tabbed_notifications"></div> -->
-<!-- 	</div> -->
+	<!-- 	<div id="custom_notifications" class="custom-notifications dsp_none"> -->
+	<!-- 		<ul class="list-unstyled notifications clearfix" -->
+	<!-- 			data-tabbed_notifications="notif-group"> -->
+	<!-- 		</ul> -->
+	<!-- 		<div class="clearfix"></div> -->
+	<!-- 		<div id="notif-group" class="tabbed_notifications"></div> -->
+	<!-- 	</div> -->
 
 	<script src="js/bootstrap.min.js"></script>
 
@@ -348,16 +375,53 @@
 	<!-- pace -->
 	<script src="js/pace/pace.min.js"></script>
 	<script type="text/javascript">
-    $(document).ready(function() {
-      // Smart Wizard
-      $('#wizard').smartWizard();
+		$(document)
+				.ready(
+						function() {
+							//Datos Iniciales
+							$
+									.ajax({
+										url : '../RegistroTurnosController',
+										data : {
+											"tipoConsulta" : "cargarDatosWizard"
+										},
+										type : 'POST',
+										datatype : 'json',
+										success : function(data) {
+											if (data.numRegistros > 0) {
+												var listadoPedidos = data.listadoPedidos;
+												$.each(listadoPedidos, function(index) {
+																	$("#dataTableContent").append(
+																					"	<tr>"
+																							+ " <td relation='producto'>"
+																							+ listadoPedidos[index].producto
+																							+ "</td>"
+																							+ " <td relation='precioPublico'>"
+																							+ listadoPedidos[index].precioPublico
+																							+ "</td>"
+																							+ " <td relation='fecha'>"
+																							+ listadoPedidos[index].fecha
+																							+ "</td>"
+																							+ "</tr>");
+																});
+											} else {
+												$("#dataTableContent")
+														.append(
+																"<tr><td colspan='4'>No existen Registros</td></tr>");
+											}
+										}
+									});
 
-      function onFinishCallback() {
-        $('#wizard').smartWizard('showMessage', 'Finish Clicked');
-        alert('Finish Clicked');
-      }
-    });
-  </script>
+							// Smart Wizard
+							$('#wizard').smartWizard();
+
+							function onFinishCallback() {
+								$('#wizard').smartWizard('showMessage',
+										'Finish Clicked');
+								alert('Finish Clicked');
+							}
+						});
+	</script>
 
 </body>
 </html>

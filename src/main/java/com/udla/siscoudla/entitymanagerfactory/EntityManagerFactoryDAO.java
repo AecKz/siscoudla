@@ -27,8 +27,11 @@ public abstract class EntityManagerFactoryDAO {
 	    } else {
 	      properties.put("javax.persistence.jdbc.driver",
 	          "com.mysql.jdbc.Driver");
+//	      properties.put("javax.persistence.jdbc.url",
+//	          System.getProperty("cloudsql.url.dev"));
+	      //Para Test
 	      properties.put("javax.persistence.jdbc.url",
-	          System.getProperty("cloudsql.url.dev"));
+		          "jdbc:mysql://localhost:3306/dsiscoudla?user=root&amp;password=Abc123-&amp;useSSL=false");	      
 	    }
 	    
 		if (entityManagerFactory == null) {
