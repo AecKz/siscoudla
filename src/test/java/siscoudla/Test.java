@@ -20,6 +20,10 @@ public class Test {
 
 	@org.junit.Test
 	public void test() {
+		testFlujoTurnoNormal();
+	}
+
+	public void testFlujoTurnoNormal() {
 		//Test del Flujo de reservar turnos normales
 		System.out.println("*******Inicia el Flujo********");
 		//1.- Se comprueba si el usuario ingresado es Estudiante
@@ -50,7 +54,8 @@ public class Test {
 			TratamientoDAO tratamientoDAO = new TratamientoDAO();
 			int idEspecialidad = 2;		
 			List<Tratamiento> tratamientos = tratamientoDAO.buscarTratamientosEspecialidad(idEspecialidad);
-			if (!tratamientos.isEmpty()) {			
+			if (!tratamientos.isEmpty()) {
+				System.out.println("Existen los siguientes tratamientos: ");
 				for (Tratamiento he : tratamientos) {
 					System.out.println("Tratamiento: " +he.getNombre() +"-"+ he.getEspecialidad().getNombre());
 				}
