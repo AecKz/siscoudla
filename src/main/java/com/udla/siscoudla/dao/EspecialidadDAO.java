@@ -97,8 +97,24 @@ public class EspecialidadDAO extends EntityManagerFactoryDAO {
 		List<Especialidad> results = null;
 		try {
 			TypedQuery<Especialidad> query = em.createQuery(
-					"SELECT c FROM Especialidad c WHERE c.activo =:valorActivo",
-					Especialidad.class).setParameter("valorActivo", true);
+					"SELECT c FROM Especialidad c WHERE c.estado =:valorActivo",
+					Especialidad.class).setParameter("valorActivo", "ACT");
+			results = query.getResultList();
+		} catch (Exception e) {
+			em.getTransaction().rollback();
+		} finally {
+			em.close();
+		}
+		return results;
+	}
+	
+	public List<Especialidad> buscarEspecialidadTratamiento(int idTratamiento) {
+		EntityManager em = obtenerEntityManagerFactory().createEntityManager();
+		List<Especialidad> results = null;
+		try {
+			TypedQuery<Especialidad> query = em.createQuery(
+					"SELECT e FROM Tratamiento t JOIN FETCH t.especialidad e WHERE t.idTratamiento =:idTratamiento AND t.estado = :valorEstado",
+					Especialidad.class).setParameter("idTratamiento", idTratamiento).setParameter("valorEstado", "ACT");
 			results = query.getResultList();
 		} catch (Exception e) {
 			em.getTransaction().rollback();

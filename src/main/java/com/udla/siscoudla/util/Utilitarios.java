@@ -7,7 +7,11 @@ import java.math.BigDecimal;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Random;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -328,4 +332,14 @@ public class Utilitarios {
 	        }
 	        return valorRetorno;
 	   }
+	 public static Date stringToDate(String fechaString){		 
+		    DateFormat df = new SimpleDateFormat("yyyy-MM-dd"); 
+		    Date startDate = null;
+			try {
+				startDate = df.parse(fechaString);
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+		    return startDate;
+	 }
 }
