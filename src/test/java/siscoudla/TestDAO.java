@@ -8,13 +8,16 @@ import java.util.List;
 import org.junit.Test;
 
 import com.udla.siscoudla.dao.EspecialidadDAO;
+import com.udla.siscoudla.dao.EstudianteDAO;
 import com.udla.siscoudla.dao.HorarioCubiculoEstadoDAO;
 import com.udla.siscoudla.dao.HorarioDAO;
+import com.udla.siscoudla.dao.PersonaDAO;
 import com.udla.siscoudla.dao.RolDAO;
 import com.udla.siscoudla.dao.TratamientoDAO;
 import com.udla.siscoudla.modelo.Especialidad;
 import com.udla.siscoudla.modelo.Estudiante;
 import com.udla.siscoudla.modelo.Horario;
+import com.udla.siscoudla.modelo.Persona;
 import com.udla.siscoudla.modelo.Rol;
 import com.udla.siscoudla.modelo.Tratamiento;
 import com.udla.siscoudla.util.Utilitarios;
@@ -27,9 +30,11 @@ public class TestDAO {
 //		testBuscarHorariosEstudiante();
 //		testBuscarRolUsuario();
 //		testBuscarTratamientosEspecialidad();
-		testBuscarEspecialidadTratamientos();
-		testBuscarCubiculosLibres();
-		testVerificarEstado();
+		//testBuscarEspecialidadTratamientos();
+		//testBuscarCubiculosLibres();
+		//testVerificarEstado();
+		testBuscarPorUsuario();
+		testBuscarPorPersona();
 		System.out.println("Fin Test DAO");
 	}
 
@@ -136,6 +141,38 @@ public class TestDAO {
 			fail("Fail: " + e);
 		}
 	}
-
+	public void testBuscarPorUsuario(){
+		try{
+			PersonaDAO personaDAO = new PersonaDAO();
+			Persona persona = new Persona();
+			String usuario = "paajacome@udlanet.ec";
+			persona = personaDAO.buscarPorUsuario(usuario);
+			if(persona!=null){
+				System.out.println("La persona es:" + persona.getNombres() +" "+persona.getApellidos());
+			}else{
+				System.out.println("No existen datos");
+			}		
+		}catch(Exception e){
+			System.out.println("Error:" + e);
+			fail("Fail: " + e);
+		}
+	}
+	public void testBuscarPorPersona(){
+		try{
+			EstudianteDAO estudianteDAO = new EstudianteDAO();
+			Estudiante estudiante = new Estudiante();
+			Persona persona = new Persona();
+			persona.setIdPersona(Integer.parseInt("1"));
+			estudiante = estudianteDAO.buscarPorPersona(persona);
+			if(estudiante!=null){
+				System.out.println("El estudiante es:" + estudiante.getMatricula());
+			}else{
+				System.out.println("No existen datos");
+			}		
+		}catch(Exception e){
+			System.out.println("Error:" + e);
+			fail("Fail: " + e);
+		}
+	}
 
 }

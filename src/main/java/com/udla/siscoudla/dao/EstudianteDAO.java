@@ -7,6 +7,7 @@ import javax.persistence.TypedQuery;
 
 import com.udla.siscoudla.entitymanagerfactory.EntityManagerFactoryDAO;
 import com.udla.siscoudla.modelo.Estudiante;
+import com.udla.siscoudla.modelo.Persona;
 
 public class EstudianteDAO extends EntityManagerFactoryDAO {
 	public Estudiante crear(Estudiante objeto) {
@@ -106,6 +107,26 @@ public class EstudianteDAO extends EntityManagerFactoryDAO {
 			em.close();
 		}
 		return results;
+	}
+	public Estudiante buscarPorPersona(Persona persona) {
+		EntityManager em = obtenerEntityManagerFactory().createEntityManager();
+		Estudiante estudiante = new Estudiante();
+		try {
+			TypedQuery<Estudiante> query = em.createQuery(
+					"SELECT e FROM Estudiante e "
+					+ "JOIN FETCH e.persona p "													
+					+ "where e.persona = :persona and e.estado = 'ACT'", Estudiante.class)
+					.setParameter("persona", persona);
+			List<Estudiante> results = query.getResultList();
+			estudiante = results.get(0);
+			return estudiante;
+		} catch (Exception e) {
+			em.getTransaction().rollback();
+			System.out.println(e.getMessage());
+			return estudiante;
+		} finally {
+			em.close();
+		}
 	}
 
 }

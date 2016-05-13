@@ -4,8 +4,6 @@ import static org.junit.Assert.*;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Random;
-
 import com.udla.siscoudla.dao.HorarioCubiculoEstadoDAO;
 import com.udla.siscoudla.dao.HorarioDAO;
 import com.udla.siscoudla.dao.RolDAO;
@@ -77,7 +75,8 @@ public class Test {
 				System.out.println("No trae resultados");			
 			}
 			//6.- Se asigna un cubiculo al estudiante al azar
-			String cubiculo = cubiculos.get(new Random().nextInt(cubiculos.size()));
+			//String cubiculo = cubiculos.get(new Random().nextInt(cubiculos.size()));
+			String cubiculo = cubiculos.get(0);
 			System.out.println("Se ha asignado el cubiculo: "+ cubiculo);
 			//7.- Si el estudiante acepta, se comprueba una vez mas si el cubiculo asignado esta Libre
 			//Ojo: Es posible que por concurrencia se asigne un cubiculo, y luego otro usuario lo registre.			

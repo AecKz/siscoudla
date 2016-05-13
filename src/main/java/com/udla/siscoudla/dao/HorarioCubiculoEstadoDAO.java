@@ -66,7 +66,7 @@ public class HorarioCubiculoEstadoDAO extends EntityManagerFactoryDAO {
 	public List<Horariocubiculoestado> buscarTodos() {
 		EntityManager em = obtenerEntityManagerFactory().createEntityManager();
 		try {
-			TypedQuery<Horariocubiculoestado> query = em.createQuery("SELECT e FROM Horariocubiculoestado e order by e.nombre",
+			TypedQuery<Horariocubiculoestado> query = em.createQuery("SELECT e FROM Horariocubiculoestado e order by e.fecha",
 					Horariocubiculoestado.class);
 			List<Horariocubiculoestado> results = query.getResultList();
 			return results;
@@ -123,7 +123,7 @@ public class HorarioCubiculoEstadoDAO extends EntityManagerFactoryDAO {
 	/**
 	 * Metodo para buscar los cubiculos libres para el horario y especialidad seleccionados
 	 * @param fecha
-	 * @param idTratamiento
+	 * @param idEspecialidad
 	 * @param idHorario
 	 * @param tipoCubiculo
 	 * @return Lista numeros de cubiculos libres

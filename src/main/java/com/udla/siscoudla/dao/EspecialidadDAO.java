@@ -97,7 +97,7 @@ public class EspecialidadDAO extends EntityManagerFactoryDAO {
 		List<Especialidad> results = null;
 		try {
 			TypedQuery<Especialidad> query = em.createQuery(
-					"SELECT c FROM Especialidad c WHERE c.estado =:valorActivo",
+					"SELECT e FROM Especialidad e WHERE e.estado =:valorActivo",
 					Especialidad.class).setParameter("valorActivo", "ACT");
 			results = query.getResultList();
 		} catch (Exception e) {

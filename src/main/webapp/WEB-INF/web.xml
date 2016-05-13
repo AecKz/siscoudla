@@ -13,6 +13,10 @@
 		<servlet-name>IndexController</servlet-name>
 		<servlet-class>com.udla.siscoudla.controlador.IndexController</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>RegistroTurnosController</servlet-name>
+		<servlet-class>com.udla.siscoudla.controlador.RegistroTurnosController</servlet-class>
+	</servlet>
 	<servlet-mapping>
 		<servlet-name>PersonaController</servlet-name>
 		<url-pattern>/PersonaController</url-pattern>
@@ -20,5 +24,9 @@
 	<servlet-mapping>
 		<servlet-name>IndexController</servlet-name>
 		<url-pattern>/IndexController</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>RegistroTurnosController</servlet-name>
+		<url-pattern>/RegistroTurnosController</url-pattern>
 	</servlet-mapping>
 </web-app>

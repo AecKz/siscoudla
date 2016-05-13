@@ -130,5 +130,28 @@ public class PersonaDAO extends EntityManagerFactoryDAO {
 			em.close();
 		}
 	}
+	public Persona buscarPorUsuario(String usuario) {
+		EntityManager em = obtenerEntityManagerFactory().createEntityManager();
+		Persona persona = new Persona();		
+		try {
+			TypedQuery<Persona> query = em.createQuery(
+					"SELECT p FROM Usuario u "
+					+ "JOIN FETCH u.persona p "		
+					+ "where u.usuario = :usuario ", Persona.class)
+					.setParameter("usuario", usuario);
+			List<Persona> results = query.getResultList();
+			if(!results.isEmpty()){
+				persona = results.get(0);
+			}
+			
+			return persona;
+		} catch (Exception e) {
+			em.getTransaction().rollback();
+			System.out.println(e.getMessage());
+			return persona;
+		} finally {
+			em.close();
+		}
+	}
 
 }

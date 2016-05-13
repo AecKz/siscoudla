@@ -280,40 +280,110 @@
 											<table id="tblHorariosEstudiante" class="table">
 												<thead>
 													<tr>
-														<th></th>
-														<th>LUNES</th>
-														<th>MARTES</th>
-														<th>MIERCOLES</th>
-														<th>JUEVES</th>
-														<th>VIERNES</th>
+														<th>DIA</th>
+														<th>HORA INICIO</th>
+														<th>HORA FIN</th>														
 													</tr>
 												</thead>
 												<tbody id="dataTableContent">
 												</tbody>
 											</table>
-
+					<p>Seleccione Fecha:</p>
+					<br>											
+					 <div class="calendar first single right" style="display: block;">
+                          <div class="calendar-date">
+                            <table class="table-condensed">
+                              <thead>
+                                <tr>
+                                  <th class="prev available"><i class="fa fa-arrow-left icon icon-arrow-left glyphicon glyphicon-arrow-left"></i>
+                                  </th>
+                                  <th colspan="5" class="month">Mar 2013</th>
+                                  <th class="next available"><i class="fa fa-arrow-right icon icon-arrow-right glyphicon glyphicon-arrow-right"></i>
+                                  </th>
+                                </tr>
+                                <tr>
+                                  <th>Su</th>
+                                  <th>Mo</th>
+                                  <th>Tu</th>
+                                  <th>We</th>
+                                  <th>Th</th>
+                                  <th>Fr</th>
+                                  <th>Sa</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <td class="available off" data-title="r0c0">24</td>
+                                  <td class="available off" data-title="r0c1">25</td>
+                                  <td class="available off" data-title="r0c2">26</td>
+                                  <td class="available off" data-title="r0c3">27</td>
+                                  <td class="available off" data-title="r0c4">28</td>
+                                  <td class="available" data-title="r0c5">1</td>
+                                  <td class="available" data-title="r0c6">2</td>
+                                </tr>
+                                <tr>
+                                  <td class="available" data-title="r1c0">3</td>
+                                  <td class="available" data-title="r1c1">4</td>
+                                  <td class="available" data-title="r1c2">5</td>
+                                  <td class="available" data-title="r1c3">6</td>
+                                  <td class="available" data-title="r1c4">7</td>
+                                  <td class="available" data-title="r1c5">8</td>
+                                  <td class="available" data-title="r1c6">9</td>
+                                </tr>
+                                <tr>
+                                  <td class="available" data-title="r2c0">10</td>
+                                  <td class="available" data-title="r2c1">11</td>
+                                  <td class="available" data-title="r2c2">12</td>
+                                  <td class="available" data-title="r2c3">13</td>
+                                  <td class="available" data-title="r2c4">14</td>
+                                  <td class="available" data-title="r2c5">15</td>
+                                  <td class="available" data-title="r2c6">16</td>
+                                </tr>
+                                <tr>
+                                  <td class="available" data-title="r3c0">17</td>
+                                  <td class="available active start-date end-date" data-title="r3c1">18</td>
+                                  <td class="available" data-title="r3c2">19</td>
+                                  <td class="available" data-title="r3c3">20</td>
+                                  <td class="available" data-title="r3c4">21</td>
+                                  <td class="available" data-title="r3c5">22</td>
+                                  <td class="available" data-title="r3c6">23</td>
+                                </tr>
+                                <tr>
+                                  <td class="available" data-title="r4c0">24</td>
+                                  <td class="available" data-title="r4c1">25</td>
+                                  <td class="available" data-title="r4c2">26</td>
+                                  <td class="available" data-title="r4c3">27</td>
+                                  <td class="available" data-title="r4c4">28</td>
+                                  <td class="available" data-title="r4c5">29</td>
+                                  <td class="available" data-title="r4c6">30</td>
+                                </tr>
+                                <tr>
+                                  <td class="available" data-title="r5c0">31</td>
+                                  <td class="available off" data-title="r5c1">1</td>
+                                  <td class="available off" data-title="r5c2">2</td>
+                                  <td class="available off" data-title="r5c3">3</td>
+                                  <td class="available off" data-title="r5c4">4</td>
+                                  <td class="available off" data-title="r5c5">5</td>
+                                  <td class="available off" data-title="r5c6">6</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
 										</div>
 										<div id="step-3">
 											<h2 class="StepTitle">Seleccione el tratamiento a
 												realizar:</h2>
-											<p>sed do eiusmod tempor incididunt ut labore et dolore
-												magna aliqua. Ut enim ad minim veniam, quis nostrud
-												exercitation ullamco laboris nisi ut aliquip ex ea commodo
-												consequat. Duis aute irure dolor in reprehenderit in
-												voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-												Excepteur sint occaecat cupidatat non proident, sunt in
-												culpa qui officia deserunt mollit anim id est laborum.</p>
-											<p>Lorem ipsum dolor sit amet, consectetur adipisicing
-												elit, sed do eiusmod tempor incididunt ut labore et dolore
-												magna aliqua. Ut enim ad minim veniam, quis nostrud
-												exercitation ullamco laboris nisi ut aliquip ex ea commodo
-												consequat. Duis aute irure dolor in reprehenderit in
-												voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-												Excepteur sint occaecat cupidatat non proident, sunt in
-												culpa qui officia deserunt mollit anim id est laborum.</p>
-										</div>
+							                  <!-- start accordion -->
+							                  <div class="accordion" id="accordion" role="tablist" aria-multiselectable="true">
+								                    <div class="panel">
+								                   	 	<div id="panelContent"></div>
+								                 	 </div>
+							                  <!-- end of accordion -->
+												</div>
 										<div id="step-4">
 											<h2 class="StepTitle">Confirme su turno:</h2>
+											<p>Estimada(o) estudiante, ha ingresado los siguientes datos:</p>											
 											<p>Lorem ipsum dolor sit amet, consectetur adipisicing
 												elit, sed do eiusmod tempor incididunt ut labore et dolore
 												magna aliqua. Ut enim ad minim veniam, quis nostrud
@@ -322,6 +392,7 @@
 												voluptate velit esse cillum dolore eu fugiat nulla pariatur.
 												Excepteur sint occaecat cupidatat non proident, sunt in
 												culpa qui officia deserunt mollit anim id est laborum.</p>
+											<p>Se le ha asignado el siguiente cubiculo:</p>
 											<p>Lorem ipsum dolor sit amet, consectetur adipisicing
 												elit, sed do eiusmod tempor incididunt ut labore et dolore
 												magna aliqua. Ut enim ad minim veniam, quis nostrud
@@ -330,14 +401,7 @@
 												voluptate velit esse cillum dolore eu fugiat nulla pariatur.
 												Excepteur sint occaecat cupidatat non proident, sunt in
 												culpa qui officia deserunt mollit anim id est laborum.</p>
-											<p>Lorem ipsum dolor sit amet, consectetur adipisicing
-												elit, sed do eiusmod tempor incididunt ut labore et dolore
-												magna aliqua. Ut enim ad minim veniam, quis nostrud
-												exercitation ullamco laboris nisi ut aliquip ex ea commodo
-												consequat. Duis aute irure dolor in reprehenderit in
-												voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-												Excepteur sint occaecat cupidatat non proident, sunt in
-												culpa qui officia deserunt mollit anim id est laborum.</p>
+											<button type="submit" class="btn btn-success">ACEPTAR</button>
 										</div>
 									</div>
 									<!-- End SmartWizard Content -->
@@ -368,6 +432,9 @@
 	<script src="js/nicescroll/jquery.nicescroll.min.js"></script>
 	<!-- icheck -->
 	<script src="js/icheck/icheck.min.js"></script>
+	  <!-- daterangepicker -->
+ 	<script type="text/javascript" src="js/moment/moment.min.js"></script>
+  	<script type="text/javascript" src="js/datepicker/daterangepicker.js"></script>
 
 	<script src="js/custom.js"></script>
 	<!-- form wizard -->
@@ -375,39 +442,83 @@
 	<!-- pace -->
 	<script src="js/pace/pace.min.js"></script>
 	<script type="text/javascript">
-		$(document)
-				.ready(
-						function() {
+		$(document).ready(function() {
 							//Datos Iniciales
-							$
-									.ajax({
+							//Cargar Horarios de los Estudiantes
+							$.ajax({
 										url : '../RegistroTurnosController',
 										data : {
-											"tipoConsulta" : "cargarDatosWizard"
+											"tipoConsulta" : "cargarHorarios"
 										},
 										type : 'POST',
 										datatype : 'json',
 										success : function(data) {
 											if (data.numRegistros > 0) {
-												var listadoPedidos = data.listadoPedidos;
-												$.each(listadoPedidos, function(index) {
-																	$("#dataTableContent").append(
-																					"	<tr>"
-																							+ " <td relation='producto'>"
-																							+ listadoPedidos[index].producto
-																							+ "</td>"
-																							+ " <td relation='precioPublico'>"
-																							+ listadoPedidos[index].precioPublico
-																							+ "</td>"
-																							+ " <td relation='fecha'>"
-																							+ listadoPedidos[index].fecha
-																							+ "</td>"
-																							+ "</tr>");
+												var listadoHorarios = data.listadoHorarios;
+												$.each(listadoHorarios, function(index) {
+													$("#dataTableContent").append("	<tr>"
+														+ " <td relation='dia'>"
+														+ listadoHorarios[index].dia
+														+ "</td>"
+														+ " <td relation='horaInicio'>"
+														+ listadoHorarios[index].horaInicio
+														+ "</td>"
+														+ " <td relation='horaFin'>"
+														+ listadoHorarios[index].horaFin
+														+ "</td>"
+														+ "</tr>");
 																});
 											} else {
 												$("#dataTableContent")
 														.append(
-																"<tr><td colspan='4'>No existen Registros</td></tr>");
+																"<tr><td colspan='4'>No existen horarios cargados</td></tr>");
+											}
+										}
+									});
+							//Cargar Tratamientos y especialidades
+							$.ajax({
+										url : '../RegistroTurnosController',
+										data : {
+											"tipoConsulta" : "cargarTratamientos"
+										},
+										type : 'POST',
+										datatype : 'json',
+										success : function(data) {
+											if (data.numRegistros > 0) {
+												var listadoEspecialidades = data.listadoEspecialidades;
+												var listadoTratamientos = data.listadoTratamientos;
+												$.each(listadoEspecialidades, function(index) {
+													$("#panelContent").append("	<a class='panel-heading' role='tab' id='heading"+[index]
+														+ "' data-toggle='collapse' data-parent='#accordion' href='#collapse"+[index]
+														+ "' aria-expanded='false' aria-controls='collapse"+[index]+"'>"
+														+ " <h4 class='panel-title'>" +listadoEspecialidades[index].nombreEspecialidad+"</h4>"
+														+ " </a>"
+														+ " <div id='collapse"+[index]+"' class='panel-collapse collapse in' role='tabpanel' aria-labelledby='heading"+[index]+"'>"
+														+ " <div class='panel-body'>"
+														+ " <div class='radio'>"
+														+ " <label>"
+														//TODO: Insertar Tratamientos aki
+														+ " <input type='radio' class='flat' name='iCheck'> Especialidad 1"
+														+ "	</label>"
+														+ " </div>"
+														+ " </div>"
+														+ " </div>");
+																});
+// 												$.each(listadoTratamientos, function(index) {
+// 													$("#dataTableContent").append("	<tr>"
+// 														+ " <td relation='dia'>"
+// 														+ listadoHorarios[index].dia
+// 														+ "</td>"
+// 														+ " <td relation='horaInicio'>"
+// 														+ listadoHorarios[index].horaInicio
+// 														+ "</td>"
+// 														+ " <td relation='horaFin'>"
+// 														+ listadoHorarios[index].horaFin
+// 														+ "</td>"
+// 														+ "</tr>");
+// 																});
+											} else {
+												$("#panelContent").append("<p>No existen datos</p>");
 											}
 										}
 									});
@@ -420,7 +531,7 @@
 										'Finish Clicked');
 								alert('Finish Clicked');
 							}
-						});
+						});//Fin jquery ready
 	</script>
 
 </body>
