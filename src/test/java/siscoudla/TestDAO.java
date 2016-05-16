@@ -11,6 +11,7 @@ import com.udla.siscoudla.dao.EspecialidadDAO;
 import com.udla.siscoudla.dao.EstudianteDAO;
 import com.udla.siscoudla.dao.HorarioCubiculoEstadoDAO;
 import com.udla.siscoudla.dao.HorarioDAO;
+import com.udla.siscoudla.dao.HorarioEstudianteDAO;
 import com.udla.siscoudla.dao.PersonaDAO;
 import com.udla.siscoudla.dao.RolDAO;
 import com.udla.siscoudla.dao.TratamientoDAO;
@@ -33,8 +34,10 @@ public class TestDAO {
 		//testBuscarEspecialidadTratamientos();
 		//testBuscarCubiculosLibres();
 		//testVerificarEstado();
-		testBuscarPorUsuario();
-		testBuscarPorPersona();
+		//testBuscarPorUsuario();
+		//testBuscarPorPersona();
+		//testBuscarEspecialidadTratamientos();
+		testBuscarPorDiaEstudiante();
 		System.out.println("Fin Test DAO");
 	}
 
@@ -94,11 +97,10 @@ public class TestDAO {
 		try{
 		EspecialidadDAO especialidadDAO = new EspecialidadDAO();
 		int idTratamiento = 5;		
-		List<Especialidad> especialidades = especialidadDAO.buscarEspecialidadTratamiento(idTratamiento);
-		if (!especialidades.isEmpty()) {			
-			for (Especialidad he : especialidades) {
-				System.out.println("Resultado: " +he.getNombre() +"-"+ he.getIdEspecialidad());
-			}
+		Especialidad especialidades = especialidadDAO.buscarEspecialidadTratamiento(idTratamiento);
+		if (especialidades!=null) {
+				System.out.println("Resultado: " +especialidades.getNombre());
+			
 		} else {
 			System.out.println("No trae resultados");			
 		}
@@ -166,6 +168,22 @@ public class TestDAO {
 			estudiante = estudianteDAO.buscarPorPersona(persona);
 			if(estudiante!=null){
 				System.out.println("El estudiante es:" + estudiante.getMatricula());
+			}else{
+				System.out.println("No existen datos");
+			}		
+		}catch(Exception e){
+			System.out.println("Error:" + e);
+			fail("Fail: " + e);
+		}
+	}
+	public void testBuscarPorDiaEstudiante(){
+		try{
+			HorarioEstudianteDAO horarioEstudianteDAO = new HorarioEstudianteDAO();
+			String diaNombre = "LUNES";
+			int idEstudiante = 1;
+			int idHorarioEstudiante = horarioEstudianteDAO.buscarPorDiaEstudiante(diaNombre, idEstudiante);
+			if(idHorarioEstudiante!=0){
+				System.out.println("El id es:" + idHorarioEstudiante);
 			}else{
 				System.out.println("No existen datos");
 			}		

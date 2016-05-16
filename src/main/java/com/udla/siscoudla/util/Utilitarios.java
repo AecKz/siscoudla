@@ -342,4 +342,28 @@ public class Utilitarios {
 			}
 		    return startDate;
 	 }
+	 
+	 public static String buscarDia(int codigoDia){
+			//(0 = Sunday, 1 = Monday, 2 = Tuesday, 3 = Wednesday, 4 = Thursday, 5 = Friday, 6 = Saturday)
+			String diaNombre;
+	        switch (codigoDia) {
+	        	case 0:  diaNombre = "DOMINGO";
+	        			 break;			
+	            case 1:  diaNombre = "LUNES";
+	                     break;
+	            case 2:  diaNombre = "MARTES";
+	                     break;
+	            case 3:  diaNombre = "MIERCOLES";
+	                     break;
+	            case 4:  diaNombre = "JUEVES";
+	                     break;
+	            case 5:  diaNombre = "VIERNES";
+	                     break;
+	            case 6:  diaNombre = "SABADO";
+	                     break;			            
+	            default: diaNombre = "Invalid DAY";
+	                     break;
+	        }
+		 return diaNombre;
+	 }
 }

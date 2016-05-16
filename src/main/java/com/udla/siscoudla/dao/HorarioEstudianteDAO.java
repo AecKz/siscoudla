@@ -91,4 +91,25 @@ public class HorarioEstudianteDAO extends EntityManagerFactoryDAO {
 			em.close();
 		}
 	}	
+	public int buscarPorDiaEstudiante(String diaNombre, int idEstudiante) {
+		EntityManager em = obtenerEntityManagerFactory().createEntityManager();
+		int resultado = 0;
+		try {
+			TypedQuery<Horarioestudiante> query = em
+					.createQuery("SELECT he FROM Horarioestudiante he "
+							+ "JOIN FETCH he.horario h "
+							+ "JOIN FETCH he.estudiante e "
+							+ "where h.dia = :diaNombre and e.idEstudiante = :idEstudiante", Horarioestudiante.class)
+					.setParameter("idEstudiante", idEstudiante).setParameter("diaNombre", diaNombre);
+			List<Horarioestudiante> results = query.getResultList();
+			resultado = results.get(0).getHorario().getIdHorario();
+			return resultado;
+		} catch (Exception e) {
+			em.getTransaction().rollback();
+			System.out.println(e.getMessage());
+			return resultado;
+		} finally {
+			em.close();
+		}
+	}
 }

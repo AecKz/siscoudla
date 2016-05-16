@@ -442,6 +442,23 @@
 	<!-- pace -->
 	<script src="js/pace/pace.min.js"></script>
 	<script type="text/javascript">
+	function consultarCubiculos(idRadio){
+		 	var fechaSeleccionada = "2016-05-09";
+			$.ajax({
+				url : '../RegistroTurnosController',
+				data : {
+					"tipoConsulta" : "consultarCubiculos",
+					"fechaSeleccionada":fechaSeleccionada,
+					"idRadio" : idRadio
+				},
+				type : 'POST',
+				datatype : 'json',
+				success : function(data) {
+					var cubiculo = data.cubiculoAsignado;
+					alert(cubiculo);
+				}
+			});
+		}
 		$(document).ready(function() {
 							//Datos Iniciales
 							//Cargar Horarios de los Estudiantes
@@ -485,40 +502,34 @@
 										datatype : 'json',
 										success : function(data) {
 											if (data.numRegistros > 0) {
-												var listadoEspecialidades = data.listadoEspecialidades;
-												var listadoTratamientos = data.listadoTratamientos;
+												var listadoEspecialidades = data.listadoEspecialidades;												
 													$.each(listadoEspecialidades, function(index) {
+														var contadorTratamientos = listadoEspecialidades[index].contadorTratamientos;
+														var tratamientos = "";
+														for(var i = 0;i<contadorTratamientos;i++){
+															var contNombreTratamiento = "nombreTratamiento" + i;
+															var contIdTratamiento = "idTratamiento" + i;
+															var tratamiento = listadoEspecialidades[index][contNombreTratamiento];
+															var idTratamiento =  listadoEspecialidades[index][contIdTratamiento];
+															tratamientos = tratamientos + " <input type='radio' name='tratamientos' id='tratamiento"+idTratamiento
+																						+"' onclick='consultarCubiculos(id)'> " + tratamiento +"<br>";
+														}
 														$("#panelContent").append("	<a class='panel-heading' role='tab' id='heading"+[index]
 															+ "' data-toggle='collapse' data-parent='#accordion' href='#collapse"+[index]
 															+ "' aria-expanded='false' aria-controls='collapse"+[index]+"'>"
-															+ " <h4 class='panel-title'>" +listadoEspecialidades[index].nombreEspecialidad+"</h4>"
+															+ " <h4 class='panel-title'> - " +listadoEspecialidades[index].nombreEspecialidad+"</h4>"
 															+ " </a>"
 															+ " <div id='collapse"+[index]+"' class='panel-collapse collapse in' role='tabpanel' aria-labelledby='heading"+[index]+"'>"
 															+ " <div class='panel-body'>"
 															+ " <div class='radio'>"
-															+ " <label>");
-																$.each(listadoTratamientos, function(index2) {
-																$("#panelContent").append("<input type='radio' class='flat' name='iCheck'> " 
-																	+ listadoTratamientos[index2].nombreTratamiento + "");
-																	});
-															$("#panelContent").append(" </label>"
+															+ " <label>"															 
+															+ tratamientos 
+															+ " </label>"
 															+ " </div>"
 															+ " </div>"
 															+ " </div>");
-																	});
-// 												$.each(listadoTratamientos, function(index) {
-// 													$("#dataTableContent").append("	<tr>"
-// 														+ " <td relation='dia'>"
-// 														+ listadoHorarios[index].dia
-// 														+ "</td>"
-// 														+ " <td relation='horaInicio'>"
-// 														+ listadoHorarios[index].horaInicio
-// 														+ "</td>"
-// 														+ " <td relation='horaFin'>"
-// 														+ listadoHorarios[index].horaFin
-// 														+ "</td>"
-// 														+ "</tr>");
-// 																});
+															});
+
 											} else {
 												$("#panelContent").append("<p>No existen datos</p>");
 											}
