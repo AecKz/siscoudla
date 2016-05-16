@@ -487,23 +487,25 @@
 											if (data.numRegistros > 0) {
 												var listadoEspecialidades = data.listadoEspecialidades;
 												var listadoTratamientos = data.listadoTratamientos;
-												$.each(listadoEspecialidades, function(index) {
-													$("#panelContent").append("	<a class='panel-heading' role='tab' id='heading"+[index]
-														+ "' data-toggle='collapse' data-parent='#accordion' href='#collapse"+[index]
-														+ "' aria-expanded='false' aria-controls='collapse"+[index]+"'>"
-														+ " <h4 class='panel-title'>" +listadoEspecialidades[index].nombreEspecialidad+"</h4>"
-														+ " </a>"
-														+ " <div id='collapse"+[index]+"' class='panel-collapse collapse in' role='tabpanel' aria-labelledby='heading"+[index]+"'>"
-														+ " <div class='panel-body'>"
-														+ " <div class='radio'>"
-														+ " <label>"
-														//TODO: Insertar Tratamientos aki
-														+ " <input type='radio' class='flat' name='iCheck'> Especialidad 1"
-														+ "	</label>"
-														+ " </div>"
-														+ " </div>"
-														+ " </div>");
-																});
+													$.each(listadoEspecialidades, function(index) {
+														$("#panelContent").append("	<a class='panel-heading' role='tab' id='heading"+[index]
+															+ "' data-toggle='collapse' data-parent='#accordion' href='#collapse"+[index]
+															+ "' aria-expanded='false' aria-controls='collapse"+[index]+"'>"
+															+ " <h4 class='panel-title'>" +listadoEspecialidades[index].nombreEspecialidad+"</h4>"
+															+ " </a>"
+															+ " <div id='collapse"+[index]+"' class='panel-collapse collapse in' role='tabpanel' aria-labelledby='heading"+[index]+"'>"
+															+ " <div class='panel-body'>"
+															+ " <div class='radio'>"
+															+ " <label>");
+																$.each(listadoTratamientos, function(index2) {
+																$("#panelContent").append("<input type='radio' class='flat' name='iCheck'> " 
+																	+ listadoTratamientos[index2].nombreTratamiento + "");
+																	});
+															$("#panelContent").append(" </label>"
+															+ " </div>"
+															+ " </div>"
+															+ " </div>");
+																	});
 // 												$.each(listadoTratamientos, function(index) {
 // 													$("#dataTableContent").append("	<tr>"
 // 														+ " <td relation='dia'>"
