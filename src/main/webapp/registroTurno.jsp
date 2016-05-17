@@ -17,6 +17,7 @@
 <link href="css/custom.css" rel="stylesheet">
 <link href="css/icheck/flat/green.css" rel="stylesheet">
 <script src="js/jquery.min.js"></script>
+<link href="css/bootstrap-datepicker/bootstrap-datepicker.css" rel="stylesheet">
 
 </head>
 
@@ -288,88 +289,10 @@
 												<tbody id="dataTableContent">
 												</tbody>
 											</table>
-					<p>Seleccione Fecha:</p>
-					<br>											
-					 <div class="calendar first single right" style="display: block;">
-                          <div class="calendar-date">
-                            <table class="table-condensed">
-                              <thead>
-                                <tr>
-                                  <th class="prev available"><i class="fa fa-arrow-left icon icon-arrow-left glyphicon glyphicon-arrow-left"></i>
-                                  </th>
-                                  <th colspan="5" class="month">Mar 2013</th>
-                                  <th class="next available"><i class="fa fa-arrow-right icon icon-arrow-right glyphicon glyphicon-arrow-right"></i>
-                                  </th>
-                                </tr>
-                                <tr>
-                                  <th>Su</th>
-                                  <th>Mo</th>
-                                  <th>Tu</th>
-                                  <th>We</th>
-                                  <th>Th</th>
-                                  <th>Fr</th>
-                                  <th>Sa</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                <tr>
-                                  <td class="available off" data-title="r0c0">24</td>
-                                  <td class="available off" data-title="r0c1">25</td>
-                                  <td class="available off" data-title="r0c2">26</td>
-                                  <td class="available off" data-title="r0c3">27</td>
-                                  <td class="available off" data-title="r0c4">28</td>
-                                  <td class="available" data-title="r0c5">1</td>
-                                  <td class="available" data-title="r0c6">2</td>
-                                </tr>
-                                <tr>
-                                  <td class="available" data-title="r1c0">3</td>
-                                  <td class="available" data-title="r1c1">4</td>
-                                  <td class="available" data-title="r1c2">5</td>
-                                  <td class="available" data-title="r1c3">6</td>
-                                  <td class="available" data-title="r1c4">7</td>
-                                  <td class="available" data-title="r1c5">8</td>
-                                  <td class="available" data-title="r1c6">9</td>
-                                </tr>
-                                <tr>
-                                  <td class="available" data-title="r2c0">10</td>
-                                  <td class="available" data-title="r2c1">11</td>
-                                  <td class="available" data-title="r2c2">12</td>
-                                  <td class="available" data-title="r2c3">13</td>
-                                  <td class="available" data-title="r2c4">14</td>
-                                  <td class="available" data-title="r2c5">15</td>
-                                  <td class="available" data-title="r2c6">16</td>
-                                </tr>
-                                <tr>
-                                  <td class="available" data-title="r3c0">17</td>
-                                  <td class="available active start-date end-date" data-title="r3c1">18</td>
-                                  <td class="available" data-title="r3c2">19</td>
-                                  <td class="available" data-title="r3c3">20</td>
-                                  <td class="available" data-title="r3c4">21</td>
-                                  <td class="available" data-title="r3c5">22</td>
-                                  <td class="available" data-title="r3c6">23</td>
-                                </tr>
-                                <tr>
-                                  <td class="available" data-title="r4c0">24</td>
-                                  <td class="available" data-title="r4c1">25</td>
-                                  <td class="available" data-title="r4c2">26</td>
-                                  <td class="available" data-title="r4c3">27</td>
-                                  <td class="available" data-title="r4c4">28</td>
-                                  <td class="available" data-title="r4c5">29</td>
-                                  <td class="available" data-title="r4c6">30</td>
-                                </tr>
-                                <tr>
-                                  <td class="available" data-title="r5c0">31</td>
-                                  <td class="available off" data-title="r5c1">1</td>
-                                  <td class="available off" data-title="r5c2">2</td>
-                                  <td class="available off" data-title="r5c3">3</td>
-                                  <td class="available off" data-title="r5c4">4</td>
-                                  <td class="available off" data-title="r5c5">5</td>
-                                  <td class="available off" data-title="r5c6">6</td>
-                                </tr>
-                              </tbody>
-                            </table>
-                          </div>
-                        </div>
+											<p>Seleccione Fecha:</p>
+											<br>		
+											<div id="datepicker" align="center"></div>									
+
 										</div>
 										<div id="step-3">
 											<h2 class="StepTitle">Seleccione el tratamiento a
@@ -378,29 +301,23 @@
 							                  <div class="accordion" id="accordion" role="tablist" aria-multiselectable="true">
 								                    <div class="panel">
 								                   	 	<div id="panelContent"></div>
-								                 	 </div>
-							                  <!-- end of accordion -->
-												</div>
+								                 	 </div>							                  
+											  </div>
+											  <!-- end of accordion -->
+										</div>
 										<div id="step-4">
 											<h2 class="StepTitle">Confirme su turno:</h2>
 											<p>Estimada(o) estudiante, ha ingresado los siguientes datos:</p>											
-											<p>Lorem ipsum dolor sit amet, consectetur adipisicing
-												elit, sed do eiusmod tempor incididunt ut labore et dolore
-												magna aliqua. Ut enim ad minim veniam, quis nostrud
-												exercitation ullamco laboris nisi ut aliquip ex ea commodo
-												consequat. Duis aute irure dolor in reprehenderit in
-												voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-												Excepteur sint occaecat cupidatat non proident, sunt in
-												culpa qui officia deserunt mollit anim id est laborum.</p>
-											<p>Se le ha asignado el siguiente cubiculo:</p>
-											<p>Lorem ipsum dolor sit amet, consectetur adipisicing
-												elit, sed do eiusmod tempor incididunt ut labore et dolore
-												magna aliqua. Ut enim ad minim veniam, quis nostrud
-												exercitation ullamco laboris nisi ut aliquip ex ea commodo
-												consequat. Duis aute irure dolor in reprehenderit in
-												voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-												Excepteur sint occaecat cupidatat non proident, sunt in
-												culpa qui officia deserunt mollit anim id est laborum.</p>
+						                        <div class="detalleTurno">						
+						                          <p class="title">Datos Paciente:</p>
+						                          <p>Deveint Inc</p>
+						                          <p class="title">Fecha y Horario:</p>
+						                          <p>Tony Chicken</p>
+						                          <p class="title">Tratamiento:</p>
+						                          <p id="lblTratamiento"></p>
+						                          <p class="title">Cubiculo asignado:</p>
+						                          <p id="lblCubiculoAsignado"></p>
+						                        </div>
 											<button type="submit" class="btn btn-success">ACEPTAR</button>
 										</div>
 									</div>
@@ -415,8 +332,7 @@
 			<!-- /page content -->
 		</div>
 
-	</div>
-
+	</div>	
 	<!-- 	<div id="custom_notifications" class="custom-notifications dsp_none"> -->
 	<!-- 		<ul class="list-unstyled notifications clearfix" -->
 	<!-- 			data-tabbed_notifications="notif-group"> -->
@@ -431,11 +347,11 @@
 	<script src="js/progressbar/bootstrap-progressbar.min.js"></script>
 	<script src="js/nicescroll/jquery.nicescroll.min.js"></script>
 	<!-- icheck -->
-	<script src="js/icheck/icheck.min.js"></script>
-	  <!-- daterangepicker -->
- 	<script type="text/javascript" src="js/moment/moment.min.js"></script>
-  	<script type="text/javascript" src="js/datepicker/daterangepicker.js"></script>
-
+	<script src="js/icheck/icheck.min.js"></script>	
+	<!-- datepicker -->
+	<script type="text/javascript" src="js/bootstrap-datepicker/bootstrap-datepicker.js"></script>
+	<script type="text/javascript" src="js/locales/bootstrap-datepicker.es.min.js"></script>
+	
 	<script src="js/custom.js"></script>
 	<!-- form wizard -->
 	<script type="text/javascript" src="js/wizard/jquery.smartWizard.js"></script>
@@ -443,7 +359,9 @@
 	<script src="js/pace/pace.min.js"></script>
 	<script type="text/javascript">
 	function consultarCubiculos(idRadio){
-		 	var fechaSeleccionada = "2016-05-09";
+			var textoTratamiento =  $('input[id="' + idRadio + '"]').text();
+			$('#lblTratamiento').text(textoTratamiento);
+		 	var fechaSeleccionada = $('#datepicker').datepicker('getDate');
 			$.ajax({
 				url : '../RegistroTurnosController',
 				data : {
@@ -455,7 +373,11 @@
 				datatype : 'json',
 				success : function(data) {
 					var cubiculo = data.cubiculoAsignado;
-					alert(cubiculo);
+					if(cubiculo>0){						
+						$('#lblCubiculoAsignado').text(cubiculo);
+					}else{
+						$('#lblCubiculoAsignado').text('No existen cubiculos disponibles');
+					}
 				}
 			});
 		}
@@ -538,6 +460,14 @@
 
 							// Smart Wizard
 							$('#wizard').smartWizard();
+							//Date picker 
+							$('#datepicker').datepicker({
+							    format: "dd-mm-yyyy",
+							    todayBtn: "linked",
+							    language: "es",
+							    daysOfWeekDisabled: "0,6",
+							    todayHighlight: true
+							});
 
 							function onFinishCallback() {
 								$('#wizard').smartWizard('showMessage',

@@ -134,8 +134,8 @@ public class RegistroTurnosController extends HttpServlet {
 					int idTratamiento = Integer.parseInt(auxIdTratamiento[1]);					
 					//Obtenemos el idEspecialidad del tratamiento seleccionado en el radio
 					int idEspecialidad = especialidadDAO.buscarEspecialidadTratamiento(idTratamiento).getIdEspecialidad();
-					//Casteamos la fecha seleccionada de string a date
-					Date fecha = Utilitarios.stringToDate(fechaSeleccionada); 
+					//Casteamos la fecha seleccionada de string a date					
+					Date fecha = Utilitarios.stringToDate(Utilitarios.fechaDatePickertoDate(fechaSeleccionada)); 
 					//De la fecha extraemos el dia y verificamos el horario del estudiante para ese dia
 					int diaFecha = fecha.getDay();
 					String diaNombre = Utilitarios.buscarDia(diaFecha);

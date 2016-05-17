@@ -366,4 +366,40 @@ public class Utilitarios {
 	        }
 		 return diaNombre;
 	 }
+	 public static String fechaDatePickertoDate(String fechaDatepicker){
+		 String fechaString = "";
+		 String [] fechaDatePickerArray = fechaDatepicker.split(" ");
+		 String anio = fechaDatePickerArray[3];		 
+		 String dia = fechaDatePickerArray[2];
+		 String auxMes = fechaDatePickerArray[1];
+		 String mes = "";
+		 switch (auxMes){
+		 	case "Jan":  mes = "01";
+		 				 break;
+		 	case "Feb":  mes = "02";
+			 break;
+		 	case "Mar":  mes = "03";
+			 break;
+		 	case "Apr":  mes = "04";
+			 break;
+		 	case "May":  mes = "05";
+			 break;
+		 	case "Jun":  mes = "06";
+			 break;
+		 	case "Jul":  mes = "07";
+			 break;
+		 	case "Aug":  mes = "08";
+			 break;
+		 	case "Sep":  mes = "09";
+			 break;
+		 	case "Oct":  mes = "10";
+			 break;
+		 	case "Nov":  mes = "11";
+			 break;
+		 	case "Dec":  mes = "12";
+			 break;
+		 }
+		 fechaString = anio + "-" +mes+"-"+dia;
+		 return fechaString;
+	 }
 }
