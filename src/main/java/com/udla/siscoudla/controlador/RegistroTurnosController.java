@@ -127,20 +127,29 @@ public class RegistroTurnosController extends HttpServlet {
 					EspecialidadDAO especialidadDAO = new EspecialidadDAO();	
 					HorarioEstudianteDAO horarioEstudianteDAO = new HorarioEstudianteDAO();
 					HorarioCubiculoEstadoDAO hceDAO = new HorarioCubiculoEstadoDAO();
+					TratamientoDAO tratamientoDAO = new TratamientoDAO();
+					HorarioDAO horarioDAO = new HorarioDAO();
+					Horario horario = new Horario();
+					Especialidad especialidad = new Especialidad();
 					String tipoCubiculo = "NORMAL";
 					String cubiculoAsignado = "0";
 					//Obtenemos el verdadero id del cubiculo seleccionado
 					String[] auxIdTratamiento = idRadio.split("tratamiento");
-					int idTratamiento = Integer.parseInt(auxIdTratamiento[1]);					
+					int idTratamiento = Integer.parseInt(auxIdTratamiento[1]);	
+					String nombreTratamiento = tratamientoDAO.buscarPorId(idTratamiento).getNombre();
 					//Obtenemos el idEspecialidad del tratamiento seleccionado en el radio
-					int idEspecialidad = especialidadDAO.buscarEspecialidadTratamiento(idTratamiento).getIdEspecialidad();
-					//Casteamos la fecha seleccionada de string a date					
-					Date fecha = Utilitarios.stringToDate(Utilitarios.fechaDatePickertoDate(fechaSeleccionada)); 
+					especialidad = especialidadDAO.buscarEspecialidadTratamiento(idTratamiento);
+					int idEspecialidad = especialidad.getIdEspecialidad();
+					String nombreEspecialidad = especialidad.getNombre();
+					//Casteamos la fecha seleccionada de string a date
+					String fechaTurno = Utilitarios.fechaDatePickertoDate(fechaSeleccionada);
+					Date fecha = Utilitarios.stringToDate(fechaTurno); 
 					//De la fecha extraemos el dia y verificamos el horario del estudiante para ese dia
 					int diaFecha = fecha.getDay();
 					String diaNombre = Utilitarios.buscarDia(diaFecha);
 					Estudiante estudiante = buscarEstudianteUsuario(valorUsuario);
-					int idHorario = horarioEstudianteDAO.buscarPorDiaEstudiante(diaNombre, estudiante.getIdEstudiante());									
+					int idHorario = horarioEstudianteDAO.buscarPorDiaEstudiante(diaNombre, estudiante.getIdEstudiante());
+					horario = horarioDAO.buscarPorId(idHorario);
 					//Consultamos los cubiculos libres para los datos ingresados
 					List<String> cubiculos = hceDAO.buscarCubiculosLibres(fecha, idEspecialidad, idHorario, tipoCubiculo);					
 					String cubiculo = "";
@@ -165,6 +174,11 @@ public class RegistroTurnosController extends HttpServlet {
 						System.out.println("No trae resultados");						
 					}
 					result.put("cubiculoAsignado", cubiculoAsignado);
+					result.put("nombreEspecialidad", nombreEspecialidad);
+					result.put("nombreTratamiento", nombreTratamiento);
+					result.put("fechaTurno",fechaTurno);
+					result.put("horaInicio", horario.getHoraInicio());
+					result.put("horaFinal", horario.getHoraFinal());
 			}//Fin consultar cubiculos
 			
 			result.put("success", Boolean.TRUE);

@@ -312,9 +312,9 @@
 						                          <p class="title">Datos Paciente:</p>
 						                          <p>Deveint Inc</p>
 						                          <p class="title">Fecha y Horario:</p>
-						                          <p>Tony Chicken</p>
+						                          <p id="lblnFechaTurno"></p> - <p id="lblnHoraInicio"></p> - <p id="lblnHoraFinal"></p>
 						                          <p class="title">Tratamiento:</p>
-						                          <p id="lblTratamiento"></p>
+						                          <p id="lblnTratamiento"></p> - <p id="lblnEspecialidad"></p>
 						                          <p class="title">Cubiculo asignado:</p>
 						                          <p id="lblCubiculoAsignado"></p>
 						                        </div>
@@ -359,9 +359,7 @@
 	<script src="js/pace/pace.min.js"></script>
 	<script type="text/javascript">
 	function consultarCubiculos(idRadio){
-			var textoTratamiento =  $('input[id="' + idRadio + '"]').text();
-			$('#lblTratamiento').text(textoTratamiento);
-		 	var fechaSeleccionada = $('#datepicker').datepicker('getDate');
+			var fechaSeleccionada = $('#datepicker').datepicker('getDate');			
 			$.ajax({
 				url : '../RegistroTurnosController',
 				data : {
@@ -373,8 +371,18 @@
 				datatype : 'json',
 				success : function(data) {
 					var cubiculo = data.cubiculoAsignado;
+					var nTratamiento = data.nombreTratamiento;
+					var nEspecialidad = data.nombreEspecialidad;
+					var nHoraInicio = data.horaInicio;
+					var nHoraFinal = data.horaFinal;
+					var nFechaTurno = data.fechaTurno;
+					$('#lblnTratamiento').text(nTratamiento);
+					$('#lblnEspecialidad').text(nEspecialidad);
+					$('#lblnFechaTurno').text(nFechaTurno);
+					$('#lblnHoraInicio').text(nHoraInicio);
+					$('#lblnHoraFinal').text(nHoraFinal);
 					if(cubiculo>0){						
-						$('#lblCubiculoAsignado').text(cubiculo);
+						$('#lblCubiculoAsignado').text(cubiculo);						
 					}else{
 						$('#lblCubiculoAsignado').text('No existen cubiculos disponibles');
 					}

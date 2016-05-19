@@ -74,15 +74,17 @@ public class HorarioDAO extends EntityManagerFactoryDAO {
 		}
 	}
 
-	public Horario buscarPorId(String id) {
+	public Horario buscarPorId(int idHorario) {
 		EntityManager em = obtenerEntityManagerFactory().createEntityManager();
 		Horario horario = new Horario();
 		try {
 			TypedQuery<Horario> query = em
-					.createQuery("SELECT c FROM Horario c where c.id = :id ", Horario.class)
-					.setParameter("id", id);
+					.createQuery("SELECT h FROM Horario h where h.idHorario = :idHorario ", Horario.class)
+					.setParameter("idHorario", idHorario);
 			List<Horario> results = query.getResultList();
-			horario = results.get(0);
+			if(!results.isEmpty()){
+				horario = results.get(0);
+			}			
 			return horario;
 		} catch (Exception e) {
 			em.getTransaction().rollback();

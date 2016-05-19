@@ -73,15 +73,17 @@ public class TratamientoDAO extends EntityManagerFactoryDAO {
 		}
 	}
 
-	public Tratamiento buscarPorId(String id) {
+	public Tratamiento buscarPorId(int idTratamiento) {
 		EntityManager em = obtenerEntityManagerFactory().createEntityManager();
 		Tratamiento tratamiento = new Tratamiento();
 		try {
 			TypedQuery<Tratamiento> query = em.createQuery(
-					"SELECT c FROM Tratamiento c where c.id = :id ", Tratamiento.class)
-					.setParameter("id", id);
+					"SELECT t FROM Tratamiento t where t.idTratamiento = :idTratamiento ", Tratamiento.class)
+					.setParameter("idTratamiento", idTratamiento);
 			List<Tratamiento> results = query.getResultList();
-			tratamiento = results.get(0);
+			if(!results.isEmpty()){
+				tratamiento = results.get(0);
+			}			
 			return tratamiento;
 		} catch (Exception e) {
 			em.getTransaction().rollback();
