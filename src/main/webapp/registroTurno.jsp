@@ -18,7 +18,6 @@
 <link href="css/icheck/flat/green.css" rel="stylesheet">
 <script src="js/jquery.min.js"></script>
 <link href="css/bootstrap-datepicker/bootstrap-datepicker.css" rel="stylesheet">
-
 </head>
 
 
@@ -249,7 +248,7 @@
 														class="control-label col-md-3 col-sm-3 col-xs-12">E-mail:<span
 														class="required">*</span></label>
 													<div class="col-md-6 col-sm-6 col-xs-12">
-														<input type="email" id="txtEmail" required
+														<input type="email" id="txtEmailPaciente" required
 															class="form-control col-md-7 col-xs-12">
 													</div>
 												</div>
@@ -268,7 +267,7 @@
 														de Nacimiento:<span class="required">*</span>
 													</label>
 													<div class="col-md-6 col-sm-6 col-xs-12">
-														<input type="date" id="fechaNacimientoPaciente"
+														<input type="text" id="fechaNacimientoPaciente"
 															class="form-control col-md-7 col-xs-12" required>
 													</div>
 												</div>
@@ -291,7 +290,7 @@
 											</table>
 											<p>Seleccione Fecha:</p>
 											<br>		
-											<div id="datepicker" align="center"></div>									
+											<div id="fechaSeleccionada" align="center"></div>									
 
 										</div>
 										<div id="step-3">
@@ -309,16 +308,20 @@
 											<h2 class="StepTitle">Confirme su turno:</h2>
 											<p>Estimada(o) estudiante, ha ingresado los siguientes datos:</p>											
 						                        <div class="detalleTurno">						
-						                          <p class="title">Datos Paciente:</p>
-						                          <p>Deveint Inc</p>
-						                          <p class="title">Fecha y Horario:</p>
-						                          <p id="lblnFechaTurno"></p> - <p id="lblnHoraInicio"></p> - <p id="lblnHoraFinal"></p>
-						                          <p class="title">Tratamiento:</p>
-						                          <p id="lblnTratamiento"></p> - <p id="lblnEspecialidad"></p>
-						                          <p class="title">Cubiculo asignado:</p>
-						                          <p id="lblCubiculoAsignado"></p>
+						                          <h4>Nombre Paciente:</h4>
+						                          <p id="lblnNombrePaciente">Deveint Inc</p>
+						                          <h4 class="title">Fecha:</h4>
+						                          <p id="lblnFechaTurno"></p>
+						                          <h4 class="title">Horario:</h4> 
+						                          <p id="lblnHorario">
+						                          <h4>Tratamiento:</h4>
+						                          <p id="lblnTratamiento">
+						                          <h4>Especialidad:</h4>
+						                          <p id="lblnEspecialidad"></p>
+						                          <h4>Cub&iacute;culo asignado:</h4>
+						                          <h3 id="lblCubiculoAsignado"></h3>
 						                        </div>
-											<button type="submit" class="btn btn-success">ACEPTAR</button>
+											<button id="btnAceptar" type="button" class="btn btn-primary" onclick="reservarTurno()">ACEPTAR</button>
 										</div>
 									</div>
 									<!-- End SmartWizard Content -->
@@ -358,8 +361,52 @@
 	<!-- pace -->
 	<script src="js/pace/pace.min.js"></script>
 	<script type="text/javascript">
+	
+	function reservarTurno(){
+		//Datos Paciente
+		var historiaClinica = $('').val();
+		var nombresPaciente = $('#txtNombresPaciente').val();
+		var apellidosPaciente = $('#txtApellidosPaciente').val();
+		var emailPaciente = $('#txtEmailPaciente').val();
+		var genero = $('#genero').val();
+		var fechaNacimientoPaciente =  $('#fechaNacimientoPaciente').datepicker('getDate');
+		var fechaSeleccionada = $('#datepicker').datepicker('getDate');
+		
+		$.ajax({
+			url : '../RegistroTurnosController',
+			data : {
+				"tipoConsulta" : "reservarTurno",
+				"fechaSeleccionada":fechaSeleccionada,
+				"idRadio" : idRadio
+			},
+			type : 'POST',
+			datatype : 'json',
+			success : function(data) {
+				var cubiculo = data.cubiculoAsignado;
+				var nTratamiento = data.nombreTratamiento;
+				var nEspecialidad = data.nombreEspecialidad;
+				var nHoraInicio = data.horaInicio;
+				var nHoraFinal = data.horaFinal;
+				var nFechaTurno = data.fechaTurno;
+				$('#lblnTratamiento').text(nTratamiento);
+				$('#lblnEspecialidad').text(nEspecialidad);
+				$('#lblnFechaTurno').text(nFechaTurno);
+				$('#lblnHorario').text(nHoraInicio + " - " + nHoraFinal);					
+				if(cubiculo>0){						
+					$('#lblCubiculoAsignado').text(cubiculo);
+					$('#btnAceptar').show();
+				}else{
+					$('#lblCubiculoAsignado').text('No existen cubículos disponibles');
+					$('#btnAceptar').hide();
+				}
+			}
+		});
+	}
 	function consultarCubiculos(idRadio){
-			var fechaSeleccionada = $('#datepicker').datepicker('getDate');			
+			var fechaSeleccionada = $('#datepicker').datepicker('getDate');
+			var nombre = $('#txtNombresPaciente').val();
+			var apellido = $('#txtApellidosPaciente').val();
+			$('#lblnNombrePaciente').text(nombre +" " + apellido);
 			$.ajax({
 				url : '../RegistroTurnosController',
 				data : {
@@ -379,16 +426,18 @@
 					$('#lblnTratamiento').text(nTratamiento);
 					$('#lblnEspecialidad').text(nEspecialidad);
 					$('#lblnFechaTurno').text(nFechaTurno);
-					$('#lblnHoraInicio').text(nHoraInicio);
-					$('#lblnHoraFinal').text(nHoraFinal);
+					$('#lblnHorario').text(nHoraInicio + " - " + nHoraFinal);					
 					if(cubiculo>0){						
-						$('#lblCubiculoAsignado').text(cubiculo);						
+						$('#lblCubiculoAsignado').text(cubiculo);
+						$('#btnAceptar').show();
 					}else{
-						$('#lblCubiculoAsignado').text('No existen cubiculos disponibles');
+						$('#lblCubiculoAsignado').text('No existen cubículos disponibles');
+						$('#btnAceptar').hide();
 					}
 				}
 			});
 		}
+		
 		$(document).ready(function() {
 							//Datos Iniciales
 							//Cargar Horarios de los Estudiantes
@@ -469,19 +518,19 @@
 							// Smart Wizard
 							$('#wizard').smartWizard();
 							//Date picker 
-							$('#datepicker').datepicker({
+							$('#fechaSeleccionada').datepicker({
 							    format: "dd-mm-yyyy",
 							    todayBtn: "linked",
 							    language: "es",
 							    daysOfWeekDisabled: "0,6",
 							    todayHighlight: true
 							});
-
-							function onFinishCallback() {
-								$('#wizard').smartWizard('showMessage',
-										'Finish Clicked');
-								alert('Finish Clicked');
-							}
+							$('#fechaNacimientoPaciente').datepicker({
+							    format: "dd-MM-yyyy",
+							    language: "es",
+							    autoclose: true
+							});
+							
 						});//Fin jquery ready
 	</script>
 

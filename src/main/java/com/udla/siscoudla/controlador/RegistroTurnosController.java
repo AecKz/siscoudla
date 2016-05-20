@@ -1,6 +1,8 @@
 package com.udla.siscoudla.controlador;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -141,9 +143,14 @@ public class RegistroTurnosController extends HttpServlet {
 					especialidad = especialidadDAO.buscarEspecialidadTratamiento(idTratamiento);
 					int idEspecialidad = especialidad.getIdEspecialidad();
 					String nombreEspecialidad = especialidad.getNombre();
+					Date fecha = new Date();
+					DateFormat fechaTexto = new SimpleDateFormat("dd-MM-yyyy");					
+					String fechaTurno = fechaTexto.format(fecha);
 					//Casteamos la fecha seleccionada de string a date
-					String fechaTurno = Utilitarios.fechaDatePickertoDate(fechaSeleccionada);
-					Date fecha = Utilitarios.stringToDate(fechaTurno); 
+					if(!fechaSeleccionada.isEmpty()){
+						fechaTurno = Utilitarios.fechaDatePickertoDate(fechaSeleccionada);
+						fecha = Utilitarios.stringToDate(fechaTurno);
+					}					 
 					//De la fecha extraemos el dia y verificamos el horario del estudiante para ese dia
 					int diaFecha = fecha.getDay();
 					String diaNombre = Utilitarios.buscarDia(diaFecha);
