@@ -363,47 +363,56 @@
 	<script type="text/javascript">
 	
 	function reservarTurno(){
-		//Datos Paciente
-		var historiaClinica = $('').val();
+		//Ocultamos el boton
+		$('#btnAceptar').hide();
+		//Enviamos datos del paciente
+		var historiaClinica = $('txtHistoriaClinica').val();
 		var nombresPaciente = $('#txtNombresPaciente').val();
 		var apellidosPaciente = $('#txtApellidosPaciente').val();
 		var emailPaciente = $('#txtEmailPaciente').val();
-		var genero = $('#genero').val();
+		var generoPaciente = $('#genero').val();
 		var fechaNacimientoPaciente =  $('#fechaNacimientoPaciente').datepicker('getDate');
-		var fechaSeleccionada = $('#datepicker').datepicker('getDate');
-		
+		var fechaSeleccionada = $('#fechaSeleccionada').datepicker('getDate');		
+		var cubiculoAsignadoTurno = $('#lblCubiculoAsignado').text();		
 		$.ajax({
 			url : '../RegistroTurnosController',
 			data : {
 				"tipoConsulta" : "reservarTurno",
+				"historiaClinica":historiaClinica,
+				"nombresPaciente":nombresPaciente,
+				"apellidosPaciente":apellidosPaciente,
+				"emailPaciente":emailPaciente,
+				"generoPaciente":generoPaciente,
+				"fechaNacimientoPaciente":fechaNacimientoPaciente,
 				"fechaSeleccionada":fechaSeleccionada,
-				"idRadio" : idRadio
+				"fechaNacimientoPaciente":fechaNacimientoPaciente,				
+				"cubiculoAsignadoTurno" : cubiculoAsignadoTurno
 			},
 			type : 'POST',
 			datatype : 'json',
 			success : function(data) {
-				var cubiculo = data.cubiculoAsignado;
-				var nTratamiento = data.nombreTratamiento;
-				var nEspecialidad = data.nombreEspecialidad;
-				var nHoraInicio = data.horaInicio;
-				var nHoraFinal = data.horaFinal;
-				var nFechaTurno = data.fechaTurno;
-				$('#lblnTratamiento').text(nTratamiento);
-				$('#lblnEspecialidad').text(nEspecialidad);
-				$('#lblnFechaTurno').text(nFechaTurno);
-				$('#lblnHorario').text(nHoraInicio + " - " + nHoraFinal);					
-				if(cubiculo>0){						
-					$('#lblCubiculoAsignado').text(cubiculo);
-					$('#btnAceptar').show();
-				}else{
-					$('#lblCubiculoAsignado').text('No existen cubículos disponibles');
-					$('#btnAceptar').hide();
+				var resultado = data.resultado;
+				switch (resultado)
+				{
+				   case "ok":
+					   alert('Turno Reservado!');
+					   break;
+				   case "error":
+					   alert('Hubo un error');
+					   break;
+				   case "cubiculo ocupado": 
+				       alert('El cubículo asignado ha sido ocupado, por favor seleccione otro Tratamiento');
+				       break;
+
+				   default: 
+				       alert('Hubo un error');
 				}
+								
 			}
 		});
 	}
 	function consultarCubiculos(idRadio){
-			var fechaSeleccionada = $('#datepicker').datepicker('getDate');
+			var fechaSeleccionada = $('#fechaSeleccionada').datepicker('getDate');
 			var nombre = $('#txtNombresPaciente').val();
 			var apellido = $('#txtApellidosPaciente').val();
 			$('#lblnNombrePaciente').text(nombre +" " + apellido);
@@ -519,8 +528,7 @@
 							$('#wizard').smartWizard();
 							//Date picker 
 							$('#fechaSeleccionada').datepicker({
-							    format: "dd-mm-yyyy",
-							    todayBtn: "linked",
+							    format: "dd-mm-yyyy",							    
 							    language: "es",
 							    daysOfWeekDisabled: "0,6",
 							    todayHighlight: true

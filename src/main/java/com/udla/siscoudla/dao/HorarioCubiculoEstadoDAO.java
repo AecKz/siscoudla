@@ -93,6 +93,30 @@ public class HorarioCubiculoEstadoDAO extends EntityManagerFactoryDAO {
 			em.close();
 		}
 	}	
+	public Horariocubiculoestado buscarPorNumero(String numeroCubiculo) {
+		EntityManager em = obtenerEntityManagerFactory().createEntityManager();
+		Horariocubiculoestado horarioCubiculoEstado = new Horariocubiculoestado();
+		try {
+			TypedQuery<Horariocubiculoestado> query = em
+					.createQuery("SELECT hce FROM Horariocubiculoestado hce "
+							+ "JOIN FETCH hce.horariocubiculo hc "
+							+ "JOIN FETCH hc.horario h "
+							+ "JOIN FETCH hc.cubiculo c "
+							+ "where c.numero = :numeroCubiculo ", Horariocubiculoestado.class)
+					.setParameter("numeroCubiculo", numeroCubiculo);
+			List<Horariocubiculoestado> results = query.getResultList();
+			if(!results.isEmpty()){
+				horarioCubiculoEstado = results.get(0);	
+			}			
+			return horarioCubiculoEstado;
+		} catch (Exception e) {
+			em.getTransaction().rollback();
+			System.out.println(e.getMessage());
+			return horarioCubiculoEstado;
+		} finally {
+			em.close();
+		}
+	}	
 	/**
 	 * Metodo para verificar el estado de un HorarioCubiculoEstado
 	 * @param idHorarioCubiculoEstado

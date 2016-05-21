@@ -6,10 +6,11 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
 import com.udla.siscoudla.entitymanagerfactory.EntityManagerFactoryDAO;
+import com.udla.siscoudla.modelo.Paciente;
 import com.udla.siscoudla.modelo.Persona;
 
-public class PersonaDAO extends EntityManagerFactoryDAO {
-	public Persona crear(Persona objeto) {
+public class PacienteDAO extends EntityManagerFactoryDAO {
+	public Paciente crear(Paciente objeto) {
 		EntityManager em = obtenerEntityManagerFactory().createEntityManager();
 		try {
 			em.getTransaction().begin();
@@ -27,7 +28,7 @@ public class PersonaDAO extends EntityManagerFactoryDAO {
 		}
 	}
 
-	public Persona editar(Persona objeto) {
+	public Paciente editar(Paciente objeto) {
 		EntityManager em = obtenerEntityManagerFactory().createEntityManager();
 		try {
 			em.getTransaction().begin();
@@ -43,12 +44,12 @@ public class PersonaDAO extends EntityManagerFactoryDAO {
 		}
 	}
 
-	public Persona eliminar(Persona objeto) {
+	public Paciente eliminar(Paciente objeto) {
 		EntityManager em = obtenerEntityManagerFactory().createEntityManager();
 		try {
 			em.getTransaction().begin();
-			Persona EntidadToBeRemoved = em.getReference(Persona.class,
-					objeto.getIdPersona());
+			Paciente EntidadToBeRemoved = em.getReference(Paciente.class,
+					objeto.getIdPaciente());
 			em.remove(EntidadToBeRemoved);
 			em.getTransaction().commit();
 			return objeto;
@@ -61,44 +62,44 @@ public class PersonaDAO extends EntityManagerFactoryDAO {
 		}
 	}
 
-	public List<Persona> buscarTodos() {
+	public List<Paciente> buscarTodos() {
 		EntityManager em = obtenerEntityManagerFactory().createEntityManager();
 		try {
-			TypedQuery<Persona> query = em.createQuery(
-					"SELECT e FROM Persona e order by e.nombre", Persona.class);
-			List<Persona> results = query.getResultList();
+			TypedQuery<Paciente> query = em.createQuery(
+					"SELECT e FROM Paciente e order by e.nombre", Paciente.class);
+			List<Paciente> results = query.getResultList();
 			return results;
 		} finally {
 			em.close();
 		}
 	}
 
-	public Persona buscarPorId(String id) {
+	public Paciente buscarPorId(String id) {
 		EntityManager em = obtenerEntityManagerFactory().createEntityManager();
-		Persona persona = new Persona();
+		Paciente paciente = new Paciente();
 		try {
-			TypedQuery<Persona> query = em.createQuery(
-					"SELECT c FROM Persona c where c.id = :id ", Persona.class)
+			TypedQuery<Paciente> query = em.createQuery(
+					"SELECT c FROM Paciente c where c.id = :id ", Paciente.class)
 					.setParameter("id", id);
-			List<Persona> results = query.getResultList();
-			persona = results.get(0);
-			return persona;
+			List<Paciente> results = query.getResultList();
+			paciente = results.get(0);
+			return paciente;
 		} catch (Exception e) {
 			em.getTransaction().rollback();
 			System.out.println(e.getMessage());
-			return persona;
+			return paciente;
 		} finally {
 			em.close();
 		}
 	}
 
-	public List<Persona> buscarActivos() {
+	public List<Paciente> buscarActivos() {
 		EntityManager em = obtenerEntityManagerFactory().createEntityManager();
-		List<Persona> results = null;
+		List<Paciente> results = null;
 		try {
-			TypedQuery<Persona> query = em.createQuery(
-					"SELECT c FROM Persona c WHERE c.activo =:valorActivo",
-					Persona.class).setParameter("valorActivo", true);
+			TypedQuery<Paciente> query = em.createQuery(
+					"SELECT c FROM Paciente c WHERE c.activo =:valorActivo",
+					Paciente.class).setParameter("valorActivo", true);
 			results = query.getResultList();
 		} catch (Exception e) {
 			em.getTransaction().rollback();
@@ -107,46 +108,53 @@ public class PersonaDAO extends EntityManagerFactoryDAO {
 		}
 		return results;
 	}
-	
-	public Persona buscarPorEmail(String email) {
+	/**
+	 * Buscar paciente por numero de historia
+	 * @param numeroHistoria
+	 * @return objeto Paciente
+	 * */
+	public Paciente buscarPorNumeroHistoria(String numeroHistoria) {
 		EntityManager em = obtenerEntityManagerFactory().createEntityManager();
-		Persona persona = new Persona();
+		Paciente paciente = new Paciente();
 		try {
-			TypedQuery<Persona> query = em.createQuery(
-					"SELECT p FROM Persona p where p.email = :email ", Persona.class)
-					.setParameter("email", email);
-			List<Persona> results = query.getResultList();
+			TypedQuery<Paciente> query = em.createQuery(
+					"SELECT p FROM Paciente p where p.numeroHistoria = :numeroHistoria ", Paciente.class)
+					.setParameter("numeroHistoria", numeroHistoria);
+			List<Paciente> results = query.getResultList();
 			if(!results.isEmpty()){
-				persona = results.get(0);
+				paciente = results.get(0);
 			}
-			return persona;
+			return paciente;
 		} catch (Exception e) {
 			em.getTransaction().rollback();
 			System.out.println(e.getMessage());
-			return persona;
+			return paciente;
 		} finally {
 			em.close();
 		}
 	}
-	public Persona buscarPorUsuario(String usuario) {
+	/**
+	 * Buscar paciente por objeto Persona
+	 * @param persona
+	 * @return objeto Paciente
+	 * */
+	public Paciente buscarPorPersona(Persona persona) {
 		EntityManager em = obtenerEntityManagerFactory().createEntityManager();
-		Persona persona = new Persona();		
+		Paciente paciente = new Paciente();		
 		try {
-			TypedQuery<Persona> query = em.createQuery(
-					"SELECT p FROM Usuario u "
-					+ "JOIN FETCH u.persona p "		
-					+ "where u.usuario = :usuario ", Persona.class)
-					.setParameter("usuario", usuario);
-			List<Persona> results = query.getResultList();
+			TypedQuery<Paciente> query = em.createQuery(
+					"SELECT p FROM Paciente p "							
+					+ "where p.persona = :persona ", Paciente.class)
+					.setParameter("persona", persona);
+			List<Paciente> results = query.getResultList();
 			if(!results.isEmpty()){
-				persona = results.get(0);
-			}
-			
-			return persona;
+				paciente = results.get(0);
+			}			
+			return paciente;
 		} catch (Exception e) {
 			em.getTransaction().rollback();
 			System.out.println(e.getMessage());
-			return persona;
+			return paciente;
 		} finally {
 			em.close();
 		}

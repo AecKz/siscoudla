@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
 import com.udla.siscoudla.entitymanagerfactory.EntityManagerFactoryDAO;
+import com.udla.siscoudla.modelo.Estudiante;
 import com.udla.siscoudla.modelo.Horarioestudiante;
 
 public class HorarioEstudianteDAO extends EntityManagerFactoryDAO {
@@ -90,7 +91,37 @@ public class HorarioEstudianteDAO extends EntityManagerFactoryDAO {
 		} finally {
 			em.close();
 		}
-	}	
+	}
+	public Horarioestudiante buscarPorIdHorarioYEstudiante(int idHorario, Estudiante estudiante) {
+		EntityManager em = obtenerEntityManagerFactory().createEntityManager();
+		Horarioestudiante horarioEstudiante = new Horarioestudiante();
+		try {
+			TypedQuery<Horarioestudiante> query = em
+					.createQuery("SELECT he FROM Horarioestudiante he "
+							+ "JOIN FETCH he.horario h "
+							+ "JOIN FETCH he.estudiante e "
+							+ "where h.idHorario = :idHorario "
+							+ "and he.estudiante = :estudiante ", Horarioestudiante.class)
+					.setParameter("idHorario", idHorario).setParameter("estudiante", estudiante);
+			List<Horarioestudiante> results = query.getResultList();
+			if(!results.isEmpty()){
+				horarioEstudiante = results.get(0);
+			}			
+			return horarioEstudiante;
+		} catch (Exception e) {
+			em.getTransaction().rollback();
+			System.out.println(e.getMessage());
+			return horarioEstudiante;
+		} finally {
+			em.close();
+		}
+	}
+	/**
+	 * Buscar idHorario por idEstudiante y el nombre del dia
+	 * @param diaNombre
+	 * @param idEstudiante
+	 * @return idHorario 
+	 * */
 	public int buscarPorDiaEstudiante(String diaNombre, int idEstudiante) {
 		EntityManager em = obtenerEntityManagerFactory().createEntityManager();
 		int resultado = 0;

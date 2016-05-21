@@ -18,6 +18,7 @@ import com.udla.siscoudla.dao.TratamientoDAO;
 import com.udla.siscoudla.modelo.Especialidad;
 import com.udla.siscoudla.modelo.Estudiante;
 import com.udla.siscoudla.modelo.Horario;
+import com.udla.siscoudla.modelo.Horariocubiculoestado;
 import com.udla.siscoudla.modelo.Persona;
 import com.udla.siscoudla.modelo.Rol;
 import com.udla.siscoudla.modelo.Tratamiento;
@@ -37,7 +38,8 @@ public class TestDAO {
 		//testBuscarPorUsuario();
 		//testBuscarPorPersona();
 		//testBuscarEspecialidadTratamientos();
-		testBuscarPorDiaEstudiante();
+		//testBuscarPorDiaEstudiante();
+		testBuscarPorNumero();
 		System.out.println("Fin Test DAO");
 	}
 
@@ -192,5 +194,20 @@ public class TestDAO {
 			fail("Fail: " + e);
 		}
 	}
-
+	public void testBuscarPorNumero(){
+		try{
+			HorarioCubiculoEstadoDAO hceDAO = new HorarioCubiculoEstadoDAO();
+			Horariocubiculoestado hce = new Horariocubiculoestado();
+			String numeroCubiculo = "5";
+			hce = hceDAO.buscarPorNumero(numeroCubiculo);			
+			if(hce!=null){
+				System.out.println("El id es:" + hce.getIdhorarioCubiculoEstado());
+			}else{
+				System.out.println("No existen datos");
+			}		
+		}catch(Exception e){
+			System.out.println("Error:" + e);
+			fail("Fail: " + e);
+		}
+	}
 }
