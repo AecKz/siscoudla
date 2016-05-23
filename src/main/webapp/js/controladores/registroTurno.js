@@ -11,7 +11,7 @@ function reservarTurno(){
 		var nombresPaciente = $('#txtNombresPaciente').val();
 		var apellidosPaciente = $('#txtApellidosPaciente').val();
 		var emailPaciente = $('#txtEmailPaciente').val();
-		var generoPaciente = $('#genero').val();
+		var generoPaciente = $('#genero input:radio:checked').val();
 		var fechaNacimientoPaciente =  $('#fechaNacimientoPaciente').datepicker('getDate');
 		var fechaSeleccionada = $('#fechaSeleccionada').datepicker('getDate');		
 		var cubiculoAsignadoTurno = $('#lblCubiculoAsignado').text();

@@ -269,8 +269,8 @@
 														class="required">*</span></label>
 													<div class="col-md-6 col-sm-6 col-xs-12">
 														<div id="genero" class="btn-group" data-toggle="buttons">
-															<input type="radio" name="genero" value="m">&nbsp;Masculino&nbsp;
-															<input type="radio" name="genero" value="f">&nbsp;Femenino&nbsp;
+															<input type="radio" name="genero" value="M">&nbsp;Masculino&nbsp;
+															<input type="radio" name="genero" value="F">&nbsp;Femenino&nbsp;
 														</div>
 													</div>
 												</div>

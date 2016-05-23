@@ -250,8 +250,8 @@
                       <!-- end of image cropping -->
                       <div id="crop-avatar">
                         <!-- Current avatar -->
-                        <div class="avatar-view" title="Change the avatar">
-                          <img src="images/picture.jpg" alt="Avatar">
+                        <div class="avatar-view" title="">
+                          <img src="images/picture.jpg" class="img-fluid" alt="Responsive image">
                         </div>
 
                         <!-- Loading state -->
