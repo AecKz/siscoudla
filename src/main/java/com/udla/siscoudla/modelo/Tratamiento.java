@@ -2,6 +2,7 @@ package com.udla.siscoudla.modelo;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import java.util.List;
 
 
 /**
@@ -27,6 +28,10 @@ public class Tratamiento implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="idEspecialidad")
 	private Especialidad especialidad;
+
+	//bi-directional many-to-one association to Turno
+	@OneToMany(mappedBy="tratamiento")
+	private List<Turno> turnos;
 
 	public Tratamiento() {
 	}
@@ -69,6 +74,28 @@ public class Tratamiento implements Serializable {
 
 	public void setEspecialidad(Especialidad especialidad) {
 		this.especialidad = especialidad;
+	}
+
+	public List<Turno> getTurnos() {
+		return this.turnos;
+	}
+
+	public void setTurnos(List<Turno> turnos) {
+		this.turnos = turnos;
+	}
+
+	public Turno addTurno(Turno turno) {
+		getTurnos().add(turno);
+		turno.setTratamiento(this);
+
+		return turno;
+	}
+
+	public Turno removeTurno(Turno turno) {
+		getTurnos().remove(turno);
+		turno.setTratamiento(null);
+
+		return turno;
 	}
 
 }

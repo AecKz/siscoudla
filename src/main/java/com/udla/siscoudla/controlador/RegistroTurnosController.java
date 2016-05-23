@@ -96,7 +96,18 @@ public class RegistroTurnosController extends HttpServlet {
 					: request.getParameter("fechaNacimientoPaciente");
 			String cubiculoAsignadoTurno = request.getParameter("cubiculoAsignadoTurno") == null ? ""
 					: request.getParameter("cubiculoAsignadoTurno");
-			
+			String tratamientoSeleccionado = request.getParameter("tratamientoSeleccionado") == null ? ""
+					: request.getParameter("tratamientoSeleccionado");
+			//Para cargar los datos del menu
+			if (tipoConsulta.equals("cargarDatosMenus")){
+				if(Utilitarios.verificarRolEstudiante(valorUsuario)){
+					PersonaDAO personaDAO = new PersonaDAO();
+					Persona persona = new Persona();
+					persona = personaDAO.buscarPorEmail(valorUsuario);
+					String nombreCompleto = persona.getNombres() +" "+ persona.getApellidos();
+					result.put("nombreCompleto", nombreCompleto);
+				}
+			}
 			//Para cargar las especialidades y sus tratamientos
 			if (tipoConsulta.equals("cargarTratamientos")) {
 				//Cargar datos de Especialidad y Tratamientos
@@ -125,10 +136,10 @@ public class RegistroTurnosController extends HttpServlet {
 			//Para cargar los horarios del estudiante
 			if(tipoConsulta.equals("cargarHorarios")){
 				//Comprueba si el rol del usuario es Estudiante
-				if(verificarRolEstudiante(valorUsuario)){
+				if(Utilitarios.verificarRolEstudiante(valorUsuario)){
 					//Si se verifica el rol, traemos los horarios que le pertenecen
 					HorarioDAO horarioDAO = new HorarioDAO();
-					Estudiante estudiante = buscarEstudianteUsuario(valorUsuario); 		
+					Estudiante estudiante = Utilitarios.buscarEstudianteUsuario(valorUsuario); 		
 					List<Horario> horarios = horarioDAO.buscarHorariosEstudiante(estudiante);
 					if (!horarios.isEmpty()) {			
 						for (Horario horario : horarios) {
@@ -175,7 +186,7 @@ public class RegistroTurnosController extends HttpServlet {
 					//De la fecha extraemos el dia y verificamos el horario del estudiante para ese dia
 					int diaFecha = fecha.getDay();
 					String diaNombre = Utilitarios.buscarDia(diaFecha);
-					Estudiante estudiante = buscarEstudianteUsuario(valorUsuario);
+					Estudiante estudiante = Utilitarios.buscarEstudianteUsuario(valorUsuario);
 					int idHorario = horarioEstudianteDAO.buscarPorDiaEstudiante(diaNombre, estudiante.getIdEstudiante());
 					horario = horarioDAO.buscarPorId(idHorario);
 					//Consultamos los cubiculos libres para los datos ingresados
@@ -228,6 +239,8 @@ public class RegistroTurnosController extends HttpServlet {
 					Persona persona = new Persona();
 					TurnoDAO turnoDAO = new TurnoDAO();
 					Turno turno = new Turno();
+					TratamientoDAO tratamientoDAO = new TratamientoDAO();
+					Tratamiento tratamiento = new Tratamiento();
 					HorarioEstudianteDAO horarioEstudianteDAO = new HorarioEstudianteDAO();
 					Horarioestudiante horarioEstudiante = new Horarioestudiante();
 					if (historiaClinica.equals("")){
@@ -287,7 +300,7 @@ public class RegistroTurnosController extends HttpServlet {
 					//De la fecha extraemos el dia y verificamos el horario del estudiante para ese dia
 					int diaFecha = fecha.getDay();
 					String diaNombre = Utilitarios.buscarDia(diaFecha);
-					Estudiante estudiante = buscarEstudianteUsuario(valorUsuario);
+					Estudiante estudiante = Utilitarios.buscarEstudianteUsuario(valorUsuario);
 					int idHorario = horarioEstudianteDAO.buscarPorDiaEstudiante(diaNombre, estudiante.getIdEstudiante());
 					horarioEstudiante = horarioEstudianteDAO.buscarPorIdHorarioYEstudiante(idHorario,estudiante);
 					turno.setFecha(fecha);
@@ -295,10 +308,14 @@ public class RegistroTurnosController extends HttpServlet {
 					turno.setTipo("NOR");
 					turno.setEstado("RES");
 					turno.setHorariocubiculoestado(hce);
-					turno.setHorarioestudiante(horarioEstudiante);					
+					turno.setHorarioestudiante(horarioEstudiante);
+					tratamiento = tratamientoDAO.buscarPorNombre(tratamientoSeleccionado);
+					turno.setTratamiento(tratamiento);
 					turno = turnoDAO.crear(turno);
 					if(turno.getIdTurno()>0){
 						resultado = "ok";
+						hce.setEstado("RES");
+						hceDAO.editar(hce);
 					}else{
 						resultado = "error";
 					}
@@ -318,35 +335,5 @@ public class RegistroTurnosController extends HttpServlet {
 			result.write(response.getWriter());
 			e.printStackTrace();
 		}
-	}
-	/**
-	 * Metodo para obtener el Estudiante del Usuario ingresado
-	 * @param valorUsuario
-	 * @return objeto Estudiante
-	 * */
-	public Estudiante buscarEstudianteUsuario(String valorUsuario) {
-		PersonaDAO personaDAO = new PersonaDAO();
-		EstudianteDAO estudianteDAO = new EstudianteDAO();
-		Persona persona = new Persona();
-		Estudiante estudiante = new Estudiante ();			
-		persona = personaDAO.buscarPorUsuario(valorUsuario);						
-		estudiante = estudianteDAO.buscarPorPersona(persona);
-		return estudiante;
-	}
-	/**
-	 * Metodo para verificar si el usuario ingresado es Estudiante
-	 * @param valorUsuario
-	 * @return Boolean
-	 * */
-	public Boolean verificarRolEstudiante(String valorUsuario) {		
-		RolDAO rolDAO = new RolDAO();
-		Boolean esEstudiante = false;
-		List<Rol> lista = rolDAO.buscarRolPorUsuario(valorUsuario);
-		for (Rol rol : lista) {
-			if (rol.getNombre().equals("Estudiante")) {
-				esEstudiante = true;
-			}
-		}
-		return esEstudiante;
 	}	
 }

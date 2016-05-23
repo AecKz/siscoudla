@@ -27,6 +27,11 @@ public class Turno implements Serializable {
 
 	private String tipo;
 
+	//bi-directional many-to-one association to Horariocubiculoestado
+	@ManyToOne
+	@JoinColumn(name="idHorarioCubiculoEstado")
+	private Horariocubiculoestado horariocubiculoestado;
+
 	//bi-directional many-to-one association to Horarioestudiante
 	@ManyToOne
 	@JoinColumn(name="idHorarioEstudiante")
@@ -37,10 +42,10 @@ public class Turno implements Serializable {
 	@JoinColumn(name="idPaciente")
 	private Paciente paciente;
 
-	//bi-directional many-to-one association to Horariocubiculoestado
+	//bi-directional many-to-one association to Tratamiento
 	@ManyToOne
-	@JoinColumn(name="idHorarioCubiculoEstado")
-	private Horariocubiculoestado horariocubiculoestado;
+	@JoinColumn(name="idTratamiento")
+	private Tratamiento tratamiento;
 
 	public Turno() {
 	}
@@ -85,6 +90,14 @@ public class Turno implements Serializable {
 		this.tipo = tipo;
 	}
 
+	public Horariocubiculoestado getHorariocubiculoestado() {
+		return this.horariocubiculoestado;
+	}
+
+	public void setHorariocubiculoestado(Horariocubiculoestado horariocubiculoestado) {
+		this.horariocubiculoestado = horariocubiculoestado;
+	}
+
 	public Horarioestudiante getHorarioestudiante() {
 		return this.horarioestudiante;
 	}
@@ -101,12 +114,12 @@ public class Turno implements Serializable {
 		this.paciente = paciente;
 	}
 
-	public Horariocubiculoestado getHorariocubiculoestado() {
-		return this.horariocubiculoestado;
+	public Tratamiento getTratamiento() {
+		return this.tratamiento;
 	}
 
-	public void setHorariocubiculoestado(Horariocubiculoestado horariocubiculoestado) {
-		this.horariocubiculoestado = horariocubiculoestado;
+	public void setTratamiento(Tratamiento tratamiento) {
+		this.tratamiento = tratamiento;
 	}
 
 }

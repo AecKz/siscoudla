@@ -93,6 +93,31 @@ public class TratamientoDAO extends EntityManagerFactoryDAO {
 			em.close();
 		}
 	}
+	/**
+	 * Buscar por nombre del tratamiento
+	 * @param nombreTratamiento
+	 * @return objeto Tratamiento
+	 * */
+	public Tratamiento buscarPorNombre(String nombreTratamiento) {
+		EntityManager em = obtenerEntityManagerFactory().createEntityManager();
+		Tratamiento tratamiento = new Tratamiento();
+		try {
+			TypedQuery<Tratamiento> query = em.createQuery(
+					"SELECT t FROM Tratamiento t where t.nombre = :nombre ", Tratamiento.class)
+					.setParameter("nombre", nombreTratamiento);
+			List<Tratamiento> results = query.getResultList();
+			if(!results.isEmpty()){
+				tratamiento = results.get(0);
+			}			
+			return tratamiento;
+		} catch (Exception e) {
+			em.getTransaction().rollback();
+			System.out.println(e.getMessage());
+			return tratamiento;
+		} finally {
+			em.close();
+		}
+	}
 
 	public List<Tratamiento> buscarActivos() {
 		EntityManager em = obtenerEntityManagerFactory().createEntityManager();

@@ -18,6 +18,19 @@
 <link href="css/icheck/flat/green.css" rel="stylesheet">
 <script src="js/jquery.min.js"></script>
 <link href="css/bootstrap-datepicker/bootstrap-datepicker.css" rel="stylesheet">
+<script src="js/controladores/registroTurno.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<!-- bootstrap progress js -->
+<script src="js/progressbar/bootstrap-progressbar.min.js"></script>
+<script src="js/nicescroll/jquery.nicescroll.min.js"></script>
+<!-- datepicker -->
+<script type="text/javascript" src="js/bootstrap-datepicker/bootstrap-datepicker.js"></script>
+<script type="text/javascript" src="js/locales/bootstrap-datepicker.es.min.js"></script>
+<script src="js/custom.js"></script>
+<!-- form wizard -->
+<script type="text/javascript" src="js/wizard/jquery.smartWizard.js"></script>
+<!-- pace -->
+<script src="js/pace/pace.min.js"></script>
 </head>
 
 
@@ -47,7 +60,7 @@
 						</div>
 						<div class="profile_info">
 							<span>Bienvenida (o),</span>
-							<h2>Empty user</h2>
+							<h2 id="txtUsuarioMenu"></h2>
 						</div>
 					</div>
 					<!-- /menu prile quick info -->
@@ -108,8 +121,7 @@
 						<ul class="nav navbar-nav navbar-right">
 							<li class=""><a href="javascript:;"
 								class="user-profile dropdown-toggle" data-toggle="dropdown"
-								aria-expanded="false"> <img src="images/img.jpg" alt="">John
-									Doe <span class=" fa fa-angle-down"></span>
+								aria-expanded="false"> <img src="images/img.jpg" alt=""><span id="txtUsuarioCabecera"></span><span class=" fa fa-angle-down"></span>
 							</a>
 								<ul
 									class="dropdown-menu dropdown-usermenu animated fadeInDown pull-right">
@@ -176,15 +188,15 @@
 			<div class="right_col" role="main">
 
 				<div class="">
-					<div class="page-title">
-						<div class="title_left">
-							<h3>Registro de Turno</h3>
-						</div>
-					</div>
 					<div class="clearfix"></div>
 					<div class="row">
 						<div class="col-md-12 col-sm-12 col-xs-12">
 							<div class="x_panel">
+							<div class="row x_title">
+								<div class="col-md-6">
+									<h3>Registro de Turno</h3>
+								</div>
+							</div>
 								<div class="x_content">
 									<!-- Smart Wizard -->
 									<p>Siga los pasos para registrar un nuevo turno:</p>
@@ -343,204 +355,5 @@
 	<!-- 		<div class="clearfix"></div> -->
 	<!-- 		<div id="notif-group" class="tabbed_notifications"></div> -->
 	<!-- 	</div> -->
-
-	<script src="js/bootstrap.min.js"></script>
-
-	<!-- bootstrap progress js -->
-	<script src="js/progressbar/bootstrap-progressbar.min.js"></script>
-	<script src="js/nicescroll/jquery.nicescroll.min.js"></script>
-	<!-- icheck -->
-	<script src="js/icheck/icheck.min.js"></script>	
-	<!-- datepicker -->
-	<script type="text/javascript" src="js/bootstrap-datepicker/bootstrap-datepicker.js"></script>
-	<script type="text/javascript" src="js/locales/bootstrap-datepicker.es.min.js"></script>
-	
-	<script src="js/custom.js"></script>
-	<!-- form wizard -->
-	<script type="text/javascript" src="js/wizard/jquery.smartWizard.js"></script>
-	<!-- pace -->
-	<script src="js/pace/pace.min.js"></script>
-	<script type="text/javascript">
-	
-	function reservarTurno(){
-		//Ocultamos el boton
-		$('#btnAceptar').hide();
-		//Enviamos datos del paciente
-		var historiaClinica = $('txtHistoriaClinica').val();
-		var nombresPaciente = $('#txtNombresPaciente').val();
-		var apellidosPaciente = $('#txtApellidosPaciente').val();
-		var emailPaciente = $('#txtEmailPaciente').val();
-		var generoPaciente = $('#genero').val();
-		var fechaNacimientoPaciente =  $('#fechaNacimientoPaciente').datepicker('getDate');
-		var fechaSeleccionada = $('#fechaSeleccionada').datepicker('getDate');		
-		var cubiculoAsignadoTurno = $('#lblCubiculoAsignado').text();		
-		$.ajax({
-			url : '../RegistroTurnosController',
-			data : {
-				"tipoConsulta" : "reservarTurno",
-				"historiaClinica":historiaClinica,
-				"nombresPaciente":nombresPaciente,
-				"apellidosPaciente":apellidosPaciente,
-				"emailPaciente":emailPaciente,
-				"generoPaciente":generoPaciente,
-				"fechaNacimientoPaciente":fechaNacimientoPaciente,
-				"fechaSeleccionada":fechaSeleccionada,
-				"fechaNacimientoPaciente":fechaNacimientoPaciente,				
-				"cubiculoAsignadoTurno" : cubiculoAsignadoTurno
-			},
-			type : 'POST',
-			datatype : 'json',
-			success : function(data) {
-				var resultado = data.resultado;
-				switch (resultado)
-				{
-				   case "ok":
-					   alert('Turno Reservado!');
-					   break;
-				   case "error":
-					   alert('Hubo un error');
-					   break;
-				   case "cubiculo ocupado": 
-				       alert('El cubículo asignado ha sido ocupado, por favor seleccione otro Tratamiento');
-				       break;
-
-				   default: 
-				       alert('Hubo un error');
-				}
-								
-			}
-		});
-	}
-	function consultarCubiculos(idRadio){
-			var fechaSeleccionada = $('#fechaSeleccionada').datepicker('getDate');
-			var nombre = $('#txtNombresPaciente').val();
-			var apellido = $('#txtApellidosPaciente').val();
-			$('#lblnNombrePaciente').text(nombre +" " + apellido);
-			$.ajax({
-				url : '../RegistroTurnosController',
-				data : {
-					"tipoConsulta" : "consultarCubiculos",
-					"fechaSeleccionada":fechaSeleccionada,
-					"idRadio" : idRadio
-				},
-				type : 'POST',
-				datatype : 'json',
-				success : function(data) {
-					var cubiculo = data.cubiculoAsignado;
-					var nTratamiento = data.nombreTratamiento;
-					var nEspecialidad = data.nombreEspecialidad;
-					var nHoraInicio = data.horaInicio;
-					var nHoraFinal = data.horaFinal;
-					var nFechaTurno = data.fechaTurno;
-					$('#lblnTratamiento').text(nTratamiento);
-					$('#lblnEspecialidad').text(nEspecialidad);
-					$('#lblnFechaTurno').text(nFechaTurno);
-					$('#lblnHorario').text(nHoraInicio + " - " + nHoraFinal);					
-					if(cubiculo>0){						
-						$('#lblCubiculoAsignado').text(cubiculo);
-						$('#btnAceptar').show();
-					}else{
-						$('#lblCubiculoAsignado').text('No existen cubículos disponibles');
-						$('#btnAceptar').hide();
-					}
-				}
-			});
-		}
-		
-		$(document).ready(function() {
-							//Datos Iniciales
-							//Cargar Horarios de los Estudiantes
-							$.ajax({
-										url : '../RegistroTurnosController',
-										data : {
-											"tipoConsulta" : "cargarHorarios"
-										},
-										type : 'POST',
-										datatype : 'json',
-										success : function(data) {
-											if (data.numRegistros > 0) {
-												var listadoHorarios = data.listadoHorarios;
-												$.each(listadoHorarios, function(index) {
-													$("#dataTableContent").append("	<tr>"
-														+ " <td relation='dia'>"
-														+ listadoHorarios[index].dia
-														+ "</td>"
-														+ " <td relation='horaInicio'>"
-														+ listadoHorarios[index].horaInicio
-														+ "</td>"
-														+ " <td relation='horaFin'>"
-														+ listadoHorarios[index].horaFin
-														+ "</td>"
-														+ "</tr>");
-																});
-											} else {
-												$("#dataTableContent")
-														.append(
-																"<tr><td colspan='4'>No existen horarios cargados</td></tr>");
-											}
-										}
-									});
-							//Cargar Tratamientos y especialidades
-							$.ajax({
-										url : '../RegistroTurnosController',
-										data : {
-											"tipoConsulta" : "cargarTratamientos"
-										},
-										type : 'POST',
-										datatype : 'json',
-										success : function(data) {
-											if (data.numRegistros > 0) {
-												var listadoEspecialidades = data.listadoEspecialidades;												
-													$.each(listadoEspecialidades, function(index) {
-														var contadorTratamientos = listadoEspecialidades[index].contadorTratamientos;
-														var tratamientos = "";
-														for(var i = 0;i<contadorTratamientos;i++){
-															var contNombreTratamiento = "nombreTratamiento" + i;
-															var contIdTratamiento = "idTratamiento" + i;
-															var tratamiento = listadoEspecialidades[index][contNombreTratamiento];
-															var idTratamiento =  listadoEspecialidades[index][contIdTratamiento];
-															tratamientos = tratamientos + " <input type='radio' name='tratamientos' id='tratamiento"+idTratamiento
-																						+"' onclick='consultarCubiculos(id)'> " + tratamiento +"<br>";
-														}
-														$("#panelContent").append("	<a class='panel-heading' role='tab' id='heading"+[index]
-															+ "' data-toggle='collapse' data-parent='#accordion' href='#collapse"+[index]
-															+ "' aria-expanded='false' aria-controls='collapse"+[index]+"'>"
-															+ " <h4 class='panel-title'> - " +listadoEspecialidades[index].nombreEspecialidad+"</h4>"
-															+ " </a>"
-															+ " <div id='collapse"+[index]+"' class='panel-collapse collapse in' role='tabpanel' aria-labelledby='heading"+[index]+"'>"
-															+ " <div class='panel-body'>"
-															+ " <div class='radio'>"
-															+ " <label>"															 
-															+ tratamientos 
-															+ " </label>"
-															+ " </div>"
-															+ " </div>"
-															+ " </div>");
-															});
-
-											} else {
-												$("#panelContent").append("<p>No existen datos</p>");
-											}
-										}
-									});
-
-							// Smart Wizard
-							$('#wizard').smartWizard();
-							//Date picker 
-							$('#fechaSeleccionada').datepicker({
-							    format: "dd-mm-yyyy",							    
-							    language: "es",
-							    daysOfWeekDisabled: "0,6",
-							    todayHighlight: true
-							});
-							$('#fechaNacimientoPaciente').datepicker({
-							    format: "dd-MM-yyyy",
-							    language: "es",
-							    autoclose: true
-							});
-							
-						});//Fin jquery ready
-	</script>
-
 </body>
 </html>

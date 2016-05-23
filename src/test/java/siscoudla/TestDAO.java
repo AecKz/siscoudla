@@ -15,6 +15,7 @@ import com.udla.siscoudla.dao.HorarioEstudianteDAO;
 import com.udla.siscoudla.dao.PersonaDAO;
 import com.udla.siscoudla.dao.RolDAO;
 import com.udla.siscoudla.dao.TratamientoDAO;
+import com.udla.siscoudla.dao.TurnoDAO;
 import com.udla.siscoudla.modelo.Especialidad;
 import com.udla.siscoudla.modelo.Estudiante;
 import com.udla.siscoudla.modelo.Horario;
@@ -22,6 +23,7 @@ import com.udla.siscoudla.modelo.Horariocubiculoestado;
 import com.udla.siscoudla.modelo.Persona;
 import com.udla.siscoudla.modelo.Rol;
 import com.udla.siscoudla.modelo.Tratamiento;
+import com.udla.siscoudla.modelo.Turno;
 import com.udla.siscoudla.util.Utilitarios;
 
 public class TestDAO {
@@ -39,7 +41,8 @@ public class TestDAO {
 		//testBuscarPorPersona();
 		//testBuscarEspecialidadTratamientos();
 		//testBuscarPorDiaEstudiante();
-		testBuscarPorNumero();
+		//testBuscarPorNumero();
+		testBuscarTurnosEstudiante();
 		System.out.println("Fin Test DAO");
 	}
 
@@ -205,6 +208,36 @@ public class TestDAO {
 			}else{
 				System.out.println("No existen datos");
 			}		
+		}catch(Exception e){
+			System.out.println("Error:" + e);
+			fail("Fail: " + e);
+		}
+	}
+	public void testBuscarTurnosEstudiante(){
+		try{
+			TurnoDAO turnoDAO = new TurnoDAO();			
+			String estado = "RES";
+			int idEstudiante = 1;
+			List<Turno> turnos = turnoDAO.buscarReservadosPorEstudiante(idEstudiante, estado);		
+			if (!turnos.isEmpty()) {			
+				for (Turno turno : turnos) {
+					System.out.println("Turno: " +turno.getFecha()+ " - Horario:" 
+							+ turno.getHorarioestudiante().getHorario().getHoraInicio()
+							+ " - "
+							+ turno.getHorarioestudiante().getHorario().getHoraFinal()
+							+ " -Tratamiento: "
+							+ turno.getTratamiento().getNombre()
+							+ " -Paciente: "
+							+ turno.getPaciente().getPersona().getNombres()
+							+ " - "
+							+ turno.getPaciente().getPersona().getApellidos()
+							+ " - Cubiculo: "
+							+ turno.getHorariocubiculoestado().getHorariocubiculo().getCubiculo().getNumero()
+							);
+				}
+			} else {
+				System.out.println("No trae resultados");			
+			}
 		}catch(Exception e){
 			System.out.println("Error:" + e);
 			fail("Fail: " + e);

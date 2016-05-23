@@ -12,6 +12,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Random;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -27,6 +28,13 @@ import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
+
+import com.udla.siscoudla.dao.EstudianteDAO;
+import com.udla.siscoudla.dao.PersonaDAO;
+import com.udla.siscoudla.dao.RolDAO;
+import com.udla.siscoudla.modelo.Estudiante;
+import com.udla.siscoudla.modelo.Persona;
+import com.udla.siscoudla.modelo.Rol;
 
 import java.util.Properties;
 
@@ -342,7 +350,12 @@ public class Utilitarios {
 			}
 		    return startDate;
 	 }
-	 
+	 public static String dateToString (Date fecha){		 
+		    DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+		    String fechaFinal ="";
+			fechaFinal = df.format(fecha);
+		    return fechaFinal;
+	 }
 	 public static String buscarDia(int codigoDia){
 			//(0 = Sunday, 1 = Monday, 2 = Tuesday, 3 = Wednesday, 4 = Thursday, 5 = Friday, 6 = Saturday)
 			String diaNombre;
@@ -402,4 +415,34 @@ public class Utilitarios {
 		 fechaString = anio + "-" +mes+"-"+dia;
 		 return fechaString;
 	 }
+	 /**
+		 * Metodo para obtener el Estudiante del Usuario ingresado
+		 * @param valorUsuario
+		 * @return objeto Estudiante
+		 * */
+		public static Estudiante buscarEstudianteUsuario(String valorUsuario) {
+			PersonaDAO personaDAO = new PersonaDAO();
+			EstudianteDAO estudianteDAO = new EstudianteDAO();
+			Persona persona = new Persona();
+			Estudiante estudiante = new Estudiante ();			
+			persona = personaDAO.buscarPorUsuario(valorUsuario);						
+			estudiante = estudianteDAO.buscarPorPersona(persona);
+			return estudiante;
+		}
+		/**
+		 * Metodo para verificar si el usuario ingresado es Estudiante
+		 * @param valorUsuario
+		 * @return Boolean
+		 * */
+		public static Boolean verificarRolEstudiante(String valorUsuario) {		
+			RolDAO rolDAO = new RolDAO();
+			Boolean esEstudiante = false;
+			List<Rol> lista = rolDAO.buscarRolPorUsuario(valorUsuario);
+			for (Rol rol : lista) {
+				if (rol.getNombre().equals("Estudiante")) {
+					esEstudiante = true;
+				}
+			}
+			return esEstudiante;
+		}	
 }

@@ -26,13 +26,13 @@ public class Horario implements Serializable {
 
 	private String horaInicio;
 
-	//bi-directional many-to-one association to Horarioestudiante
-	@OneToMany(mappedBy="horario")
-	private List<Horarioestudiante> horarioestudiantes;
-
 	//bi-directional many-to-one association to Horariocubiculo
 	@OneToMany(mappedBy="horario")
 	private List<Horariocubiculo> horariocubiculos;
+
+	//bi-directional many-to-one association to Horarioestudiante
+	@OneToMany(mappedBy="horario")
+	private List<Horarioestudiante> horarioestudiantes;
 
 	public Horario() {
 	}
@@ -77,28 +77,6 @@ public class Horario implements Serializable {
 		this.horaInicio = horaInicio;
 	}
 
-	public List<Horarioestudiante> getHorarioestudiantes() {
-		return this.horarioestudiantes;
-	}
-
-	public void setHorarioestudiantes(List<Horarioestudiante> horarioestudiantes) {
-		this.horarioestudiantes = horarioestudiantes;
-	}
-
-	public Horarioestudiante addHorarioestudiante(Horarioestudiante horarioestudiante) {
-		getHorarioestudiantes().add(horarioestudiante);
-		horarioestudiante.setHorario(this);
-
-		return horarioestudiante;
-	}
-
-	public Horarioestudiante removeHorarioestudiante(Horarioestudiante horarioestudiante) {
-		getHorarioestudiantes().remove(horarioestudiante);
-		horarioestudiante.setHorario(null);
-
-		return horarioestudiante;
-	}
-
 	public List<Horariocubiculo> getHorariocubiculos() {
 		return this.horariocubiculos;
 	}
@@ -119,6 +97,28 @@ public class Horario implements Serializable {
 		horariocubiculo.setHorario(null);
 
 		return horariocubiculo;
+	}
+
+	public List<Horarioestudiante> getHorarioestudiantes() {
+		return this.horarioestudiantes;
+	}
+
+	public void setHorarioestudiantes(List<Horarioestudiante> horarioestudiantes) {
+		this.horarioestudiantes = horarioestudiantes;
+	}
+
+	public Horarioestudiante addHorarioestudiante(Horarioestudiante horarioestudiante) {
+		getHorarioestudiantes().add(horarioestudiante);
+		horarioestudiante.setHorario(this);
+
+		return horarioestudiante;
+	}
+
+	public Horarioestudiante removeHorarioestudiante(Horarioestudiante horarioestudiante) {
+		getHorarioestudiantes().remove(horarioestudiante);
+		horarioestudiante.setHorario(null);
+
+		return horarioestudiante;
 	}
 
 }
