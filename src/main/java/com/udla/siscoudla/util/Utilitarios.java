@@ -445,4 +445,20 @@ public class Utilitarios {
 			}
 			return esEstudiante;
 		}	
+		/**
+		 * Metodo para verificar si el usuario ingresado es Estudiante
+		 * @param valorUsuario
+		 * @return Boolean
+		 * */
+		public static Boolean verificarRolAdministrador(String valorUsuario) {		
+			RolDAO rolDAO = new RolDAO();
+			Boolean esAdministrador = false;
+			List<Rol> lista = rolDAO.buscarRolPorUsuario(valorUsuario);
+			for (Rol rol : lista) {
+				if (rol.getNombre().equals("Administrador")) {
+					esAdministrador = true;
+				}
+			}
+			return esAdministrador;
+		}	
 }

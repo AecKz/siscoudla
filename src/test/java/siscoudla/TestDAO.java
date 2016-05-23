@@ -16,6 +16,7 @@ import com.udla.siscoudla.dao.PersonaDAO;
 import com.udla.siscoudla.dao.RolDAO;
 import com.udla.siscoudla.dao.TratamientoDAO;
 import com.udla.siscoudla.dao.TurnoDAO;
+import com.udla.siscoudla.dao.UsuarioDAO;
 import com.udla.siscoudla.modelo.Especialidad;
 import com.udla.siscoudla.modelo.Estudiante;
 import com.udla.siscoudla.modelo.Horario;
@@ -24,6 +25,7 @@ import com.udla.siscoudla.modelo.Persona;
 import com.udla.siscoudla.modelo.Rol;
 import com.udla.siscoudla.modelo.Tratamiento;
 import com.udla.siscoudla.modelo.Turno;
+import com.udla.siscoudla.modelo.Usuario;
 import com.udla.siscoudla.util.Utilitarios;
 
 public class TestDAO {
@@ -42,7 +44,8 @@ public class TestDAO {
 		//testBuscarEspecialidadTratamientos();
 		//testBuscarPorDiaEstudiante();
 		//testBuscarPorNumero();
-		testBuscarTurnosEstudiante();
+		//testBuscarTurnosEstudiante();
+		testBuscarPorIdPersona();
 		System.out.println("Fin Test DAO");
 	}
 
@@ -235,6 +238,22 @@ public class TestDAO {
 							+ turno.getHorariocubiculoestado().getHorariocubiculo().getCubiculo().getNumero()
 							);
 				}
+			} else {
+				System.out.println("No trae resultados");			
+			}
+		}catch(Exception e){
+			System.out.println("Error:" + e);
+			fail("Fail: " + e);
+		}
+	}
+	public void testBuscarPorIdPersona(){
+		try{
+			UsuarioDAO usuarioDAO = new UsuarioDAO();
+			Usuario usuario = new Usuario();
+			int idPersona = 1;
+			usuario = usuarioDAO.buscarPorIdPersona(idPersona);
+			if (usuario.getIdUsuario()>0) {
+				System.out.println("Resultado: "+ usuario.getUsuario() +"-"+usuario.getRol().getNombre());				
 			} else {
 				System.out.println("No trae resultados");			
 			}

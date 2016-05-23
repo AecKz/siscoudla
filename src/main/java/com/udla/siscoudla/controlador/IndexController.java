@@ -94,14 +94,17 @@ public class IndexController extends HttpServlet {
 				activarSesion(request, usuario);
 			}
 			
-			if (tipoConsulta.equals("loginGoogle")){				
-				int idPersonaLogin = personaDAO.buscarPorEmail(email).getIdPersona();
+			if (tipoConsulta.equals("loginGoogle")){
+				persona = personaDAO.buscarPorEmail(email);
+				int idPersonaLogin = persona.getIdPersona();
 				if(idPersonaLogin==0){
 					persona.setEstado("ACT");
 					personaDAO.crear(persona);
 					usuario.setPersona(persona);
 					usuario.setEstado("ACT");
 					usuarioDAO.crear(usuario);
+				}else{
+					usuario = usuarioDAO.buscarPorIdPersona(idPersonaLogin);
 				}		
 				activarSesion(request, usuario);
 			}
@@ -110,7 +113,7 @@ public class IndexController extends HttpServlet {
 				flagLogin = usuarioDAO.login(usuarioLogin, contrasenaLogin);
 				if(!flagLogin){
 					result.put("success", Boolean.FALSE);
-					result.put("error", "Usuario o Contrase\u00F1a Incorrecta");
+					result.put("errorLogin", "Usuario o Contrase\u00F1a Incorrecta");
 					response.setContentType("application/json; charset=UTF-8");
 					result.write(response.getWriter());
 				}
@@ -133,6 +136,7 @@ public class IndexController extends HttpServlet {
 		// Activacion de la sesion y agregamos 
 		HttpSession session = request.getSession();			
 		session.setAttribute("login", usuario.getUsuario());
+		session.setAttribute("rol", usuario.getRol().getNombre());
 	}
 
 }

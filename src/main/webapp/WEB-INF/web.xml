@@ -21,6 +21,10 @@
 		<servlet-name>DashboardController</servlet-name>
 		<servlet-class>com.udla.siscoudla.controlador.DashboardController</servlet-class>
 	</servlet>
+	<servlet>
+	<servlet-name>DashboardAdministradorController</servlet-name>
+		<servlet-class>com.udla.siscoudla.controlador.DashboardAdministradorController</servlet-class>
+	</servlet>
 	<servlet-mapping>
 		<servlet-name>PersonaController</servlet-name>
 		<url-pattern>/PersonaController</url-pattern>
@@ -36,5 +40,9 @@
 	<servlet-mapping>
 		<servlet-name>DashboardController</servlet-name>
 		<url-pattern>/DashboardController</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>DashboardAdministradorController</servlet-name>
+		<url-pattern>/DashboardAdministradorController</url-pattern>
 	</servlet-mapping>
 </web-app>

@@ -23,7 +23,7 @@
 	<script src="js/nprogress.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/custom.js"></script>
-	<script src="js/controladores/dashboard.js"></script>
+	<script src="js/controladores/dashboardAdministrador.js"></script>
 	<!-- bootstrap progress js -->
 	<script src="js/progressbar/bootstrap-progressbar.min.js"></script>
 	<script src="js/nicescroll/jquery.nicescroll.min.js"></script>
@@ -36,8 +36,8 @@
 				if(session.getAttribute("login") == null){
 				    response.sendRedirect("/index.jsp");
 				}else{
-					if(session.getAttribute("rol").equals("Administrador")){
-						response.sendRedirect("/dashboardAdministrador.jsp");
+					if(!session.getAttribute("rol").equals("Administrador")){
+						response.sendRedirect("/index.jsp");
 					}
 				}
 		%>
@@ -69,15 +69,17 @@
 					<div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
 
 						<div class="menu_section">								
-							<h3>Estudiante</h3>
+							<h3>Administrador</h3>
 							<ul class="nav side-menu">
 								<li><a href="dashboard.jsp"><i class="fa fa-home"></i>Home<span class="fa fa-home fa-fw"></span></a>
 								</li>
-								<li><a><i class="fa fa-edit"></i>Registro de Turnos<span class="fa fa-chevron-down"></span></a>
+								<li><a><i class="fa fa-edit"></i>Mantenimiento<span class="fa fa-chevron-down"></span></a>
 									<ul class="nav child_menu" style="display: none">
-										<li><a href="registroTurno.jsp">Turno Normal</a>
+										<li><a href="#">Tratamientos y Especialidades</a>
 										</li>
-										<li><a href="#">Turno Extra</a>
+										<li><a href="#">Cub&iacute;culos</a>
+										</li>
+										<li><a href="#">Horarios</a>
 										</li>
 									</ul>
 								</li>
@@ -264,11 +266,8 @@
                       <li><i class="fa fa-envelope user-profile-icon"></i><span id="txtUsuario"></span>
                       </li>
                       <li>
-                        <i class="fa fa-university user-profile-icon"></i><span id="txtMatricula"></span>
-                      </li>
-                      <li>
-                        <i class="fa fa-hospital-o user-profile-icon"></i><span id="txtClinica"></span>
-                      </li>
+                        <i class="fa fa-phone user-profile-icon"></i><span id="txtTelefono"></span>
+                      </li>                     
                     </ul>
 
                     <a class="btn btn-success"><i class="fa fa-edit m-right-xs"></i>Editar Perfil</a>
@@ -304,6 +303,7 @@
 								<th>FECHA</th>
 								<th>HORARIO</th>
 								<th>TRATAMIENTO</th>
+								<th>ESTUDIANTE</th>
 								<th>PACIENTE</th>
 								<th>CUBICULO</th>
 								</tr>
@@ -322,6 +322,7 @@
 								<th>FECHA</th>
 								<th>HORARIO</th>
 								<th>TRATAMIENTO</th>
+								<th>ESTUDIANTE</th>
 								<th>PACIENTE</th>
 								<th>CUBICULO</th>
 								</tr>
@@ -339,6 +340,7 @@
 								<th>FECHA</th>
 								<th>HORARIO</th>
 								<th>TRATAMIENTO</th>
+								<th>ESTUDIANTE</th>
 								<th>PACIENTE</th>
 								<th>CUBICULO</th>
 								</tr>

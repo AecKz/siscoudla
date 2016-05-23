@@ -12,7 +12,6 @@ import javax.servlet.http.HttpSession;
 
 import com.udla.siscoudla.dao.PersonaDAO;
 import com.udla.siscoudla.dao.TurnoDAO;
-import com.udla.siscoudla.modelo.Estudiante;
 import com.udla.siscoudla.modelo.Persona;
 import com.udla.siscoudla.modelo.Turno;
 import com.udla.siscoudla.util.Utilitarios;
@@ -21,16 +20,16 @@ import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 /**
- * Servlet implementation class DashboardController
+ * Servlet implementation class DashboardAdministradorController
  */
-@WebServlet("/DashboardController")
-public class DashboardController extends HttpServlet {
+@WebServlet("/DashboardAdministradorController")
+public class DashboardAdministradorController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public DashboardController() {
+	public DashboardAdministradorController() {
 		super();
 	}
 
@@ -59,42 +58,40 @@ public class DashboardController extends HttpServlet {
 		JSONArray ocupadosJSONArray = new JSONArray();
 		JSONObject canceladosJSONObject = new JSONObject();
 		JSONArray canceladosJSONArray = new JSONArray();
-		if (valorRol.equals("Estudiante")) {
+		if (valorRol.equals("Administrador")) {
 			try {
 				String tipoConsulta = request.getParameter("tipoConsulta") == null ? ""
 						: request.getParameter("tipoConsulta");
 
 				TurnoDAO turnoDAO = new TurnoDAO();
-				Estudiante estudiante = new Estudiante();
-				estudiante = Utilitarios.buscarEstudianteUsuario(valorUsuario);
-				int idEstudiante = estudiante.getIdEstudiante();
+				PersonaDAO personaDAO = new PersonaDAO();
+				Persona persona = new Persona();
+				persona = personaDAO.buscarPorEmail(valorUsuario);
 				if (tipoConsulta.equals("cargarDatosMenus")) {
-					if (Utilitarios.verificarRolEstudiante(valorUsuario)) {
-						PersonaDAO personaDAO = new PersonaDAO();
-						Persona persona = new Persona();
-						persona = personaDAO.buscarPorEmail(valorUsuario);
+					if (Utilitarios.verificarRolAdministrador(valorUsuario)) {
 						String nombreCompleto = persona.getNombres() + " " + persona.getApellidos();
 						result.put("nombreCompleto", nombreCompleto);
 					}
 				}
 				if (tipoConsulta.equals("cargarDatosProfile")) {
-					if (Utilitarios.verificarRolEstudiante(valorUsuario)) {
-						String matricula = estudiante.getMatricula();
-						String clinica = estudiante.getClinica().getNombre();
+					if (Utilitarios.verificarRolAdministrador(valorUsuario)) {
+						String telefono = persona.getTelefono();
 						result.put("usuario", valorUsuario);
-						result.put("matricula", matricula);
-						result.put("clinica", clinica);
+						result.put("telefono", telefono);
 					}
 				}
 				if (tipoConsulta.equals("cargarDatosReservados")) {
 					String estado = "RES";
-					List<Turno> turnos = turnoDAO.buscarReservadosPorEstudiante(idEstudiante, estado);
+					List<Turno> turnos = turnoDAO.buscarReservadosPorEstado(estado);
 					for (Turno turno : turnos) {
 						String fechaTurno = Utilitarios.dateToString(turno.getFecha());
 						reservadosJSONObject.put("fecha", fechaTurno);
 						reservadosJSONObject.put("horario", turno.getHorarioestudiante().getHorario().getHoraInicio()
 								+ " - " + turno.getHorarioestudiante().getHorario().getHoraFinal());
 						reservadosJSONObject.put("tratamiento", turno.getTratamiento().getNombre());
+						reservadosJSONObject.put("estudiante",
+								turno.getHorarioestudiante().getEstudiante().getPersona().getNombres() + " "
+										+ turno.getHorarioestudiante().getEstudiante().getPersona().getApellidos());
 						reservadosJSONObject.put("paciente", turno.getPaciente().getPersona().getNombres() + " "
 								+ turno.getPaciente().getPersona().getApellidos());
 						reservadosJSONObject.put("cubiculo",
@@ -106,13 +103,16 @@ public class DashboardController extends HttpServlet {
 				}
 				if (tipoConsulta.equals("cargarDatosOcupados")) {
 					String estado = "OCU";
-					List<Turno> turnos = turnoDAO.buscarReservadosPorEstudiante(idEstudiante, estado);
+					List<Turno> turnos = turnoDAO.buscarReservadosPorEstado(estado);
 					for (Turno turno : turnos) {
 						String fechaTurno = Utilitarios.dateToString(turno.getFecha());
 						reservadosJSONObject.put("fecha", fechaTurno);
 						ocupadosJSONObject.put("horario", turno.getHorarioestudiante().getHorario().getHoraInicio()
 								+ " - " + turno.getHorarioestudiante().getHorario().getHoraFinal());
 						ocupadosJSONObject.put("tratamiento", turno.getTratamiento().getNombre());
+						ocupadosJSONObject.put("estudiante",
+								turno.getHorarioestudiante().getEstudiante().getPersona().getNombres() + " "
+										+ turno.getHorarioestudiante().getEstudiante().getPersona().getApellidos());
 						ocupadosJSONObject.put("paciente", turno.getPaciente().getPersona().getNombres() + " "
 								+ turno.getPaciente().getPersona().getApellidos());
 						ocupadosJSONObject.put("cubiculo",
@@ -124,13 +124,16 @@ public class DashboardController extends HttpServlet {
 				}
 				if (tipoConsulta.equals("cargarDatosCancelados")) {
 					String estado = "CAN";
-					List<Turno> turnos = turnoDAO.buscarReservadosPorEstudiante(idEstudiante, estado);
+					List<Turno> turnos = turnoDAO.buscarReservadosPorEstado(estado);
 					for (Turno turno : turnos) {
 						String fechaTurno = Utilitarios.dateToString(turno.getFecha());
 						reservadosJSONObject.put("fecha", fechaTurno);
 						canceladosJSONObject.put("horario", turno.getHorarioestudiante().getHorario().getHoraInicio()
 								+ " - " + turno.getHorarioestudiante().getHorario().getHoraFinal());
 						canceladosJSONObject.put("tratamiento", turno.getTratamiento().getNombre());
+						canceladosJSONObject.put("estudiante",
+								turno.getHorarioestudiante().getEstudiante().getPersona().getNombres() + " "
+										+ turno.getHorarioestudiante().getEstudiante().getPersona().getApellidos());
 						canceladosJSONObject.put("paciente", turno.getPaciente().getPersona().getNombres() + " "
 								+ turno.getPaciente().getPersona().getApellidos());
 						canceladosJSONObject.put("cubiculo",

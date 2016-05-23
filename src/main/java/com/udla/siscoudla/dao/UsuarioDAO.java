@@ -91,6 +91,33 @@ public class UsuarioDAO extends EntityManagerFactoryDAO {
 			em.close();
 		}
 	}
+	/**
+	 * Metodo para buscar el objeto Usuario a partir del idPersona
+	 * @param idPersona
+	 * @return objeto Usuario
+	 * */
+	public Usuario buscarPorIdPersona(int idPersona) {
+		EntityManager em = obtenerEntityManagerFactory().createEntityManager();
+		Usuario usuario = new Usuario();
+		try {
+			TypedQuery<Usuario> query = em.createQuery(
+					"SELECT u FROM Usuario u "
+					+ "JOIN FETCH u.persona p "	
+					+ "where p.idPersona = :idPersona ", Usuario.class)
+					.setParameter("idPersona", idPersona);
+			List<Usuario> results = query.getResultList();
+			if(!results.isEmpty()){
+				usuario = results.get(0);
+			}			
+			return usuario;
+		} catch (Exception e) {
+			em.getTransaction().rollback();
+			System.out.println(e.getMessage());
+			return usuario;
+		} finally {
+			em.close();
+		}
+	}
 	
 	public Boolean login (String usuarioLogin, String contrasenaLogin) {
 		EntityManager em = obtenerEntityManagerFactory().createEntityManager();
