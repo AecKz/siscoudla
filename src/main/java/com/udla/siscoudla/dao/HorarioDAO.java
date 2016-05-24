@@ -62,10 +62,10 @@ public class HorarioDAO extends EntityManagerFactoryDAO {
 		}
 	}
 
-	public List<Horario> buscarTodos() {
+	public List<Horario> buscarTodosActivos() {
 		EntityManager em = obtenerEntityManagerFactory().createEntityManager();
 		try {
-			TypedQuery<Horario> query = em.createQuery("SELECT e FROM Horario e order by e.nombre",
+			TypedQuery<Horario> query = em.createQuery("SELECT h FROM Horario h where h.estado ='ACT' order by h.idHorario",
 					Horario.class);
 			List<Horario> results = query.getResultList();
 			return results;
