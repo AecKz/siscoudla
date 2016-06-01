@@ -3,8 +3,17 @@
  * Autor: Pablo Jácome A
  * Fecha: 22-05-2016
  */
+//signOut Google
+function signOut() {
+   var auth2 = gapi.auth2.getAuthInstance();
+   auth2.signOut().then(function () {
+     console.log('User signed out.');
+   });
+ }
 //jquery ready
-$(document).ready(function() {	
+$(document).ready(function() {
+					//Ocultar boton					
+					$('#btnGoogle').hide();
 					// Datos Iniciales
 					// Cargar Datos del Menu
 					$.ajax({

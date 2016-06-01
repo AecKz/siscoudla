@@ -27,6 +27,9 @@
 	<!-- bootstrap progress js -->
 	<script src="js/progressbar/bootstrap-progressbar.min.js"></script>
 	<script src="js/nicescroll/jquery.nicescroll.min.js"></script>
+	<!-- Para Login con Google -->
+  	<script src="https://apis.google.com/js/platform.js" async defer></script>
+  	<meta name="google-signin-client_id" content="581128372441-0fhgqacdt6tc43pbrvkn2erm3hb0c7ac.apps.googleusercontent.com">
 </head>
 
 
@@ -105,7 +108,7 @@
 						<a data-toggle="tooltip" data-placement="top" title="Lock">
 							<span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
 						</a>
-						<a data-toggle="tooltip" data-placement="top" title="Logout">
+						<a data-toggle="tooltip" data-placement="top" title="Logout" href="index.jsp" onclick="signOut();">
 							<span class="glyphicon glyphicon-off" aria-hidden="true"></span>
 						</a>
 					</div>
@@ -140,7 +143,7 @@
                   <li>
                     <a href="javascript:;">Help</a>
                   </li>
-                  <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
+                  <li><a href="index.jsp" onclick="signOut();"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
                   </li>
                 </ul>
               </li>
@@ -236,6 +239,9 @@
 							<div class="row x_title">
 								<div>
 									<h3>Bienvenida (o) al Sistema de la Cl&iacute;nica Odontol&oacute;gica de la UDLA</h3>
+									<div id="btnGoogle">
+									<div class="g-signin2" data-onsuccess="onSignIn"></div>
+									</div>
 								</div>
 							</div>
 							<div class="col-md-12 col-sm-12 col-xs-12">
