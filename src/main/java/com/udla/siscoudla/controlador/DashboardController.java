@@ -79,11 +79,13 @@ public class DashboardController extends HttpServlet {
 				}
 				if (tipoConsulta.equals("cargarDatosProfile")) {
 					if (Utilitarios.verificarRolEstudiante(valorUsuario)) {
-						String matricula = estudiante.getMatricula();
-						String clinica = estudiante.getClinica().getNombre();
+						if(estudiante.getMatricula()!=null && estudiante.getClinica()!=null){
+							String matricula = estudiante.getMatricula();
+							String clinica = estudiante.getClinica().getNombre();						
+							result.put("matricula", matricula);
+							result.put("clinica", clinica);
+						}
 						result.put("usuario", valorUsuario);
-						result.put("matricula", matricula);
-						result.put("clinica", clinica);
 					}
 				}
 				if (tipoConsulta.equals("cargarDatosReservados")) {

@@ -14,6 +14,7 @@ import net.sf.json.JSONObject;
 import com.udla.siscoudla.dao.PersonaDAO;
 import com.udla.siscoudla.dao.UsuarioDAO;
 import com.udla.siscoudla.modelo.Persona;
+import com.udla.siscoudla.modelo.Rol;
 import com.udla.siscoudla.modelo.Usuario;
 import com.udla.siscoudla.util.Utilitarios;
 
@@ -110,14 +111,15 @@ public class IndexController extends HttpServlet {
 			}
 			if (tipoConsulta.equals("login")){
 				Boolean flagLogin = false;
-				flagLogin = usuarioDAO.login(usuarioLogin, contrasenaLogin);
-				if(!flagLogin){
-					result.put("success", Boolean.FALSE);
+				flagLogin = usuarioDAO.login(usuarioLogin, Utilitarios.encriptacionClave(contrasenaLogin));
+				if(!flagLogin){					
 					result.put("errorLogin", "Usuario o Contrase\u00F1a Incorrecta");
-					response.setContentType("application/json; charset=UTF-8");
-					result.write(response.getWriter());
-				}
-				activarSesion(request, usuario);
+				}else{
+					persona = personaDAO.buscarPorEmail(usuarioLogin);
+					int idPersonaLogin = persona.getIdPersona();
+					usuario = usuarioDAO.buscarPorIdPersona(idPersonaLogin);
+					activarSesion(request, usuario);
+				}				
 			}
 			result.put("success", Boolean.TRUE);
 			response.setContentType("application/json; charset=UTF-8");
@@ -134,9 +136,20 @@ public class IndexController extends HttpServlet {
 
 	private void activarSesion(HttpServletRequest request, Usuario usuario) {
 		// Activacion de la sesion y agregamos 
-		HttpSession session = request.getSession();			
-		session.setAttribute("login", usuario.getUsuario());
-		session.setAttribute("rol", usuario.getRol().getNombre());
+		HttpSession session = request.getSession();
+		if(usuario!=null){
+			session.setAttribute("login", usuario.getUsuario());
+			//Verificar Rol
+			Rol rol = usuario.getRol();
+			if(rol!=null){
+				session.setAttribute("rol", usuario.getRol().getNombre());
+			}else{
+				session.setAttribute("rol", "");
+			}
+		}else{
+			session.setAttribute("login", "");
+			session.setAttribute("rol", "");
+		}
 	}
 
 }

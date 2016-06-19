@@ -73,12 +73,12 @@ public class ClinicaDAO extends EntityManagerFactoryDAO {
 		}
 	}
 
-	public Clinica buscarPorId(String id) {
+	public Clinica buscarPorId(int id) {
 		EntityManager em = obtenerEntityManagerFactory().createEntityManager();
 		Clinica clinica = new Clinica();
 		try {
 			TypedQuery<Clinica> query = em.createQuery(
-					"SELECT c FROM Clinica c where c.id = :id ", Clinica.class)
+					"SELECT c FROM Clinica c where c.idClinica = :id ", Clinica.class)
 					.setParameter("id", id);
 			List<Clinica> results = query.getResultList();
 			clinica = results.get(0);

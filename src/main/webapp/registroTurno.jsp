@@ -39,6 +39,10 @@
 		// Permitimos el acceso si la session existe		
 		if (session.getAttribute("login") == null) {
 			response.sendRedirect("/index.jsp");
+		}else{
+			if(!session.getAttribute("rol").equals("Estudiante")){
+				response.sendRedirect("/dashboard.jsp");
+			}
 		}
 	%>
 	<div class="container body">

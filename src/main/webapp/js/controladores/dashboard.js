@@ -14,6 +14,9 @@ function signOut() {
 $(document).ready(function() {
 					//Ocultar boton					
 					$('#btnGoogle').hide();
+					$('#btnEditarPerfil').click(function(){
+						window.location.href = "datosEstudiante.jsp";
+					});
 					// Datos Iniciales
 					// Cargar Datos del Menu
 					$.ajax({

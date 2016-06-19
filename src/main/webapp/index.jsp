@@ -1,11 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE>
 <html>
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <!-- Meta, title, CSS, favicons, etc. -->
-  <meta charset="utf-8">
+  <!-- Meta, title, CSS, favicons, etc. -->  
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -30,7 +29,6 @@
 </head>
 
 <body style="background:#F7F7F7;">
-
   <div class="">
     <a class="hiddenanchor" id="toregister"></a>
     <a class="hiddenanchor" id="tologin"></a>
@@ -62,7 +60,7 @@
               <div>
                 <h1><i class="fa fa-institution" style="font-size: 26px;"></i> SISCOUDLA</h1>
 
-                <p> ©2016 Todos los derechos reservados</p>
+                <p> Â©2016 Todos los derechos reservados</p>
               </div>
             </div>
           </form>
@@ -100,7 +98,7 @@
               <div>
                 <h1><i class="fa fa-institution" style="font-size: 26px;"></i> SISCOUDLA</h1>
 
-                <p> ©2016 Todos los derechos reservados</p>
+                <p> Â©2016 Todos los derechos reservados</p>
               </div>
             </div>
           </form>

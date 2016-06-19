@@ -30,6 +30,8 @@
 	<!-- Para Login con Google -->
   	<script src="https://apis.google.com/js/platform.js" async defer></script>
   	<meta name="google-signin-client_id" content="581128372441-0fhgqacdt6tc43pbrvkn2erm3hb0c7ac.apps.googleusercontent.com">
+  	<!-- pace -->
+	<script src="js/pace/pace.min.js"></script>
 </head>
 
 
@@ -41,6 +43,10 @@
 				}else{
 					if(session.getAttribute("rol").equals("Administrador")){
 						response.sendRedirect("/dashboardAdministrador.jsp");
+					}else if(session.getAttribute("rol").equals("Coordinador")){
+						response.sendRedirect("/dashboardCoordinador.jsp");
+					}else if(session.getAttribute("rol").equals("")){
+						response.sendRedirect("/nuevoUsuario.jsp");
 					}
 				}
 		%>
@@ -277,7 +283,7 @@
                       </li>
                     </ul>
 
-                    <a class="btn btn-success"><i class="fa fa-edit m-right-xs"></i>Editar Perfil</a>
+                    <a class="btn btn-success" id="btnEditarPerfil"><i class="fa fa-edit m-right-xs"></i>Editar Perfil</a>
                     <br />
                     
                   </div>
