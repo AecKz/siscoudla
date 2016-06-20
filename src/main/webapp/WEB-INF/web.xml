@@ -30,6 +30,10 @@
 		<servlet-class>com.udla.siscoudla.controlador.DashboardAdministradorController</servlet-class>
 	</servlet>
 	<servlet>
+	<servlet-name>DashboardCoordinadorController</servlet-name>
+		<servlet-class>com.udla.siscoudla.controlador.DashboardCoordinadorController</servlet-class>
+	</servlet>
+	<servlet>
 		<servlet-name>DatosEstudianteController</servlet-name>
 		<servlet-class>com.udla.siscoudla.controlador.DatosEstudianteController</servlet-class>
 	</servlet>
@@ -60,5 +64,9 @@
 	<servlet-mapping>
 		<servlet-name>DatosEstudianteController</servlet-name>
 		<url-pattern>/DatosEstudianteController</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>DashboardCoordinadorController</servlet-name>
+		<url-pattern>/DashboardCoordinadorController</url-pattern>
 	</servlet-mapping>
 </web-app>

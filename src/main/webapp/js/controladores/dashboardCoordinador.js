@@ -1,7 +1,7 @@
 /**
- * Controlador del Dashboard del Administrador
+ * Controlador del Dashboard del Coordinador
  * Autor: Pablo Jácome A
- * Fecha: 23-05-2016
+ * Fecha: 20-06-2016
  */
 function signOut() {
    var auth2 = gapi.auth2.getAuthInstance();
@@ -29,7 +29,7 @@ $(document).ready(function() {
 					// Datos Iniciales
 					// Cargar Datos del Menu
 					$.ajax({
-						url : '../DashboardAdministradorController',
+						url : '../DashboardCoordinadorController',
 						data : {
 							"tipoConsulta" : "cargarDatosMenus"
 						},
@@ -44,7 +44,7 @@ $(document).ready(function() {
 							});
 					// Cargar Datos Profile
 					$.ajax({
-						url : '../DashboardAdministradorController',
+						url : '../DashboardCoordinadorController',
 						data : {
 							"tipoConsulta" : "cargarDatosProfile"
 						},
@@ -59,7 +59,7 @@ $(document).ready(function() {
 							});
 					// Cargar Datos de Turnos Reservados
 					$.ajax({
-						url : '../DashboardAdministradorController',
+						url : '../DashboardCoordinadorController',
 						data : {
 							"tipoConsulta" : "cargarDatosReservados"
 						},
@@ -85,7 +85,7 @@ $(document).ready(function() {
 							});
 					// Cargar Datos de Turnos Ocupados
 					$.ajax({
-						url : '../DashboardAdministradorController',
+						url : '../DashboardCoordinadorController',
 						data : {
 							"tipoConsulta" : "cargarDatosOcupados"
 						},
@@ -111,7 +111,7 @@ $(document).ready(function() {
 							});
 					// Cargar Datos de Turnos Cancelados
 					$.ajax({
-						url : '../DashboardAdministradorController',
+						url : '../DashboardCoordinadorController',
 						data : {
 							"tipoConsulta" : "cargarDatosCancelados"
 						},

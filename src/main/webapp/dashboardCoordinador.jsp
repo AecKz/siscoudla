@@ -23,7 +23,7 @@
 	<script src="js/nprogress.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/custom.js"></script>
-	<script src="js/controladores/dashboardAdministrador.js"></script>
+	<script src="js/controladores/dashboardCoordinador.js"></script>
 	<!-- bootstrap progress js -->
 	<script src="js/progressbar/bootstrap-progressbar.min.js"></script>
 	<script src="js/nicescroll/jquery.nicescroll.min.js"></script>
@@ -41,7 +41,7 @@
 				if(session.getAttribute("login") == null){
 				    response.sendRedirect("/index.jsp");
 				}else{
-					if(!session.getAttribute("rol").equals("Administrador")){
+					if(!session.getAttribute("rol").equals("Coordinador")){
 						response.sendRedirect("/index.jsp");
 					}
 				}
@@ -74,22 +74,20 @@
 					<div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
 
 						<div class="menu_section">								
-							<h3>Administrador</h3>
+							<h3>Coordinador</h3>
 							<ul class="nav side-menu">
 								<li><a href="dashboard.jsp"><i class="fa fa-home"></i>Home<span class="fa fa-home fa-fw"></span></a>
 								</li>
 								<li><a><i class="fa fa-edit"></i>Mantenimiento<span class="fa fa-chevron-down"></span></a>
 									<ul class="nav child_menu" style="display: none">
-										<li><a href="#">Tratamientos y Especialidades</a>
-										</li>
 										<li><a href="#">Cub&iacute;culos</a>
-										</li>
-										<li><a href="mantenimientoHorario.jsp">Horarios</a>
-										</li>
+										</li>										
 									</ul>
 								</li>
 								<li><a><i class="fa fa-book"></i>Informes<span class="fa fa-chevron-down"></span></a>
 									<ul class="nav child_menu" style="display: none">
+										<li><a href="#">Tomar Lista</a>
+										</li>
 										<li><a href="#">Turno Normal</a>
 										</li>
 										<li><a href="#">Turno Extra</a>
