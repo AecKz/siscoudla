@@ -121,6 +121,9 @@ public class IndexController extends HttpServlet {
 					activarSesion(request, usuario);
 				}				
 			}
+			if (tipoConsulta.equals("cerrarSesion")) {
+				cerrarSesion(request,response);
+			}
 			result.put("success", Boolean.TRUE);
 			response.setContentType("application/json; charset=UTF-8");
 			result.write(response.getWriter());
@@ -150,6 +153,14 @@ public class IndexController extends HttpServlet {
 			session.setAttribute("login", "");
 			session.setAttribute("rol", "");
 		}
+	}
+	private void cerrarSesion(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		// Activacion de la sesion y agregamos 
+		HttpSession session = request.getSession();
+		session.removeAttribute("login");
+		session.removeAttribute("rol");
+		session.invalidate();
+		response.sendRedirect("index.jsp");		
 	}
 
 }

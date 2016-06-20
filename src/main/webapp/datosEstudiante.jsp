@@ -27,6 +27,9 @@
 <!-- bootstrap progress js -->
 <script src="js/progressbar/bootstrap-progressbar.min.js"></script>
 <script src="js/nicescroll/jquery.nicescroll.min.js"></script>
+<!-- datepicker -->
+<script type="text/javascript" src="js/bootstrap-datepicker/bootstrap-datepicker.js"></script>
+<script type="text/javascript" src="js/locales/bootstrap-datepicker.es.min.js"></script>
 <!-- Para Login con Google -->
 <script src="https://apis.google.com/js/platform.js" async defer></script>
 <meta name="google-signin-client_id"
@@ -255,7 +258,37 @@
 												</label>
 												<div class="col-md-6 col-sm-6 col-xs-12">
 													<input type="email" class="form-control col-md-7 col-xs-12"
-														id="txtEmail" placeholder="E-mail" readonly="readonly"/>
+														id="txtEmail" placeholder="E-mail" readonly="readonly" />
+												</div>
+											</div>
+											<div class="form-group">
+												<label class="control-label col-md-3 col-sm-3 col-xs-12">G&eacute;nero:<span
+													class="required">*</span></label>
+												<div class="col-md-6 col-sm-6 col-xs-12">
+													<div id="genero" class="btn-group" data-toggle="buttons">
+														<input type="radio" name="genero" value="M">&nbsp;Masculino&nbsp;
+														<input type="radio" name="genero" value="F">&nbsp;Femenino&nbsp;
+													</div>
+												</div>
+											</div>
+											<div class="form-group">
+												<label class="control-label col-md-3 col-sm-3 col-xs-12">Fecha
+													de Nacimiento:<span class="required">*</span>
+												</label>
+												<div class="col-md-6 col-sm-6 col-xs-12">
+													<input type="text" id="fechaNacimiento"
+														class="form-control col-md-7 col-xs-12" 
+														placeholder="dd/MM/yyyy"
+														required>
+												</div>
+											</div>
+											<div class="form-group">
+												<label class="control-label col-md-3 col-sm-3 col-xs-12"
+													for="txtTelefono">Tel&eacute;fono:
+												</label>
+												<div class="col-md-6 col-sm-6 col-xs-12">
+													<input type="text" class="form-control col-md-7 col-xs-12"
+														id="txtTelefono" placeholder="Tel&eacute;fono"/>
 												</div>
 											</div>
 											<div class="form-group">

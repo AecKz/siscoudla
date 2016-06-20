@@ -141,7 +141,7 @@ public class DashboardController extends HttpServlet {
 					}
 					result.put("numRegistros", (canceladosJSONArray.size()));
 					result.put("listadoCancelados", canceladosJSONArray);
-				}
+				}	
 
 				result.put("success", Boolean.TRUE);
 				response.setContentType("application/json; charset=UTF-8");

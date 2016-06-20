@@ -1,6 +1,8 @@
 package com.udla.siscoudla.controlador;
 
 import java.io.IOException;
+import java.util.Date;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -63,6 +65,12 @@ public class DatosEstudianteController extends HttpServlet {
 				: request.getParameter("matricula");
 		String clinicaEstudiante = request.getParameter("clinica") == null ? ""
 				: request.getParameter("clinica");
+		String generoEstudiante = request.getParameter("genero") == null ? ""
+				: request.getParameter("genero");
+		String fechaNacimientoEstudiante = request.getParameter("fechaNacimiento") == null ? ""
+				: request.getParameter("fechaNacimiento");
+		String telefonoEstudiante = request.getParameter("telefono") == null ? ""
+				: request.getParameter("telefono");
 
 		try {
 			String tipoConsulta = request.getParameter("tipoConsulta") == null ? ""
@@ -89,16 +97,31 @@ public class DatosEstudianteController extends HttpServlet {
 					personaVO = personaDAO.buscarPorEmail(valorUsuario);
 					estudianteVO = estudianteDAO.buscarPorPersona(personaVO);
 					String matricula = "";
-					String clinica = "";	
+					String clinica = "";
+					String telefono ="";
+					String fechaNacimiento ="";
+					String genero = "";
 					result.put("nombres", personaVO.getNombres());
 					result.put("apellidos", personaVO.getApellidos());
-					result.put("email", personaVO.getEmail());					
+					result.put("email", personaVO.getEmail());
+					if(personaVO.getFechaNacimiento()!=null){
+						fechaNacimiento = Utilitarios.dateToString(personaVO.getFechaNacimiento()); 
+					}
+					if(personaVO.getTelefono()!=null){
+						telefono = personaVO.getTelefono();
+					}
+					if(personaVO.getGenero()!=null){
+						genero = personaVO.getGenero();						
+					}
 					if(estudianteVO.getMatricula()!=null && estudianteVO.getClinica()!=null){
 						matricula = estudianteVO.getMatricula();
 						clinica = estudianteVO.getClinica().getNombre();
 					}
 					result.put("matricula", matricula);
 					result.put("clinica", clinica);
+					result.put("fechaNacimiento", fechaNacimiento);
+					result.put("telefono", telefono);
+					result.put("genero", genero);
 				}
 			}
 			//Guardar datos del estudiante
@@ -110,6 +133,11 @@ public class DatosEstudianteController extends HttpServlet {
 					personaVO.setApellidos(apellidos);
 					personaVO.setEmail(email);
 					personaVO.setEstado("ACT");
+					String fecha = Utilitarios.fechaDatePickertoDate(fechaNacimientoEstudiante);
+					Date fechaNacimientoPersona = Utilitarios.stringToDate(fecha);									
+					personaVO.setFechaNacimiento(fechaNacimientoPersona);
+					personaVO.setGenero(generoEstudiante);
+					personaVO.setTelefono(telefonoEstudiante);
 					personaDAO.editar(personaVO);
 					estudianteVO.setMatricula(matriculaEstudiante);
 					clinicaVO = clinicaDAO.buscarPorId(Integer.parseInt(clinicaEstudiante));

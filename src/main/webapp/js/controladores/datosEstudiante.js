@@ -78,21 +78,34 @@ $(document).ready(function() {
 							var email = data.email;
 							var matricula = data.matricula;
 							var clinica = data.clinica;
+							var fechaNacimiento = data.fechaNacimiento;
+							var genero = data.genero;
+							var telefono = data.telefono;
 							
 							$('#txtNombres').val(nombres);
 							$('#txtApellidos').val(apellidos);
 							$('#txtEmail').val(email);
 							$('#txtMatricula').val(matricula);
-							$('#txtClinica').val(clinica);							
+							$('#txtClinica').val(clinica);
+							$('#txtTelefono').val(telefono);
+							if(fechaNacimiento != null){								
+								$('#fechaNacimiento').datepicker('setDate', fechaNacimiento);
 							}
-							});
+							if(genero != null){
+								$("input[name=genero][value=" + genero + "]").attr('checked', 'checked');																
+							}							
+						}
+						});
 					//Guardar Datos
 					$('#btnGuardar').click(function(){
 						var nombres = $('#txtNombres').val();
 						var apellidos = $('#txtApellidos').val();
 						var email = $('#txtEmail').val();
 						var matricula = $('#txtMatricula').val();
-						var clinica = $('#txtClinica').val();	
+						var clinica = $('#txtClinica').val();
+						var telefono = $('#txtTelefono').val();
+						var fechaNacimiento =  $('#fechaNacimiento').datepicker('getDate');
+						var genero = $('#genero input:radio:checked').val();
 						$.ajax({
 							url : '../DatosEstudianteController',
 							data : {
@@ -101,7 +114,10 @@ $(document).ready(function() {
 								"apellidos":apellidos,
 								"email":email,
 								"matricula":matricula,
-								"clinica":clinica
+								"clinica":clinica,
+								"telefono":telefono,
+								"fechaNacimiento":fechaNacimiento,
+								"genero":genero
 							},
 							type : 'POST',
 							datatype : 'json',
@@ -111,4 +127,10 @@ $(document).ready(function() {
 						});
 						 
 					});
+					
+					$('#fechaNacimiento').datepicker({
+					    format: "dd/mm/yyyy",
+					    language: "es"
+					});
+					
 });//Fin jquery ready

@@ -191,9 +191,10 @@ function reservarTurno(){
 							    todayHighlight: true
 							});
 							$('#fechaNacimientoPaciente').datepicker({
-							    format: "dd-MM-yyyy",
-							    language: "es",
-							    autoclose: true
+							    format: "dd/mm/yyyy",
+							    startView: 3,
+							    maxViewMode: 3,
+							    language: "es"
 							});
 							
 						});//Fin jquery ready

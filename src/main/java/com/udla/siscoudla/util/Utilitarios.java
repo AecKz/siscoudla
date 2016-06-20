@@ -350,6 +350,11 @@ public class Utilitarios {
 			}
 		    return startDate;
 	 }
+	 /**
+	  * Transforma de fecha a string
+	  * @param fecha tipo Date
+	  * @return string formato dd-MM-yyyy 
+	  * */
 	 public static String dateToString (Date fecha){		 
 		    DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
 		    String fechaFinal ="";
