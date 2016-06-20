@@ -65,7 +65,7 @@ public class ClinicaDAO extends EntityManagerFactoryDAO {
 		EntityManager em = obtenerEntityManagerFactory().createEntityManager();
 		try {
 			TypedQuery<Clinica> query = em.createQuery(
-					"SELECT e FROM Clinica e order by e.nombre", Clinica.class);
+					"SELECT c FROM Clinica c order by c.nombre", Clinica.class);
 			List<Clinica> results = query.getResultList();
 			return results;
 		} finally {
@@ -90,22 +90,6 @@ public class ClinicaDAO extends EntityManagerFactoryDAO {
 		} finally {
 			em.close();
 		}
-	}
-
-	public List<Clinica> buscarActivos() {
-		EntityManager em = obtenerEntityManagerFactory().createEntityManager();
-		List<Clinica> results = null;
-		try {
-			TypedQuery<Clinica> query = em.createQuery(
-					"SELECT c FROM Clinica c WHERE c.activo =:valorActivo",
-					Clinica.class).setParameter("valorActivo", true);
-			results = query.getResultList();
-		} catch (Exception e) {
-			em.getTransaction().rollback();
-		} finally {
-			em.close();
-		}
-		return results;
 	}
 
 }

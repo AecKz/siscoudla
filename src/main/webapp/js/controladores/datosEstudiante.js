@@ -3,6 +3,7 @@
  * Autor: Pablo Jácome A
  * Fecha: 19-06-2016
  */
+
 //signOut Google
 function signOut() {
    var auth2 = gapi.auth2.getAuthInstance();
@@ -32,6 +33,22 @@ $(document).ready(function() {
 							$('#txtUsuarioCabecera').text(nombreCompleto);							
 								}
 							});
+					//Cargar Select
+					$.ajax({
+						url : '../DatosEstudianteController',
+						data : {
+							"tipoConsulta" : "cargarClinicas"
+						},
+						type : 'POST',
+						datatype : 'json',
+						success : function(data) {
+		                    var listadoClinicas = data.listadoClinicas;
+		                    $.each(listadoClinicas, function (index) {
+		                        $("#selectClinica").append("<option value='" + listadoClinicas[index].codigo + "'>" + listadoClinicas[index].nombre + "</option>");
+		                    });				
+							
+						}					
+					});
 					//Cargar Horarios de los Estudiantes
 					$.ajax({
 								url : '../RegistroTurnosController',
@@ -86,7 +103,7 @@ $(document).ready(function() {
 							$('#txtApellidos').val(apellidos);
 							$('#txtEmail').val(email);
 							$('#txtMatricula').val(matricula);
-							$('#txtClinica').val(clinica);
+							$('#selectClinica').val(clinica);
 							$('#txtTelefono').val(telefono);
 							if(fechaNacimiento != null){								
 								$('#fechaNacimiento').datepicker('setDate', fechaNacimiento);
@@ -102,7 +119,7 @@ $(document).ready(function() {
 						var apellidos = $('#txtApellidos').val();
 						var email = $('#txtEmail').val();
 						var matricula = $('#txtMatricula').val();
-						var clinica = $('#txtClinica').val();
+						var clinica = $('#selectClinica').val();
 						var telefono = $('#txtTelefono').val();
 						var fechaNacimiento =  $('#fechaNacimiento').datepicker('getDate');
 						var genero = $('#genero input:radio:checked').val();

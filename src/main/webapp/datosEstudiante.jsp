@@ -16,7 +16,7 @@
 
 <link href="fonts/css/font-awesome.min.css" rel="stylesheet">
 <link href="css/animate.min.css" rel="stylesheet">
-
+<link href="css/bootstrap-datepicker/bootstrap-datepicker.css" rel="stylesheet">
 <!-- Custom styling plus plugins -->
 <link href="css/custom.css" rel="stylesheet">
 <script src="js/jquery.min.js"></script>
@@ -28,8 +28,10 @@
 <script src="js/progressbar/bootstrap-progressbar.min.js"></script>
 <script src="js/nicescroll/jquery.nicescroll.min.js"></script>
 <!-- datepicker -->
-<script type="text/javascript" src="js/bootstrap-datepicker/bootstrap-datepicker.js"></script>
-<script type="text/javascript" src="js/locales/bootstrap-datepicker.es.min.js"></script>
+<script type="text/javascript"
+	src="js/bootstrap-datepicker/bootstrap-datepicker.js"></script>
+<script type="text/javascript"
+	src="js/locales/bootstrap-datepicker.es.min.js"></script>
 <!-- Para Login con Google -->
 <script src="https://apis.google.com/js/platform.js" async defer></script>
 <meta name="google-signin-client_id"
@@ -40,16 +42,16 @@
 
 
 <body class="nav-md">
-	<%				
+	<%
 		// Permitimos el acceso si la session existe		
 		if (session.getAttribute("login") == null) {
 			response.sendRedirect("/index.jsp");
-		}else{
-			if(!session.getAttribute("rol").equals("Estudiante")){
+		} else {
+			if (!session.getAttribute("rol").equals("Estudiante")) {
 				response.sendRedirect("/dashboard.jsp");
 			}
 		}
-		%>
+	%>
 	<div class="container body">
 		<div class="main_container">
 			<div class="col-md-3 left_col">
@@ -277,18 +279,16 @@
 												</label>
 												<div class="col-md-6 col-sm-6 col-xs-12">
 													<input type="text" id="fechaNacimiento"
-														class="form-control col-md-7 col-xs-12" 
-														placeholder="dd/MM/yyyy"
-														required>
+														class="form-control col-md-7 col-xs-12"
+														placeholder="dd/MM/yyyy" required>
 												</div>
 											</div>
 											<div class="form-group">
 												<label class="control-label col-md-3 col-sm-3 col-xs-12"
-													for="txtTelefono">Tel&eacute;fono:
-												</label>
+													for="txtTelefono">Tel&eacute;fono: </label>
 												<div class="col-md-6 col-sm-6 col-xs-12">
 													<input type="text" class="form-control col-md-7 col-xs-12"
-														id="txtTelefono" placeholder="Tel&eacute;fono"/>
+														id="txtTelefono" placeholder="Tel&eacute;fono" />
 												</div>
 											</div>
 											<div class="form-group">
@@ -301,15 +301,17 @@
 														id="txtMatricula" placeholder="No Matr&iacute;cula"
 														required />
 												</div>
-											</div>
+											</div>											
 											<div class="form-group">
 												<label class="control-label col-md-3 col-sm-3 col-xs-12"
 													for="txtClinica">Cl&iacute;nica:<span
 													class="required">*</span>
 												</label>
 												<div class="col-md-6 col-sm-6 col-xs-12">
-													<input type="text" class="form-control" id="txtClinica"
-														placeholder="Cl&iacute;nica" required />
+													<select type="select" class="form-control required"
+														id="selectClinica">
+														<option>Seleccione una opcion</option>
+													</select>
 												</div>
 											</div>
 											<br>

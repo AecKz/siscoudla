@@ -2,6 +2,7 @@ package com.udla.siscoudla.controlador;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 import com.udla.siscoudla.dao.ClinicaDAO;
@@ -91,13 +93,26 @@ public class DatosEstudianteController extends HttpServlet {
 					result.put("nombreCompleto", nombreCompleto);
 				}
 			}
+			if(tipoConsulta.equals("cargarClinicas")){
+				// Se consultan todos las Clinicas
+				JSONObject clinicaJSONObject = new JSONObject();
+				JSONArray clinicaJSONArray = new JSONArray();
+				List <Clinica> listaClinicas =  clinicaDAO.buscarTodos();
+				for (int i=0; i<listaClinicas.size(); i++){
+					clinicaVO = listaClinicas.get(i);
+					clinicaJSONObject.put("codigo", clinicaVO.getIdClinica());
+					clinicaJSONObject.put("nombre", clinicaVO.getNombre());
+					clinicaJSONArray.add(clinicaJSONObject);
+				}
+				result.put("listadoClinicas", clinicaJSONArray);
+			}
 			//Cargar datos del estudiante
 			if (tipoConsulta.equals("cargarDatosProfile")) {
 				if (Utilitarios.verificarRolEstudiante(valorUsuario)) {
 					personaVO = personaDAO.buscarPorEmail(valorUsuario);
 					estudianteVO = estudianteDAO.buscarPorPersona(personaVO);
 					String matricula = "";
-					String clinica = "";
+					int clinica = 0;
 					String telefono ="";
 					String fechaNacimiento ="";
 					String genero = "";
@@ -115,7 +130,7 @@ public class DatosEstudianteController extends HttpServlet {
 					}
 					if(estudianteVO.getMatricula()!=null && estudianteVO.getClinica()!=null){
 						matricula = estudianteVO.getMatricula();
-						clinica = estudianteVO.getClinica().getNombre();
+						clinica = estudianteVO.getClinica().getIdClinica();
 					}
 					result.put("matricula", matricula);
 					result.put("clinica", clinica);
