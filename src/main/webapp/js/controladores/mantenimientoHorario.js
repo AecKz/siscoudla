@@ -8,8 +8,8 @@
 	var horaFinal = "";
 	var dia = "";	
 	var tipoConsulta = "";
-		
-		$(document).ready(function() {
+
+	$(document).ready(function() {
 			$("#msgPopup").remove();
 			// Datos Iniciales
 			// Cargar Datos del Menu
@@ -26,7 +26,9 @@
 					$('#txtUsuarioContent').text(nombreCompleto);
 					$('#txtUsuarioCabecera').text(nombreCompleto);							
 						}
-					});			
+					});	
+	
+			//Cargar Horarios
 			$.ajax({
 				url : '../HorarioController',
 				data : {
@@ -77,17 +79,17 @@
 						
 						/* Inicio Controles Eliminar Registro */
 						$(".eliminar-btn").bind({click: function() {
-								var r = confirm("Seguro que desea eliminar el Horario " + $(this).parent().parent().children().first().text());
+								var r = confirm("Seguro que desea eliminar el Horario: " + $(this).parent().parent().children().first().text());
 								if (r == true){
 									codigo = $(this).parent().children().first().val();
-									horaInicio = ""; horaFinal = ""; dia="";
+									horaInicio = ""; horaFinal = ""; dia = "";
 									tipoConsulta = "eliminar";
 									enviarDatos(codigo, horaInicio, horaFinal, dia, tipoConsulta);
 							    	$(this).parent().parent().remove();
 								}
 							}
 						});	
-						/* Fin Controles Elminar Registro */
+						/* Fin Controles Eliminar Registro */
 					}else{
 						$("#dataTableContent").append("<tr><td colspan='2'>No existen Registros</td></tr>");
 					}
@@ -107,11 +109,10 @@
 							retorno= false;
 						}
 					});		
-					
+					codigo = $("#codigo").val();
 					horaInicio = $("#horaInicio").val();
 					horaFinal = $("#horaFinal").val();
-					dia = $("#dia").val();					
-				
+					dia = $("#dia").val();
 					if (codigo == ""){
 						tipoConsulta = "crear";
 					}else{
@@ -136,10 +137,11 @@
 					type : 'POST',
 					datatype : 'json',
 					success : function(data) {
-						if(data.success)
+						if(data.success){
 							$("#msgPopup").show();
-						else
+						}else{
 							alert(data.error);
+						}
 					}
 				});
 			}

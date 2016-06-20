@@ -20,6 +20,7 @@
 	<!-- Custom styling plus plugins -->
 	<link href="css/custom.css" rel="stylesheet">
 	<link href="css/loading.css" rel="stylesheet">
+	<link href="css/dataTables/dataTables.bootstrap.css" rel="stylesheet">
 	<script src="js/jquery.min.js"></script>
 	<script src="js/nprogress.js"></script>
 	<script src="js/bootstrap.min.js"></script>
@@ -28,6 +29,10 @@
 	<!-- bootstrap progress js -->
 	<script src="js/progressbar/bootstrap-progressbar.min.js"></script>
 	<script src="js/nicescroll/jquery.nicescroll.min.js"></script>
+	<!-- Data Tables -->
+	<script src="js/dataTables/jquery.dataTables.js"></script>
+	<script src="js/dataTables/dataTables.bootstrap.js"></script>
+	<script src="js/util.js"></script>
 </head>
 
 
@@ -277,6 +282,8 @@
 								  <option value="MIERCOLES">MIERCOLES</option>
 								  <option value="JUEVES">JUEVES</option>
 								  <option value="VIERNES">VIERNES</option>
+								  <option value="SABADO">SABADO</option>
+								  <option value="DOMINGO">DOMINGO</option>
 								</select>
 							</div>
 						</div>
@@ -294,7 +301,10 @@
 							<!-- Datatable -->
 							<div class="row">
 								<div class="col-lg-12">
-									<div class="table-responsive">		
+									<div class="table-responsive">	
+									<div class="input-group"> <span class="input-group-addon">Filtro</span>
+										    <input id="filter" type="text" class="form-control" placeholder="Escriba la palabra a buscar...">
+										</div>		
 										<table class="table table-striped table-bordered table-hover"
 											id="dataTable">
 											<thead>

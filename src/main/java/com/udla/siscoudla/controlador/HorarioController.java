@@ -93,6 +93,7 @@ public class HorarioController extends HttpServlet {
 					result.put("nombreCompleto", nombreCompleto);
 				}
 			}
+			
 			if (tipoConsulta.equals("encontrarTodos")) {
 				if (Utilitarios.verificarRolAdministrador(valorUsuario)) {
 				List<Horario> results = horarioDAO.buscarTodosActivos();
@@ -119,13 +120,15 @@ public class HorarioController extends HttpServlet {
 
 			if (tipoConsulta.equals("actualizar")){
 				if (Utilitarios.verificarRolAdministrador(valorUsuario)) {
+					horario.setEstado("ACT");
 					horarioDAO.editar(horario);
 				}
 			}
 
 			if (tipoConsulta.equals("eliminar")){
 				if (Utilitarios.verificarRolAdministrador(valorUsuario)) {
-					horario.setEstado("ACT");
+					horario = horarioDAO.buscarPorId(Integer.parseInt(idHorario));
+					horario.setEstado("INA");
 					horarioDAO.editar(horario);
 				}
 			}
