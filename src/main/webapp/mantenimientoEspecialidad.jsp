@@ -25,7 +25,7 @@
 	<script src="js/nprogress.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/custom.js"></script>
-	<script src="js/controladores/mantenimientoHorario.js"></script>
+	<script src="js/controladores/mantenimientoEspecialidad.js"></script>
 	<!-- bootstrap progress js -->
 	<script src="js/progressbar/bootstrap-progressbar.min.js"></script>
 	<script src="js/nicescroll/jquery.nicescroll.min.js"></script>
@@ -81,7 +81,9 @@
 								</li>
 								<li><a><i class="fa fa-edit"></i>Mantenimiento<span class="fa fa-chevron-down"></span></a>
 									<ul class="nav child_menu" style="display: none">
-										<li><a href="#">Tratamientos y Especialidades</a>
+										<li><a href="mantenimientoTratamiento.jsp">Tratamientos</a>
+										</li>
+										<li><a href="mantenimientoEspecialidad.jsp">Especialidad</a>
 										</li>
 										<li><a href="#">Cub&iacute;culos</a>
 										</li>
@@ -243,7 +245,7 @@
 
 							<div class="row x_title">
 								<div>
-									<h3>Mantenimiento de los Horarios</h3>
+									<h3>Mantenimiento de las Especialidades</h3>
 								</div>
 							</div>
 							<div class="col-md-12 col-sm-12 col-xs-12">
@@ -264,27 +266,16 @@
 							<button type="button" class="close" data-dismiss="modal">
 								<span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span>
 							</button>
-							<h4 class="modal-title" id="myModalLabel">Horario</h4>
+							<h4 class="modal-title" id="myModalLabel">Especialidad</h4>
 						</div>
 						<div class="modal-body">
-							<div class="alert alert-success" id="msgPopup">El Horario se ha guardado correctamente.</div>
+							<div class="alert alert-success" id="msgPopup">La Especialidad se ha guardado correctamente.</div>
 							<div class="form-group">
 								<input type="hidden"class="form-control" id="codigo">
-								<label>Hora Inicio</label> 
-								<input type="text"class="form-control required" id="horaInicio">
-								<label>Hora Final</label> 
-								<input type="text"class="form-control required" id="horaFinal">
-								<label>D&iacute;a</label>
-								<br>
-								<select class="form-control required" id="dia">
-								  <option value="LUNES">LUNES</option>
-								  <option value="MARTES">MARTES</option>
-								  <option value="MIERCOLES">MIERCOLES</option>
-								  <option value="JUEVES">JUEVES</option>
-								  <option value="VIERNES">VIERNES</option>
-								  <option value="SABADO">SABADO</option>
-								  <option value="DOMINGO">DOMINGO</option>
-								</select>
+								<label>Nombre</label> 
+								<input type="text"class="form-control required" id="nombre">
+								<label>Descripci&oacute;n</label> 
+								<input type="text"class="form-control required" id="descripcion">
 							</div>
 						</div>
 						<div class="modal-footer">
@@ -309,9 +300,8 @@
 											id="dataTable">
 											<thead>
 												<tr>
-													<th>Hora Inicio</th>
-													<th>Hora Final</th>
-													<th>D&iacute;a</th>													
+													<th>Nombre</th>
+													<th>Descripcion</th>																										
 													<th></th>
 												</tr>
 											</thead>

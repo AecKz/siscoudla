@@ -83,7 +83,7 @@
 									<ul class="nav child_menu" style="display: none">
 										<li><a href="mantenimientoTratamiento.jsp">Tratamientos</a>
 										</li>
-										<li><a href="#">Especialidad</a>
+										<li><a href="mantenimientoEspecialidad.jsp">Especialidad</a>
 										</li>
 										<li><a href="#">Cub&iacute;culos</a>
 										</li>

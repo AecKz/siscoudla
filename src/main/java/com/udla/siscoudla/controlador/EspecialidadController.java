@@ -13,16 +13,16 @@ import javax.servlet.http.HttpSession;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
-import com.udla.siscoudla.dao.HorarioDAO;
+import com.udla.siscoudla.dao.EspecialidadDAO;
 import com.udla.siscoudla.dao.PersonaDAO;
-import com.udla.siscoudla.modelo.Horario;
+import com.udla.siscoudla.modelo.Especialidad;
 import com.udla.siscoudla.modelo.Persona;
 import com.udla.siscoudla.util.Utilitarios;
 
 /**
  * Servlet implementation class PersonaController
  */
-@WebServlet("/HorarioController")
+@WebServlet("/EspecialidadController")
 public class EspecialidadController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -56,34 +56,29 @@ public class EspecialidadController extends HttpServlet {
 		try {
 			String tipoConsulta = request.getParameter("tipoConsulta") == null ? ""
 					: request.getParameter("tipoConsulta");
-			String idHorario = request.getParameter("codigo") == null ? ""
+			String idEspecialidad = request.getParameter("codigo") == null ? ""
 					: request.getParameter("codigo");
-			String horaInicio = request.getParameter("horaInicio") == null ? ""
-					: request.getParameter("horaInicio").toUpperCase();
-			String horaFinal = request.getParameter("horaFinal") == null ? ""
-					: request.getParameter("horaFinal").toUpperCase();
-			String dia = request.getParameter("dia") == null ? ""
-					: request.getParameter("dia");
+			String nombre = request.getParameter("nombre") == null ? ""
+					: request.getParameter("nombre").toUpperCase();
+			String descripcion = request.getParameter("descripcion") == null ? ""
+					: request.getParameter("descripcion").toUpperCase();			
 
 			JSONObject entidadJSONObject = new JSONObject();
 			JSONArray entidadJSONArray = new JSONArray();
 
-			Horario horario = new Horario();
-			HorarioDAO horarioDAO = new HorarioDAO();
+			Especialidad especialidad = new Especialidad();
+			EspecialidadDAO especialidadDAO = new EspecialidadDAO();
 
-			if (!idHorario.equals("")){
-				horario.setIdHorario(Integer.parseInt(idHorario));
+			if (!idEspecialidad.equals("")){
+				especialidad.setIdEspecialidad(Integer.parseInt(idEspecialidad));
 			}
-			if (!horaInicio.equals("")){
-				horario.setHoraInicio(horaInicio);
+			if (!nombre.equals("")){
+				especialidad.setNombre(nombre);
 			}
-			if (!horaFinal.equals("")){
-				horario.setHoraFinal(horaFinal);
+			if (!descripcion.equals("")){
+				especialidad.setDescripcion(descripcion);
 			}
-			if (!dia.equals("")){
-				horario.setDia(dia);
-			}
-
+			
 			if (tipoConsulta.equals("cargarDatosMenus")) {
 				if (Utilitarios.verificarRolAdministrador(valorUsuario)) {
 					PersonaDAO personaDAO = new PersonaDAO();
@@ -96,40 +91,39 @@ public class EspecialidadController extends HttpServlet {
 			
 			if (tipoConsulta.equals("encontrarTodos")) {
 				if (Utilitarios.verificarRolAdministrador(valorUsuario)) {
-				List<Horario> results = horarioDAO.buscarTodosActivos();
+				List<Especialidad> results = especialidadDAO.buscarActivos();
 				int i = 0;
 				for (i = 0; i < results.size(); i++) {
-					horario = results.get(i);
-					entidadJSONObject.put("codigo", horario.getIdHorario());
-					entidadJSONObject.put("horaInicio", horario.getHoraInicio());
-					entidadJSONObject.put("horaFinal", horario.getHoraFinal());
-					entidadJSONObject.put("dia", horario.getDia());					
+					especialidad = results.get(i);
+					entidadJSONObject.put("codigo", especialidad.getIdEspecialidad());
+					entidadJSONObject.put("nombre", especialidad.getNombre());
+					entidadJSONObject.put("descripcion", especialidad.getDescripcion());										
 					entidadJSONArray.add(entidadJSONObject);
 				}
 				result.put("numRegistros", i);
-				result.put("listadoHorarios", entidadJSONArray);
+				result.put("listadoEspecialidads", entidadJSONArray);
 				}
 			}
 
 			if (tipoConsulta.equals("crear")){
 				if (Utilitarios.verificarRolAdministrador(valorUsuario)) {
-					horario.setEstado("ACT");
-					horarioDAO.crear(horario);
+					especialidad.setEstado("ACT");
+					especialidadDAO.crear(especialidad);
 				}
 			}
 
 			if (tipoConsulta.equals("actualizar")){
 				if (Utilitarios.verificarRolAdministrador(valorUsuario)) {
-					horario.setEstado("ACT");
-					horarioDAO.editar(horario);
+					especialidad.setEstado("ACT");
+					especialidadDAO.editar(especialidad);
 				}
 			}
 
 			if (tipoConsulta.equals("eliminar")){
 				if (Utilitarios.verificarRolAdministrador(valorUsuario)) {
-					horario = horarioDAO.buscarPorId(Integer.parseInt(idHorario));
-					horario.setEstado("INA");
-					horarioDAO.editar(horario);
+					especialidad = especialidadDAO.buscarPorId(Integer.parseInt(idEspecialidad));
+					especialidad.setEstado("INA");
+					especialidadDAO.editar(especialidad);
 				}
 			}
 			result.put("success", Boolean.TRUE);
