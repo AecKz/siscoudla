@@ -81,7 +81,9 @@
 								</li>
 								<li><a><i class="fa fa-edit"></i>Mantenimiento<span class="fa fa-chevron-down"></span></a>
 									<ul class="nav child_menu" style="display: none">
-										<li><a href="#">Tratamientos y Especialidades</a>
+										<li><a href="mantenimientoTratamiento.jsp">Tratamientos</a>
+										</li>
+										<li><a href="#">Especialidad</a>
 										</li>
 										<li><a href="#">Cub&iacute;culos</a>
 										</li>

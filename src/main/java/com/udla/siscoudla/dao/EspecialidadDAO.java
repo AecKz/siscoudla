@@ -73,12 +73,12 @@ public class EspecialidadDAO extends EntityManagerFactoryDAO {
 		}
 	}
 
-	public Especialidad buscarPorId(String id) {
+	public Especialidad buscarPorId(int id) {
 		EntityManager em = obtenerEntityManagerFactory().createEntityManager();
 		Especialidad especialidad = new Especialidad();
 		try {
 			TypedQuery<Especialidad> query = em.createQuery(
-					"SELECT c FROM Especialidad c where c.id = :id ", Especialidad.class)
+					"SELECT e FROM Especialidad e where e.idEspecialidad = :id ", Especialidad.class)
 					.setParameter("id", id);
 			List<Especialidad> results = query.getResultList();
 			especialidad = results.get(0);

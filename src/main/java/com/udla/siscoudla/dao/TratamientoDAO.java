@@ -124,8 +124,8 @@ public class TratamientoDAO extends EntityManagerFactoryDAO {
 		List<Tratamiento> results = null;
 		try {
 			TypedQuery<Tratamiento> query = em.createQuery(
-					"SELECT c FROM Tratamiento c WHERE c.activo =:valorActivo",
-					Tratamiento.class).setParameter("valorActivo", true);
+					"SELECT t FROM Tratamiento t WHERE t.estado =:estado",
+					Tratamiento.class).setParameter("estado", "ACT");
 			results = query.getResultList();
 		} catch (Exception e) {
 			em.getTransaction().rollback();

@@ -14,6 +14,10 @@
 		<servlet-class>com.udla.siscoudla.controlador.HorarioController</servlet-class>
 	</servlet>
 	<servlet>
+		<servlet-name>TratamientoController</servlet-name>
+		<servlet-class>com.udla.siscoudla.controlador.TratamientoController</servlet-class>
+	</servlet>
+	<servlet>
 		<servlet-name>IndexController</servlet-name>
 		<servlet-class>com.udla.siscoudla.controlador.IndexController</servlet-class>
 	</servlet>
@@ -48,6 +52,10 @@
 	<servlet-mapping>
 		<servlet-name>HorarioController</servlet-name>
 		<url-pattern>/HorarioController</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>TratamientoController</servlet-name>
+		<url-pattern>/TratamientoController</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>PersonaController</servlet-name>

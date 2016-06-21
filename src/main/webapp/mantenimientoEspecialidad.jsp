@@ -19,19 +19,20 @@
 
 	<!-- Custom styling plus plugins -->
 	<link href="css/custom.css" rel="stylesheet">
+	<link href="css/loading.css" rel="stylesheet">
+	<link href="css/dataTables/dataTables.bootstrap.css" rel="stylesheet">
 	<script src="js/jquery.min.js"></script>
 	<script src="js/nprogress.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/custom.js"></script>
-	<script src="js/controladores/dashboardAdministrador.js"></script>
+	<script src="js/controladores/mantenimientoHorario.js"></script>
 	<!-- bootstrap progress js -->
 	<script src="js/progressbar/bootstrap-progressbar.min.js"></script>
 	<script src="js/nicescroll/jquery.nicescroll.min.js"></script>
-	<!-- Para Login con Google -->
-  	<script src="https://apis.google.com/js/platform.js" async defer></script>
-  	<meta name="google-signin-client_id" content="581128372441-0fhgqacdt6tc43pbrvkn2erm3hb0c7ac.apps.googleusercontent.com">
-  	<!-- pace -->
-	<script src="js/pace/pace.min.js"></script>
+	<!-- Data Tables -->
+	<script src="js/dataTables/jquery.dataTables.js"></script>
+	<script src="js/dataTables/dataTables.bootstrap.js"></script>
+	<script src="js/util.js"></script>
 </head>
 
 
@@ -80,9 +81,7 @@
 								</li>
 								<li><a><i class="fa fa-edit"></i>Mantenimiento<span class="fa fa-chevron-down"></span></a>
 									<ul class="nav child_menu" style="display: none">
-										<li><a href="mantenimientoTratamiento.jsp">Tratamientos</a>
-										</li>
-										<li><a href="#">Especialidad</a>
+										<li><a href="#">Tratamientos y Especialidades</a>
 										</li>
 										<li><a href="#">Cub&iacute;culos</a>
 										</li>
@@ -114,7 +113,7 @@
 						<a data-toggle="tooltip" data-placement="top" title="Lock">
 							<span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
 						</a>
-						<a data-toggle="tooltip" data-placement="top" title="Logout" href="index.jsp" onclick="signOut();">
+						<a data-toggle="tooltip" data-placement="top" title="Logout">
 							<span class="glyphicon glyphicon-off" aria-hidden="true"></span>
 						</a>
 					</div>
@@ -149,7 +148,7 @@
                   <li>
                     <a href="javascript:;">Help</a>
                   </li>
-                  <li><a href="index.jsp" onclick="signOut();"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
+                  <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
                   </li>
                 </ul>
               </li>
@@ -244,125 +243,94 @@
 
 							<div class="row x_title">
 								<div>
-									<h3>Bienvenida (o) al Sistema de la Cl&iacute;nica Odontol&oacute;gica de la UDLA</h3>
-									<div id="btnGoogle">
-										<div class="g-signin2" data-onsuccess="onSignIn"></div>
-									</div>
+									<h3>Mantenimiento de los Horarios</h3>
 								</div>
 							</div>
 							<div class="col-md-12 col-sm-12 col-xs-12">
 							<div class="x_content">
+								<div class="row crud-nav-bar">
+		<!-- Button trigger modal -->
+		<button class="btn btn-primary" data-toggle="modal" data-target="#add" id="addButton">
+			<span class="glyphicon glyphicon-plus"></span> &nbsp; Nuevo
+		</button>
 
-                  <div class="col-md-3 col-sm-3 col-xs-12 profile_left">
+		<!-- Modal -->
+		<div class="modal fade" id="add" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<form id="formCrud">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">
+								<span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span>
+							</button>
+							<h4 class="modal-title" id="myModalLabel">Horario</h4>
+						</div>
+						<div class="modal-body">
+							<div class="alert alert-success" id="msgPopup">El Horario se ha guardado correctamente.</div>
+							<div class="form-group">
+								<input type="hidden"class="form-control" id="codigo">
+								<label>Hora Inicio</label> 
+								<input type="text"class="form-control required" id="horaInicio">
+								<label>Hora Final</label> 
+								<input type="text"class="form-control required" id="horaFinal">
+								<label>D&iacute;a</label>
+								<br>
+								<select class="form-control required" id="dia">
+								  <option value="LUNES">LUNES</option>
+								  <option value="MARTES">MARTES</option>
+								  <option value="MIERCOLES">MIERCOLES</option>
+								  <option value="JUEVES">JUEVES</option>
+								  <option value="VIERNES">VIERNES</option>
+								  <option value="SABADO">SABADO</option>
+								  <option value="DOMINGO">DOMINGO</option>
+								</select>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" id="close-popup"
+								data-dismiss="modal">Cerrar</button>
+							<button type="button" class="btn btn-primary" id="save-record">Guardar</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Modal -->
+							<!-- Datatable -->
+							<div class="row">
+								<div class="col-lg-12">
+									<div class="table-responsive">	
+									<div class="input-group"> <span class="input-group-addon">Filtro</span>
+										    <input id="filter" type="text" class="form-control" placeholder="Escriba la palabra a buscar...">
+										</div>		
+										<table class="table table-striped table-bordered table-hover"
+											id="dataTable">
+											<thead>
+												<tr>
+													<th>Hora Inicio</th>
+													<th>Hora Final</th>
+													<th>D&iacute;a</th>													
+													<th></th>
+												</tr>
+											</thead>
+											<tbody id="dataTableContent" class="searchable">	
+											<div id="loading">
+												<div class="loading-indicator">
+													<img src="images/ajax-loader.gif"/><br /><br />
+													<span id="loading-msg">Cargando...</span>
+												</div>					
+											</div>									
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+							<!-- Datatable -->			
 
-                    <div class="profile_img">
 
-                      <!-- end of image cropping -->
-                      <div id="crop-avatar">
-                        <!-- Current avatar -->
-                        <div class="avatar-view" title="">
-                          <img src="images/picture.jpg" class="img-fluid" alt="Responsive image">
-                        </div>
-
-                        <!-- Loading state -->
-                        <div class="loading" aria-label="Loading" role="img" tabindex="-1"></div>
-                      </div>
-                      <!-- end of image cropping -->
-
-                    </div>
-                    <h3 id="txtUsuarioContent"></h3>
-
-                    <ul class="list-unstyled user_data">
-                      <li><i class="fa fa-envelope user-profile-icon"></i><span id="txtUsuario"></span>
-                      </li>
-                      <li>
-                        <i class="fa fa-phone user-profile-icon"></i><span id="txtTelefono"></span>
-                      </li>                     
-                    </ul>
-
-                    <a class="btn btn-success" id="btnEditarPerfil"><i class="fa fa-edit m-right-xs"></i>Editar Perfil</a>
-                    <br />
-                    
-                  </div>
-                  <div class="col-md-9 col-sm-9 col-xs-12">
-
-                    <div class="profile_title">
-                      <div class="col-md-6">
-                        <h2>Estad&iacute;sticas</h2>
-                      </div>
-                    </div>
-                    <!-- start of user-activity-graph -->
-                    <div id="graph_bar" style="width:100%; height:280px;"></div>
-                    <!-- end of user-activity-graph -->
-
-                    <div class="" role="tabpanel" data-example-id="togglable-tabs">
-                      <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
-                        <li role="presentation" class="active"><a href="#tab_content1" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">Turnos Reservados</a>
-                        </li>
-                        <li role="presentation" class=""><a href="#tab_content2" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false">Turnos Ocupados </a>
-                        </li>
-                        <li role="presentation" class=""><a href="#tab_content3" role="tab" id="profile-tab2" data-toggle="tab" aria-expanded="false">Turnos Cancelados</a>
-                        </li>
-                      </ul>
-                      <div id="myTabContent" class="tab-content">
-                        <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="home-tab">
- 						<!-- tablas de turnos reservados -->
-							<table id="tblTurnosReservados" class="table">
-							 <thead>
-								<tr>
-								<th>FECHA</th>
-								<th>HORARIO</th>
-								<th>TRATAMIENTO</th>
-								<th>ESTUDIANTE</th>
-								<th>PACIENTE</th>
-								<th>CUBICULO</th>
-								</tr>
-							</thead>
-							<tbody id="contentReservados"></tbody>
-							</table>
-					   <!-- final tablas de turnos reservados-->
-
-                        </div>
-                        <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="profile-tab">
-
-                   <!-- tablas de turnos ocupados -->
-							<table id="tblTurnosOcupados" class="table">
-							 <thead>
-								<tr>
-								<th>FECHA</th>
-								<th>HORARIO</th>
-								<th>TRATAMIENTO</th>
-								<th>ESTUDIANTE</th>
-								<th>PACIENTE</th>
-								<th>CUBICULO</th>
-								</tr>
-							</thead>
-							<tbody id="contentOcupados"></tbody>
-							</table>
-					   <!-- final tablas de turnos ocupados-->
-
-                        </div>
-                        <div role="tabpanel" class="tab-pane fade" id="tab_content3" aria-labelledby="profile-tab">
-                        <!-- tablas de turnos cancelados -->
-							<table id="tblTurnosCancelados" class="table">
-							 <thead>
-								<tr>
-								<th>FECHA</th>
-								<th>HORARIO</th>
-								<th>TRATAMIENTO</th>
-								<th>ESTUDIANTE</th>
-								<th>PACIENTE</th>
-								<th>CUBICULO</th>
-								</tr>
-							</thead>
-							<tbody id="contentCancelados"></tbody>
-							</table>
-					   <!-- final tablas de turnos cancelados-->
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+               			 	</div>
 						</div>
 					</div>
 
