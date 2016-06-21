@@ -37,6 +37,14 @@
 		<servlet-name>DatosEstudianteController</servlet-name>
 		<servlet-class>com.udla.siscoudla.controlador.DatosEstudianteController</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>DatosAdministradorController</servlet-name>
+		<servlet-class>com.udla.siscoudla.controlador.DatosAdministradorController</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>DatosCoordinadorController</servlet-name>
+		<servlet-class>com.udla.siscoudla.controlador.DatosCoordinadorController</servlet-class>
+	</servlet>
 	<servlet-mapping>
 		<servlet-name>HorarioController</servlet-name>
 		<url-pattern>/HorarioController</url-pattern>
@@ -64,6 +72,14 @@
 	<servlet-mapping>
 		<servlet-name>DatosEstudianteController</servlet-name>
 		<url-pattern>/DatosEstudianteController</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>DatosAdministradorController</servlet-name>
+		<url-pattern>/DatosAdministradorController</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>DatosCoordinadorController</servlet-name>
+		<url-pattern>/DatosCoordinadorController</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>DashboardCoordinadorController</servlet-name>

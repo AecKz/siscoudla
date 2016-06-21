@@ -278,7 +278,7 @@
                       </li>                     
                     </ul>
 
-                    <a class="btn btn-success"><i class="fa fa-edit m-right-xs"></i>Editar Perfil</a>
+                    <a class="btn btn-success" id="btnEditarPerfil"><i class="fa fa-edit m-right-xs"></i>Editar Perfil</a>
                     <br />
                     
                   </div>

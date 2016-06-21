@@ -26,6 +26,9 @@ function cerrarSesion(){
 //jquery ready
 $(document).ready(function() {	
 					$('#btnGoogle').hide();
+					$('#btnEditarPerfil').click(function(){
+						window.location.href = "datosCoordinador.jsp";
+					});
 					// Datos Iniciales
 					// Cargar Datos del Menu
 					$.ajax({

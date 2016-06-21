@@ -152,6 +152,7 @@ public class HorarioCubiculoEstadoDAO extends EntityManagerFactoryDAO {
 	 * @param tipoCubiculo
 	 * @return Lista numeros de cubiculos libres
 	 * */	
+	@SuppressWarnings("unchecked")
 	public List<String> buscarCubiculosLibres(Date fecha, int idEspecialidad, int idHorario, String tipoCubiculo) {
 		EntityManager em = obtenerEntityManagerFactory().createEntityManager();
 		List<String> results = null;
