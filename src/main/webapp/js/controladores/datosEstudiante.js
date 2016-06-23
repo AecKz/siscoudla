@@ -16,7 +16,8 @@ function signOut() {
 $(document).ready(function() {
 					//Ocultar boton					
 					$('#btnGoogle').hide();
-					$("#btnCargarHorarios").hide();
+					$("#addButton").hide();
+					$("#msgPopup").hide();					
 					// Datos Iniciales
 					// Cargar Datos del Menu
 					$.ajax({
@@ -33,7 +34,7 @@ $(document).ready(function() {
 							$('#txtUsuarioCabecera').text(nombreCompleto);							
 								}
 							});
-					//Cargar Select
+					//Cargar Select Clinicas
 					$.ajax({
 						url : '../DatosEstudianteController',
 						data : {
@@ -45,6 +46,39 @@ $(document).ready(function() {
 		                    var listadoClinicas = data.listadoClinicas;
 		                    $.each(listadoClinicas, function (index) {
 		                        $("#selectClinica").append("<option value='" + listadoClinicas[index].codigo + "'>" + listadoClinicas[index].nombre + "</option>");
+		                    });				
+							
+						}					
+					});
+					//Cargar Select Horarios de los combos
+					$.ajax({
+						url : '../DatosEstudianteController',
+						data : {
+							"tipoConsulta" : "cargarHorariosCombos"
+						},
+						type : 'POST',
+						datatype : 'json',
+						success : function(data) {
+		                    var listadoHorariosCombos = data.listadoHorariosCombos;
+		                    $.each(listadoHorariosCombos, function (index) {
+		                    	switch (listadoHorariosCombos[index].dia) {
+		                        case "LUNES":		                            
+		                            $("#selectDia1").append("<option value='" + listadoHorariosCombos[index].codigo + "'>" + listadoHorariosCombos[index].horario + "</option>");
+		                            break;
+		                        case "MARTES":
+		                        	$("#selectDia2").append("<option value='" + listadoHorariosCombos[index].codigo + "'>" + listadoHorariosCombos[index].horario + "</option>");
+		                            break;
+		                        case "MIERCOLES":
+		                        	$("#selectDia3").append("<option value='" + listadoHorariosCombos[index].codigo + "'>" + listadoHorariosCombos[index].horario + "</option>");
+		                            break;
+		                        case "JUEVES":
+		                        	$("#selectDia4").append("<option value='" + listadoHorariosCombos[index].codigo + "'>" + listadoHorariosCombos[index].horario + "</option>");
+		                            break;
+		                        case "VIERNES":
+		                        	$("#selectDia5").append("<option value='" + listadoHorariosCombos[index].codigo + "'>" + listadoHorariosCombos[index].horario + "</option>");
+		                            break;
+		                    }
+		                        
 		                    });				
 							
 						}					
@@ -77,7 +111,7 @@ $(document).ready(function() {
 										$("#dataTableContent")
 												.append(
 														"<tr><td colspan='4'>No existen horarios cargados</td></tr>");
-										$("#btnCargarHorarios").show();
+										$("#addButton").show();
 									}
 								}
 							});
@@ -143,11 +177,36 @@ $(document).ready(function() {
 							}
 						});
 						 
-					});
+					});				
 					
 					$('#fechaNacimiento').datepicker({
 					    format: "dd/mm/yyyy",
 					    language: "es"
+					});
+					
+					//Guardar Datos
+					$('#guardarHorarios').click(function(){
+						var dia1 = $('#selectDia1').val();
+						var dia2 = $('#selectDia2').val();
+						var dia3 = $('#selectDia3').val();
+						var dia4 = $('#selectDia4').val();
+						var dia5 = $('#selectDia5').val();
+						var horarios =  String(dia1)+"-"+String(dia2)+"-"+String(dia3)+"-"+String(dia4)+"-"+String(dia5);
+						var semestre = $('#semestre').val();						
+						$.ajax({
+							url : '../DatosEstudianteController',
+							data : {
+								"tipoConsulta" : "guardarHorarios",
+								"semestre": semestre,
+								"horarios": horarios
+							},
+							type : 'POST',
+							datatype : 'json',
+							success : function(data) {
+								$("#msgPopup").show();							
+							}
+						});
+						 
 					});
 					
 });//Fin jquery ready

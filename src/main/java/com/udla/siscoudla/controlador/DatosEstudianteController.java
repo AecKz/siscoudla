@@ -16,10 +16,14 @@ import net.sf.json.JSONObject;
 
 import com.udla.siscoudla.dao.ClinicaDAO;
 import com.udla.siscoudla.dao.EstudianteDAO;
+import com.udla.siscoudla.dao.HorarioDAO;
+import com.udla.siscoudla.dao.HorarioEstudianteDAO;
 import com.udla.siscoudla.dao.PersonaDAO;
 import com.udla.siscoudla.dao.UsuarioDAO;
 import com.udla.siscoudla.modelo.Clinica;
 import com.udla.siscoudla.modelo.Estudiante;
+import com.udla.siscoudla.modelo.Horario;
+import com.udla.siscoudla.modelo.Horarioestudiante;
 import com.udla.siscoudla.modelo.Persona;
 import com.udla.siscoudla.modelo.Rol;
 import com.udla.siscoudla.modelo.Usuario;
@@ -73,6 +77,10 @@ public class DatosEstudianteController extends HttpServlet {
 				: request.getParameter("fechaNacimiento");
 		String telefonoEstudiante = request.getParameter("telefono") == null ? ""
 				: request.getParameter("telefono");
+		String semestre = request.getParameter("semestre") == null ? ""
+				: request.getParameter("semestre");
+		String horarios = request.getParameter("horarios") == null ? ""
+				: request.getParameter("horarios");
 
 		try {
 			String tipoConsulta = request.getParameter("tipoConsulta") == null ? ""
@@ -84,7 +92,9 @@ public class DatosEstudianteController extends HttpServlet {
 			EstudianteDAO estudianteDAO = new EstudianteDAO();
 			Estudiante estudianteVO = new Estudiante();
 			ClinicaDAO clinicaDAO = new ClinicaDAO();
-			Clinica clinicaVO = new Clinica(); 
+			Clinica clinicaVO = new Clinica();
+			HorarioDAO horarioDAO = new HorarioDAO();
+			Horario horarioVO = new Horario();
 			//Para cargar los datos del menu
 			if (tipoConsulta.equals("cargarDatosMenus")){
 				if(Utilitarios.verificarRolEstudiante(valorUsuario)){					
@@ -105,6 +115,42 @@ public class DatosEstudianteController extends HttpServlet {
 					clinicaJSONArray.add(clinicaJSONObject);
 				}
 				result.put("listadoClinicas", clinicaJSONArray);
+			}
+			if(tipoConsulta.equals("cargarHorariosCombos")){
+				// Se consultan todos los Horarios
+				JSONObject horarioJSONObject = new JSONObject();
+				JSONArray horarioJSONArray = new JSONArray();
+				List <Horario> listaHorarios =  horarioDAO.buscarTodosActivos();
+				for (int i=0; i<listaHorarios.size(); i++){
+					horarioVO = listaHorarios.get(i);
+					horarioJSONObject.put("codigo", horarioVO.getIdHorario());
+					horarioJSONObject.put("horario", horarioVO.getHoraInicio() + "-"+ horarioVO.getHoraFinal());
+					horarioJSONObject.put("dia", horarioVO.getDia());
+					horarioJSONArray.add(horarioJSONObject);
+				}
+				result.put("listadoHorariosCombos", horarioJSONArray);
+			}
+			if(tipoConsulta.equals("guardarHorarios")){
+				if (Utilitarios.verificarRolEstudiante(valorUsuario)) {
+					Horarioestudiante horarioEstudianteVO = new Horarioestudiante();
+					HorarioEstudianteDAO horarioEstudianteDAO = new HorarioEstudianteDAO();
+					String [] auxHorarios = horarios.split("-");
+					for(int i =0; i<auxHorarios.length;i++){
+						String IdHorario = auxHorarios[i];
+						horarioEstudianteVO.setHorario(horarioVO);
+						horarioVO = horarioDAO.buscarPorId(Integer.parseInt(IdHorario));						
+						personaVO = personaDAO.buscarPorEmail(valorUsuario);
+						estudianteVO = estudianteDAO.buscarPorPersona(personaVO);						
+						horarioEstudianteVO.setEstudiante(estudianteVO);
+						horarioEstudianteVO.setEstado("ACT");
+						horarioEstudianteVO.setSemestre(semestre);
+						horarioEstudianteDAO.crear(horarioEstudianteVO);	
+						System.out.print("Horario Creado: " + horarioEstudianteVO.getHorario().getDia() +"-"
+						+ horarioEstudianteVO.getHorario().getHoraInicio() + "-" + horarioEstudianteVO.getHorario().getHoraFinal()+"\n");
+					}
+					
+				}
+				
 			}
 			//Cargar datos del estudiante
 			if (tipoConsulta.equals("cargarDatosProfile")) {

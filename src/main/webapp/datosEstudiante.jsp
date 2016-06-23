@@ -340,8 +340,61 @@
 							<tbody id="dataTableContent">
 							</tbody>
 						</table>
-						<button type="button" class="btn btn-primary"
-							id="btnCargarHorarios">Cargar Horarios</button>
+						<!-- Button trigger modal -->
+		<button class="btn btn-primary" data-toggle="modal" data-target="#add" id="addButton">
+			<span class="glyphicon glyphicon-plus"></span> &nbsp; Cargar Horarios
+		</button>
+
+		<!-- Modal -->
+		<div class="modal fade" id="add" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<form id="formCrud">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">
+								<span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span>
+							</button>
+							<h4 class="modal-title" id="myModalLabel">Horarios</h4>
+						</div>
+						<div class="modal-body">
+							<div class="alert alert-success" id="msgPopup">Los Horarios se han guardado correctamente.</div>
+							<div class="form-group">								
+								<label>LUNES</label> 
+								<select type="select" class="form-control required" id="selectDia1">
+									<option>Seleccione una opcion</option>
+								</select>
+								<label>MARTES</label> 
+								<select type="select" class="form-control required" id="selectDia2">
+									<option>Seleccione una opcion</option>
+								</select>
+								<label>MIERCOLES</label> 
+								<select type="select" class="form-control required" id="selectDia3">
+									<option>Seleccione una opcion</option>
+								</select>
+								<label>JUEVES</label> 
+								<select type="select" class="form-control required" id="selectDia4">
+									<option>Seleccione una opcion</option>
+								</select>
+								<label>VIERNES</label> 
+								<select type="select" class="form-control required" id="selectDia5">
+									<option>Seleccione una opcion</option>
+								</select>
+								<label>SEMESTRE</label> 
+								<input type="text"class="form-control required" id="semestre"  placeholder="Ej: 2016-01">
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" id="close-popup"
+								data-dismiss="modal">Cerrar</button>
+							<button type="button" class="btn btn-primary" id="guardarHorarios">Guardar</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Modal -->
 
 
 					</div>
