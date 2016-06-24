@@ -8,6 +8,7 @@
 	var estudiante = "";
 	var especialidad = "";
 	var tratamiento = "";
+	var cubiculo = "";
 	var tipoConsulta = "";
 
 	$(document).ready(function() {
@@ -47,6 +48,7 @@
 									" <td relation='estudiante'>"+ listadoTurnos[index].estudiante +"</td>" +
 									" <td relation='especialidad'>"+ listadoTurnos[index].especialidad +"</td>" +
 									" <td relation='tratamiento'>"+ listadoTurnos[index].tratamiento +"</td>" +
+									" <td relation='cubiculo'>"+ listadoTurnos[index].cubiculo +"</td>" +
 									" <td width='50px'> " +
 									" <input type='checkbox' name='chkLista' value='"+ listadoTurnos[index].codigo +"'/>" +
 									"</td>" +
@@ -88,8 +90,9 @@
 								if (r == true){
 									codigo = $(this).parent().children().first().val();
 									nombre = ""; estudiante = ""; especialidad = ""; tratamiento ="";
+									cubiculo = "";
 									tipoConsulta = "eliminar";
-									enviarDatos(codigo, clinica, estudiante, especialidad,tratamiento, tipoConsulta);
+									enviarDatos(codigo, clinica, estudiante, especialidad,tratamiento,cubiculo, tipoConsulta);
 							    	$(this).parent().parent().remove();
 								}
 							}
@@ -119,18 +122,19 @@
 					estudiante = $("#estudiante").val();
 					especialidad = $("#selectEspecialidades").val();
 					tratamiento = $("#tratamiento").val();
+					cubiculo= $("#cubiculo").val();
 					if (codigo == ""){
 						tipoConsulta = "crear";
 					}else{
 						tipoConsulta = "actualizar";
 					}
 					if(retorno){
-						enviarDatos(codigo, clinica, estudiante, especialidad,tratamiento, tipoConsulta);
+						enviarDatos(codigo, clinica, estudiante, especialidad,tratamiento,cubiculo, tipoConsulta);
 					}
 				});
 			/* Fin Controles Grabar Resgistro*/
 			
-			function enviarDatos(codigo, clinica, estudiante, especialidad,tratamiento, tipoConsulta){
+			function enviarDatos(codigo, clinica, estudiante, especialidad,tratamiento,cubiculo, tipoConsulta){
 				$.ajax({
 					url : '../TomarListaController',
 					data : {
@@ -139,6 +143,7 @@
 						"estudiante" : estudiante,
 						"especialidad" : especialidad,
 						"tratamiento" : tratamiento,
+						"cubiculo" : cubiculo,
 						"tipoConsulta": tipoConsulta
 					},
 					type : 'POST',

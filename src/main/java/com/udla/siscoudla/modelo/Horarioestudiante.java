@@ -28,7 +28,7 @@ public class Horarioestudiante implements Serializable {
 	private Estudiante estudiante;
 
 	//bi-directional many-to-one association to Horario
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name="idHorario")
 	private Horario horario;
 

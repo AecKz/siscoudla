@@ -305,6 +305,7 @@
 													<th>Estudiante</th>
 													<th>Especialidad</th>
 													<th>Tratamiento</th>
+													<th>Cub&iacute;culo</th>
 													<th></th>													
 													<th></th>
 												</tr>

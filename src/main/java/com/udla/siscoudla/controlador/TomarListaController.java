@@ -17,9 +17,11 @@ import net.sf.json.JSONObject;
 import com.udla.siscoudla.dao.EspecialidadDAO;
 import com.udla.siscoudla.dao.PersonaDAO;
 import com.udla.siscoudla.dao.TratamientoDAO;
+import com.udla.siscoudla.dao.TurnoDAO;
 import com.udla.siscoudla.modelo.Especialidad;
 import com.udla.siscoudla.modelo.Persona;
 import com.udla.siscoudla.modelo.Tratamiento;
+import com.udla.siscoudla.modelo.Turno;
 import com.udla.siscoudla.util.Utilitarios;
 
 /**
@@ -71,25 +73,25 @@ public class TomarListaController extends HttpServlet {
 			JSONObject entidadJSONObject = new JSONObject();
 			JSONArray entidadJSONArray = new JSONArray();
 
-			Tratamiento tratamiento = new Tratamiento();
-			TratamientoDAO tratamientoDAO = new TratamientoDAO();
+			Turno turno = new Turno();
+			TurnoDAO turnoDAO = new TurnoDAO();
 			
 			Especialidad especialidadVO = new Especialidad();
 			EspecialidadDAO especialidadDAO = new EspecialidadDAO();
 
-			if (!idTratamiento.equals("")){
-				tratamiento.setIdTratamiento(Integer.parseInt(idTratamiento));
-			}
-			if (!nombre.equals("")){
-				tratamiento.setNombre(nombre);
-			}
-			if (!descripcion.equals("")){
-				tratamiento.setDescripcion(descripcion);
-			}
-			if (!especialidadId.equals("")){
-				especialidadVO = especialidadDAO.buscarPorId(Integer.parseInt(especialidadId));
-				tratamiento.setEspecialidad(especialidadVO);
-			}
+//			if (!idTratamiento.equals("")){
+//				tratamiento.setIdTratamiento(Integer.parseInt(idTratamiento));
+//			}
+//			if (!nombre.equals("")){
+//				tratamiento.setNombre(nombre);
+//			}
+//			if (!descripcion.equals("")){
+//				tratamiento.setDescripcion(descripcion);
+//			}
+//			if (!especialidadId.equals("")){
+//				especialidadVO = especialidadDAO.buscarPorId(Integer.parseInt(especialidadId));
+//				tratamiento.setEspecialidad(especialidadVO);
+//			}
 
 			if (tipoConsulta.equals("cargarDatosMenus")) {
 				if (Utilitarios.verificarRolCoordinador(valorUsuario)) {
@@ -103,42 +105,45 @@ public class TomarListaController extends HttpServlet {
 			
 			if (tipoConsulta.equals("encontrarTodos")) {
 				if (Utilitarios.verificarRolCoordinador(valorUsuario)) {
-				List<Tratamiento> results = tratamientoDAO.buscarActivos();
+				List<Turno> results = turnoDAO.buscarTodos();
 				int i = 0;
 				for (i = 0; i < results.size(); i++) {
-					tratamiento = results.get(i);
-					entidadJSONObject.put("codigo", tratamiento.getIdTratamiento());
-					entidadJSONObject.put("nombre", tratamiento.getNombre());
-					entidadJSONObject.put("descripcion", tratamiento.getDescripcion());
-					entidadJSONObject.put("especialidad", tratamiento.getEspecialidad().getNombre());					
+					turno = results.get(i);
+					entidadJSONObject.put("codigo", turno.getIdTurno());
+					entidadJSONObject.put("clinica", turno.getHorarioestudiante().getEstudiante().getClinica().getNombre());
+					entidadJSONObject.put("estudiante", turno.getHorarioestudiante().getEstudiante().getPersona().getNombres() +" "
+											+ turno.getHorarioestudiante().getEstudiante().getPersona().getApellidos());
+					entidadJSONObject.put("especialidad", turno.getTratamiento().getEspecialidad().getNombre());
+					entidadJSONObject.put("tratamiento", turno.getTratamiento().getNombre());
+					entidadJSONObject.put("cubiculo", turno.getHorariocubiculoestado().getHorariocubiculo().getCubiculo().getNumero());
 					entidadJSONArray.add(entidadJSONObject);
 				}
 				result.put("numRegistros", i);
-				result.put("listadoTratamientos", entidadJSONArray);
+				result.put("listadoTurnos", entidadJSONArray);
 				}
 			}
 
-			if (tipoConsulta.equals("crear")){
-				if (Utilitarios.verificarRolAdministrador(valorUsuario)) {
-					tratamiento.setEstado("ACT");
-					tratamientoDAO.crear(tratamiento);
-				}
-			}
-
-			if (tipoConsulta.equals("actualizar")){
-				if (Utilitarios.verificarRolAdministrador(valorUsuario)) {
-					tratamiento.setEstado("ACT");
-					tratamientoDAO.editar(tratamiento);
-				}
-			}
-
-			if (tipoConsulta.equals("eliminar")){
-				if (Utilitarios.verificarRolAdministrador(valorUsuario)) {
-					tratamiento = tratamientoDAO.buscarPorId(Integer.parseInt(idTratamiento));
-					tratamiento.setEstado("INA");
-					tratamientoDAO.editar(tratamiento);
-				}
-			}
+//			if (tipoConsulta.equals("crear")){
+//				if (Utilitarios.verificarRolCoordinador(valorUsuario)) {
+//					tratamiento.setEstado("ACT");
+//					tratamientoDAO.crear(tratamiento);
+//				}
+//			}
+//
+//			if (tipoConsulta.equals("actualizar")){
+//				if (Utilitarios.verificarRolCoordinador(valorUsuario)) {
+//					tratamiento.setEstado("ACT");
+//					tratamientoDAO.editar(tratamiento);
+//				}
+//			}
+//
+//			if (tipoConsulta.equals("eliminar")){
+//				if (Utilitarios.verificarRolCoordinador(valorUsuario)) {
+//					tratamiento = tratamientoDAO.buscarPorId(Integer.parseInt(idTratamiento));
+//					tratamiento.setEstado("INA");
+//					tratamientoDAO.editar(tratamiento);
+//				}
+//			}
 			result.put("success", Boolean.TRUE);
 			response.setContentType("application/json; charset=UTF-8");
 			result.write(response.getWriter());
