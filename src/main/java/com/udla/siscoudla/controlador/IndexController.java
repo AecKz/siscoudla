@@ -96,8 +96,9 @@ public class IndexController extends HttpServlet {
 			}
 			
 			if (tipoConsulta.equals("loginGoogle")){
-				persona = personaDAO.buscarPorEmail(email);
-				int idPersonaLogin = persona.getIdPersona();
+				Persona auxPersona = new Persona();
+				auxPersona = personaDAO.buscarPorEmail(email);
+				int idPersonaLogin = auxPersona.getIdPersona();
 				if(idPersonaLogin==0){
 					persona.setEstado("ACT");
 					personaDAO.crear(persona);
