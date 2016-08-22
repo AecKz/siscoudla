@@ -48,7 +48,7 @@
             </div>
             <div>
 		       <button type="button" class="btn btn-primary" id="btnLogin">Enviar</button>
-               <a class="reset_pass" href="#">Recuperar Contrase&ntilde;a</a>
+<!--                <a class="reset_pass" href="#">Recuperar Contrase&ntilde;a</a> -->
             </div>            
             <div class="clearfix"></div>
             <div class="separator">

@@ -1,7 +1,6 @@
 package com.udla.siscoudla.controlador;
 
 import java.io.IOException;
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -16,11 +15,9 @@ import net.sf.json.JSONObject;
 
 import com.udla.siscoudla.dao.EspecialidadDAO;
 import com.udla.siscoudla.dao.PersonaDAO;
-import com.udla.siscoudla.dao.TratamientoDAO;
 import com.udla.siscoudla.dao.TurnoDAO;
 import com.udla.siscoudla.modelo.Especialidad;
 import com.udla.siscoudla.modelo.Persona;
-import com.udla.siscoudla.modelo.Tratamiento;
 import com.udla.siscoudla.modelo.Turno;
 import com.udla.siscoudla.util.Utilitarios;
 
