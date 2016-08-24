@@ -59,4 +59,8 @@
 					}
 				}
 			});
+			//Imprimir
+			$('#btnImprimirLista').click(function(){	
+					$.print("#informeTurnos");
+			});
 		});

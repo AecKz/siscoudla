@@ -33,6 +33,7 @@
 	<script src="js/dataTables/jquery.dataTables.js"></script>
 	<script src="js/dataTables/dataTables.bootstrap.js"></script>
 	<script src="js/util.js"></script>
+	<script src="js/jQuery.print.js"></script>
 </head>
 
 
@@ -238,8 +239,7 @@
 
 				<div class="row">
 					<div class="col-md-12 col-sm-12 col-xs-12">
-						<div class="dashboard_graph">
-
+						<div class="dashboard_graph" id="informeTurnos">						
 							<div class="row x_title">
 								<div>
 									<h3>Informe de Turnos</h3>
@@ -323,6 +323,7 @@
 									</div>
 								</div>
 							</div>
+							</div>
 							<!-- Datatable -->			
 							<!-- Boton de Guardar lista -->
 							<button class="btn btn-primary" id="btnImprimirLista">
@@ -331,8 +332,6 @@
                			 	</div>
 						</div>
 					</div>
-
-				</div>
 				<br />
 			</div>
 			<!-- /page content -->
