@@ -57,6 +57,10 @@
 		<servlet-name>TomarListaController</servlet-name>
 		<servlet-class>com.udla.siscoudla.controlador.TomarListaController</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>InformesController</servlet-name>
+		<servlet-class>com.udla.siscoudla.controlador.InformesController</servlet-class>
+	</servlet>
 	<servlet-mapping>
 		<servlet-name>HorarioController</servlet-name>
 		<url-pattern>/HorarioController</url-pattern>
@@ -108,5 +112,9 @@
 	<servlet-mapping>
 		<servlet-name>TomarListaController</servlet-name>
 		<url-pattern>/TomarListaController</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>InformesController</servlet-name>
+		<url-pattern>/InformesController</url-pattern>
 	</servlet-mapping>
 </web-app>

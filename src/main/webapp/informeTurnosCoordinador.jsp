@@ -135,18 +135,18 @@
                   <span class=" fa fa-angle-down"></span>
                 </a>
                 <ul class="dropdown-menu dropdown-usermenu animated fadeInDown pull-right">
-                  <li><a href="javascript:;">  Profile</a>
+                  <li><a href="dashboardCoordinador.jsp">  Inicio</a>
                   </li>
                   <li>
-                    <a href="javascript:;">
-                      <span class="badge bg-red pull-right">50%</span>
-                      <span>Settings</span>
+                    <a href="datosCoordinador.jsp">
+<!--                       <span class="badge bg-red pull-right">50%</span> -->
+                      <span>Perfil</span>
                     </a>
                   </li>
                   <li>
-                    <a href="javascript:;">Help</a>
+                    <a href="javascript:;">Ayuda</a>
                   </li>
-                  <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
+                  <li><a href="index.jsp" onclick="signOut();"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
                   </li>
                 </ul>
               </li>
@@ -301,13 +301,13 @@
 											id="dataTable">
 											<thead>
 												<tr>
+													<th>Fecha</th>
 													<th>Clinica</th>
 													<th>Estudiante</th>
 													<th>Especialidad</th>
 													<th>Tratamiento</th>
 													<th>Cub&iacute;culo</th>
-													<th></th>													
-													<th></th>
+													<th>Estado</th>													
 												</tr>
 											</thead>
 											<tbody id="dataTableContent" class="searchable">	

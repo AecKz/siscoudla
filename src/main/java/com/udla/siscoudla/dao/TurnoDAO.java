@@ -72,7 +72,7 @@ public class TurnoDAO extends EntityManagerFactoryDAO {
 			em.close();
 		}
 	}
-
+	
 	public Turno buscarPorId(int idTurno) {
 		EntityManager em = obtenerEntityManagerFactory().createEntityManager();
 		Turno turno = new Turno();
@@ -116,6 +116,37 @@ public class TurnoDAO extends EntityManagerFactoryDAO {
 					+ "JOIN FETCH pa.persona p "
 					+ "WHERE t.estado =:estado AND e.idEstudiante = :idEstudiante",
 					Turno.class).setParameter("estado", estado).setParameter("idEstudiante", idEstudiante);
+			results = query.getResultList();
+		} catch (Exception e) {
+			em.getTransaction().rollback();
+		} finally {
+			em.close();
+		}
+		return results;
+	}
+	/**
+	 * Metodo para buscar Turnos por Estudiante
+	 * @param idEstudiante
+	 * @param estado del turno
+	 * @return Lista de objetos Turno
+	 * */
+	public List<Turno> buscarTodosPorEstudiante(int idEstudiante) {
+		EntityManager em = obtenerEntityManagerFactory().createEntityManager();
+		List<Turno> results = null;
+		try {
+			TypedQuery<Turno> query = em.createQuery(
+					"SELECT t FROM Turno t "
+					+ "JOIN FETCH t.horariocubiculoestado hce "
+					+ "JOIN FETCH t.horarioestudiante he "
+					+ "JOIN FETCH t.tratamiento tr "
+					+ "JOIN FETCH t.paciente pa "										
+					+ "JOIN FETCH he.estudiante e "
+					+ "JOIN FETCH hce.horariocubiculo hc "
+					+ "JOIN FETCH hc.cubiculo c "
+					+ "JOIN FETCH he.horario h "
+					+ "JOIN FETCH pa.persona p "
+					+ "WHERE e.idEstudiante = :idEstudiante",
+					Turno.class).setParameter("idEstudiante", idEstudiante);
 			results = query.getResultList();
 		} catch (Exception e) {
 			em.getTransaction().rollback();
