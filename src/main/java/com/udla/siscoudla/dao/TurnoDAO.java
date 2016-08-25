@@ -1,5 +1,6 @@
 package com.udla.siscoudla.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -178,6 +179,41 @@ public class TurnoDAO extends EntityManagerFactoryDAO {
 					+ "JOIN FETCH pa.persona p "
 					+ "WHERE t.estado =:estado ",
 					Turno.class).setParameter("estado", estado);
+			results = query.getResultList();
+		} catch (Exception e) {
+			em.getTransaction().rollback();
+		} finally {
+			em.close();
+		}
+		return results;
+	}
+	
+	/**
+	 * Metodo para buscar Turnos por Reservados por Horario (Tomar Lista)
+	 * @param idHorario del turno
+	 * @return Lista de objetos Turno
+	 * */
+	public List<Turno> buscarReservadosPorHorario(int idHorario, Date fecha) {
+		EntityManager em = obtenerEntityManagerFactory().createEntityManager();
+		List<Turno> results = null;
+		try {
+			TypedQuery<Turno> query = em.createQuery(
+					"SELECT t FROM Turno t "
+					+ "JOIN FETCH t.horariocubiculoestado hce "
+					+ "JOIN FETCH t.horarioestudiante he "
+					+ "JOIN FETCH t.tratamiento tr "
+					+ "JOIN FETCH t.paciente pa "										
+					+ "JOIN FETCH he.estudiante e "
+					+ "JOIN FETCH hce.horariocubiculo hc "
+					+ "JOIN FETCH hc.cubiculo c "
+					+ "JOIN FETCH he.horario h "
+					+ "JOIN FETCH pa.persona p "
+					+ "WHERE t.estado =:estado "
+					+ "AND h.idHorario = :idHorario "
+					+ "AND t.fecha =:fecha",
+					Turno.class).setParameter("estado", "RES")
+					.setParameter("idHorario", idHorario)
+					.setParameter("fecha", fecha);
 			results = query.getResultList();
 		} catch (Exception e) {
 			em.getTransaction().rollback();

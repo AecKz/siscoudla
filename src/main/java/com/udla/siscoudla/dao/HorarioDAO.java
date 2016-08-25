@@ -1,5 +1,6 @@
 package com.udla.siscoudla.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -8,6 +9,7 @@ import javax.persistence.TypedQuery;
 import com.udla.siscoudla.entitymanagerfactory.EntityManagerFactoryDAO;
 import com.udla.siscoudla.modelo.Estudiante;
 import com.udla.siscoudla.modelo.Horario;
+import com.udla.siscoudla.util.Utilitarios;
 
 public class HorarioDAO extends EntityManagerFactoryDAO {
 	public Horario crear(Horario objeto) {
@@ -67,6 +69,22 @@ public class HorarioDAO extends EntityManagerFactoryDAO {
 		try {
 			TypedQuery<Horario> query = em.createQuery("SELECT h FROM Horario h where h.estado ='ACT' order by h.idHorario",
 					Horario.class);
+			List<Horario> results = query.getResultList();
+			return results;
+		} finally {
+			em.close();
+		}
+	}
+	
+	public List<Horario> buscarActivosPorFecha() {
+		Date fecha = new Date();
+		int diaFecha = fecha.getDay();
+		String diaNombre = Utilitarios.buscarDia(diaFecha);		
+		EntityManager em = obtenerEntityManagerFactory().createEntityManager();
+		try {
+			TypedQuery<Horario> query = em.createQuery("SELECT h FROM Horario h "
+					+ "where h.estado ='ACT' and h.dia =:diaNombre order by h.idHorario",
+					Horario.class).setParameter("diaNombre", diaNombre);
 			List<Horario> results = query.getResultList();
 			return results;
 		} finally {

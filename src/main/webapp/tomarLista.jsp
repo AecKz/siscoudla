@@ -290,6 +290,11 @@
 <!-- 		</div> -->
 <!-- 	</div> -->
 	<!-- Modal -->
+								<label>HORARIO</label> 
+								<select type="select" class="form-control required" id="selectHorario" onchange="tomarLista();">
+									<option>Seleccione una opcion</option>
+								</select>
+								<br>								
 							<!-- Datatable -->
 							<div class="row">
 								<div class="col-lg-12">
