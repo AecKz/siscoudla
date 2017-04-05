@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<persistence
+    xmlns="http://java.sun.com/xml/ns/persistence"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+    version="2.0">
+
+  <persistence-unit name="siscoudla">
+  <class>com.udla.siscoudla.modelo.Clinica</class>
+  <class>com.udla.siscoudla.modelo.Cubiculo</class>
+  <class>com.udla.siscoudla.modelo.Especialidad</class>
+  <class>com.udla.siscoudla.modelo.Estudiante</class>
+  <class>com.udla.siscoudla.modelo.Horario</class>
+  <class>com.udla.siscoudla.modelo.Paciente</class>
+  <class>com.udla.siscoudla.modelo.Persona</class>
+  <class>com.udla.siscoudla.modelo.Rol</class>
+  <class>com.udla.siscoudla.modelo.Tratamiento</class>
+  <class>com.udla.siscoudla.modelo.Turno</class>
+  <class>com.udla.siscoudla.modelo.Usuario</class>
+  <class>com.udla.siscoudla.modelo.Horarioestudiante</class>
+  <class>com.udla.siscoudla.modelo.Horariocubiculo</class>
+  <class>com.udla.siscoudla.modelo.Horariocubiculoestado</class>
+
+    <properties>
+      <property name="javax.persistence.jdbc.user" value="root" />
+      <property name="javax.persistence.jdbc.password" value="Abc123-"/>
+      <property name="eclipselink.ddl-generation" value="create-tables" />
+    </properties>
+
+  </persistence-unit>
+
+</persistence>

@@ -1,0 +1,8 @@
+{
+  "clientId": "581128372441-0fhgqacdt6tc43pbrvkn2erm3hb0c7ac.apps.googleusercontent.com",
+  "projectId": "siscoudla",
+  "serviceAccountEmail": "",
+  "serviceAccountPrivateKeyFile": "/WEB-INF/siscoudla-9475b80ad547.p12",
+  "widgetUrl": "http://localhost:8888/index.jsp",
+  "cookieName": "gtoken"
+}
